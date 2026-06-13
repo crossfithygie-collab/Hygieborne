@@ -1292,8 +1292,6 @@ searchInputEl.addEventListener('input', e => {
 
 searchInputEl.addEventListener('focus', () => {
   searchScreenEl.classList.add('searching');
-  // Recharge les données (crédits, PINs) à chaque nouvelle connexion client
-  loadMembers();
 });
 
 searchInputEl.addEventListener('blur', () => {
@@ -1957,6 +1955,9 @@ try {
 } catch(e) {}
 renderHeroBanner();
 loadMembers();
+
+// Rafraîchit les données depuis le Sheet toutes les 30 min (pas Hiboutik, juste le Sheet)
+setInterval(loadMembers, 30 * 60 * 1000);
 
 </script>
 </body>
