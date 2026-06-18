@@ -228,7 +228,7 @@
   /* ─── SEARCH INPUT ─── */
   .search-wrap {
     width: 100%;
-    max-width: 680px;
+    max-width: 460px;
     position: relative;
   }
   .search-wrap input {
@@ -256,7 +256,7 @@
   /* ─── MEMBERS LIST ─── */
   .members-list {
     width: 100%;
-    max-width: 680px;
+    max-width: 460px;
     max-height: 320px;
     overflow-y: auto;
     display: flex;
@@ -290,7 +290,7 @@
   }
   .member-name { font-size: 18px; font-weight: 400; color: var(--white); }
 
-  .hint { font-size: 15px; color: var(--subtle); text-align: center; letter-spacing: 0.5px; }
+  .hint { font-size: 15px; color: #ffffff; background: var(--accent); font-weight: 600; text-align: center; letter-spacing: 0.3px; width: fit-content; max-width: 90%; margin: 0 auto; padding: 12px 18px; border-radius: 12px; }
 
   /* ─── NAV BAR (flèche + maison) ─── */
   .nav-bar {
@@ -366,6 +366,21 @@
     height: 18px;
   }
 
+  .pin-hint {
+    font-size: 15px;
+    color: #ffffff;
+    background: var(--accent);
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 6px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    line-height: 1.4;
+  }
+
   .setpin-instruction {
     font-size: 16px;
     color: var(--muted);
@@ -391,14 +406,20 @@
     text-wrap: balance;
   }
   .verify-hint {
-    font-size: 14px;
-    color: var(--subtle);
+    font-size: 15px;
+    color: #ffffff;
+    background: var(--accent);
+    font-weight: 600;
     text-align: center;
     max-width: 520px;
-    line-height: 1.5;
-    min-height: 18px;
+    width: fit-content;
+    margin: 0 auto;
+    line-height: 1.45;
+    padding: 12px 18px;
+    border-radius: 12px;
     text-wrap: balance;
   }
+  .verify-hint:empty { display: none; }
   .verify-input {
     width: 100%;
     max-width: 440px;
@@ -432,6 +453,42 @@
     transition: opacity 0.15s;
   }
   .verify-btn:active { opacity: 0.8; }
+
+  /* ─── CARROUSEL GUIDE ─── */
+  #screen-guide { padding: 40px 0; justify-content: space-between; }
+  .guide-skip {
+    align-self: flex-end;
+    margin: 0 24px;
+    background: none; border: none;
+    color: var(--muted); font-size: 15px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+  }
+  .guide-viewport { width: 100%; overflow: hidden; flex: 1 1 auto; display: flex; align-items: center; }
+  .guide-track { display: flex; width: 100%; transition: transform 0.35s ease; }
+  .guide-slide {
+    flex: 0 0 100%; min-width: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 0 36px; gap: 18px;
+  }
+  .guide-emoji {
+    font-size: 64px; line-height: 1;
+    width: 120px; height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-dim); border-radius: 50%;
+  }
+  .guide-title { font-size: 24px; font-weight: 700; color: var(--white); }
+  .guide-text { font-size: 17px; color: var(--muted); line-height: 1.5; max-width: 400px; }
+  .guide-bottom { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 0 40px; }
+  .guide-dots { display: flex; gap: 10px; }
+  .guide-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: all 0.25s; cursor: pointer; }
+  .guide-dot.active { background: var(--accent); width: 26px; border-radius: 5px; }
+  .guide-btn {
+    width: 100%; max-width: 440px; height: 54px;
+    background: var(--accent); color: #fff; border: none; border-radius: 12px;
+    font-size: 16px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .guide-btn:active { opacity: 0.8; }
 
   .numpad {
     display: grid;
@@ -863,58 +920,29 @@
   }
   .howto-btn:active { border-color: var(--accent); color: var(--accent); }
 
-  /* ─── ÉCRAN TUTORIEL ─── */
-  #screen-howto {
-    justify-content: flex-start;
-    padding: 0;
-    overflow-y: auto;
+  /* ═══ ADAPTATION PAYSAGE (iPad en mode horizontal) ═══ */
+  @media (orientation: landscape) {
+    .screen {
+      justify-content: flex-start;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+    #screen-search { justify-content: flex-start; gap: 20px; padding-top: 28px; padding-bottom: 28px; }
+    /* mode recherche : input remonté + liste plafonnée au-dessus du clavier iOS */
+    #screen-search.searching { padding-top: 64px; gap: 12px; }
+    #screen-search.searching .members-list { max-height: 32vh; }
+    #screen-verify { padding-top: 28px; }
+    #screen-guide { padding-top: 18px; padding-bottom: 18px; }
+    .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
+    .hero-headline { font-size: 30px; }
+    #screen-shop { padding-bottom: 110px; }
+    .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .product-emoji, .product-img { height: 132px; }
+    .numpad { grid-template-columns: repeat(3, 76px); grid-template-rows: repeat(4, 76px); gap: 10px; }
+    .numpad-btn { font-size: 23px; }
   }
-  .howto-content {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 88px 32px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
-  .howto-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    letter-spacing: 2px;
-    color: var(--white);
-    text-align: center;
-  }
-  .howto-section {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .howto-subtitle {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .howto-text {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--muted);
-    font-weight: 300;
-  }
-  .howto-close {
-    margin-top: 8px;
-    background: var(--accent);
-    color: #ffffff;
-    border: none;
-    border-radius: 12px;
-    height: 54px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
-  .howto-close:active { opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -927,20 +955,19 @@
   <div class="logo">HYGIE CROSSFIT</div>
 
   <div class="hero-message">
-    <div class="hero-pill">Nouveau à la box</div>
     <div class="hero-headline">Tu t'es <em>dépensé</em>,<br>maintenant recharge.</div>
-    <p class="hero-sub">Nocco, Fitaid, C4, barres protéinées. Commande en 10 secondes, prélevé sur ton RIB ou ton solde.</p>
+    <p class="hero-sub">Nocco, Fitaid, C4, barres protéinées. Commande en 10 secondes, réglée sur ton crédit rechargé ou par prélèvement en début de mois prochain.</p>
   </div>
 
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
-    <input type="text" id="search-input" placeholder="Recherche ton nom pour commencer…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input type="text" id="search-input" placeholder="S'identifier" autocomplete="off" autocorrect="off" spellcheck="false">
   </div>
   <p class="hint" id="search-hint">Tape les premières lettres de ton prénom ou nom</p>
 
   <div class="members-list" id="members-list"></div>
 
-  <button class="howto-btn" onclick="goTo('screen-howto')">Comment ça marche ?</button>
+  <button class="howto-btn" onclick="startGuide('info')">Comment ça marche ?</button>
 
   <div class="hero-products">
     <div class="hero-track" id="hero-track"></div>
@@ -949,30 +976,36 @@
   <button class="admin-entry" onclick="goTo('screen-admin-login')" title="Admin">⚙</button>
 </div>
 
-<!-- ═══════════════ SCREEN HOWTO : TUTORIEL ═══════════════ -->
-<div class="screen" id="screen-howto">
-  <div class="nav-bar">
-    <button class="nav-btn" onclick="goTo('screen-search')">← Retour</button>
+<!-- ═══════════════ SCREEN : GUIDE (carrousel) ═══════════════ -->
+<div class="screen" id="screen-guide">
+  <button class="guide-skip" id="guide-skip" onclick="closeGuide()">Passer</button>
+  <div class="guide-viewport" id="guide-viewport">
+    <div class="guide-track" id="guide-track">
+      <div class="guide-slide">
+        <div class="guide-emoji">🔎</div>
+        <h2 class="guide-title">1. Trouve ton nom</h2>
+        <p class="guide-text">Tape les premières lettres de ton prénom ou de ton nom, puis sélectionne-toi dans la liste.</p>
+      </div>
+      <div class="guide-slide">
+        <div class="guide-emoji">🔢</div>
+        <h2 class="guide-title">2. Entre ton code</h2>
+        <p class="guide-text">Première visite : tape 1234, confirme ton identité, puis choisis ton code perso. Ensuite, c'est ce code à chaque passage.</p>
+      </div>
+      <div class="guide-slide">
+        <div class="guide-emoji">🥤</div>
+        <h2 class="guide-title">3. Choisis tes produits</h2>
+        <p class="guide-text">Sélectionne tes boissons et tes barres, ajuste les quantités, puis valide ta commande.</p>
+      </div>
+      <div class="guide-slide">
+        <div class="guide-emoji">✅</div>
+        <h2 class="guide-title">4. Sers-toi !</h2>
+        <p class="guide-text">Aucun paiement sur place : le paiement se fait par prélèvement en début de mois prochain, ou sur ton crédit rechargé. Bonne séance&nbsp;!</p>
+      </div>
+    </div>
   </div>
-  <div class="howto-content">
-    <h2 class="howto-title">Comment ça marche</h2>
-
-    <div class="howto-section">
-      <h3 class="howto-subtitle">Première utilisation</h3>
-      <p class="howto-text">Recherche ton nom puis saisis le code 1234. On te demandera de confirmer ton identité avec l'adresse mail et le numéro de téléphone de ton compte Resawod. Tu choisiras ensuite ton propre code à 4 chiffres, à garder pour toutes tes prochaines visites.</p>
-    </div>
-
-    <div class="howto-section">
-      <h3 class="howto-subtitle">Utilisation normale</h3>
-      <p class="howto-text">Recherche ton nom, saisis ton code à 4 chiffres, sélectionne les produits que tu prends et les quantités, puis valide ta commande. Le montant sera prélevé sur ton RIB ou ton solde. Une fois la commande validée, tu peux aller te servir.</p>
-    </div>
-
-    <div class="howto-section">
-      <h3 class="howto-subtitle">Bon à savoir</h3>
-      <p class="howto-text">Pour utiliser la borne, tu dois soit avoir du crédit disponible en caisse, soit avoir renseigné ton RIB sur ton compte Resawod. Sans l'un des deux, ton compte n'apparaîtra pas. Aucun paiement immédiat n'est demandé : si tu paies par RIB, tes consommations sont réglées en début de mois suivant. Si tu oublies ton code, demande à un coach de le réinitialiser.</p>
-    </div>
-
-    <button class="howto-close" onclick="goTo('screen-search')">J'ai compris</button>
+  <div class="guide-bottom">
+    <div class="guide-dots" id="guide-dots"></div>
+    <button class="guide-btn" id="guide-btn" onclick="guideNext()">Suivant</button>
   </div>
 </div>
 
@@ -984,6 +1017,7 @@
   </div>
   <div class="logo">HYGIE<span>.</span></div>
   <p class="selected-name" id="pin-member-name"></p>
+  <p class="pin-hint" id="pin-hint">Première connexion ? Tape le code 1234</p>
 
   <div class="pin-dots">
     <div class="pin-dot" id="dot-0"></div>
@@ -1092,7 +1126,7 @@
     <button class="nav-btn" onclick="resetApp()">⌂ Se déconnecter</button>
   </div>
   <div class="confirm-title">Confirmer ?</div>
-  <p class="confirm-note">Ta consommation sera prélevée sur ton RIB ou ton solde. Aucun paiement immédiat requis.</p>
+  <p class="confirm-note">Aucun paiement immédiat requis : soit sur ton crédit rechargé, soit par prélèvement en début de mois prochain.</p>
   <div class="order-recap" id="order-recap"></div>
   <div class="confirm-actions">
     <button class="btn-confirm" onclick="confirmOrder()">Confirmer ✓</button>
@@ -1182,7 +1216,7 @@
   <div class="success-icon">✓</div>
   <div class="success-title">C'est noté !</div>
   <div class="success-amount" id="success-amount"></div>
-  <p class="success-sub">Ta consommation a été enregistrée. Montant prélevé sur ton RIB ou ton solde.</p>
+  <p class="success-sub">Ta consommation a été enregistrée. Montant réglé sur ton crédit rechargé ou par prélèvement en début de mois prochain.</p>
   <p class="success-serve">Tu peux aller te servir 💪</p>
   <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
 </div>
@@ -1281,6 +1315,8 @@ function selectMember(member) {
   updatePinDots();
   document.getElementById('pin-member-name').textContent = member.name;
   document.getElementById('pin-error').textContent = '';
+  // Texte d'aide visible seulement en 1ʳᵉ connexion (PIN encore par défaut 1234)
+  document.getElementById('pin-hint').style.display = (member.pin === '1234') ? '' : 'none';
   goTo('screen-pin');
 }
 
@@ -1410,7 +1446,7 @@ function checkVerify() {
       // OK → passer à la question téléphone
       verifyStep = 2;
       document.getElementById('verify-question').textContent = "Quel est ton numéro de téléphone renseigné ?";
-      document.getElementById('verify-hint').textContent = "Si ton numéro est 0665656565, entre 33665656565";
+      document.getElementById('verify-hint').textContent = "Entre ton numéro de portable (ex. 0665656565)";
       input.value = '';
       input.type = 'tel';
       errorEl.textContent = '';
@@ -1422,8 +1458,9 @@ function checkVerify() {
 
   // Étape 2 : TÉLÉPHONE
   if (verifyStep === 2) {
-    const cleanVal = val.replace(/\s/g, '').replace(/^\+/, '');
-    if (cleanVal === (currentMember.tel || '')) {
+    // Compare le numéro national (9 derniers chiffres) → accepte 06…, 33…, +33…, 0033…
+    const normTel = s => { const d = (s || '').replace(/\D/g, ''); return d.length > 9 ? d.slice(-9) : d; };
+    if (normTel(val) === normTel(currentMember.tel)) {
       // Identité confirmée → choix du PIN
       startSetPin();
     } else {
@@ -1501,7 +1538,7 @@ function validateSetPin() {
     showMemberCredit();
     document.getElementById('search-input').value = '';
     renderMembers('');
-    goTo('screen-shop');
+    startGuide('onboarding');
   } else {
     document.getElementById('setpin-error').textContent = 'Les codes ne correspondent pas, recommence';
     setPinFirst = null;
@@ -1510,6 +1547,60 @@ function validateSetPin() {
     document.getElementById('setpin-instruction').textContent = 'Choisis ton code à 4 chiffres';
   }
 }
+
+// ─── CARROUSEL GUIDE ───
+let guideIndex = 0;
+let guideContext = 'info'; // 'onboarding' → boutique | 'info' → recherche
+const GUIDE_SLIDES = 4;
+
+function startGuide(context) {
+  guideContext = context;
+  guideIndex = 0;
+  renderGuideDots();
+  updateGuide();
+  goTo('screen-guide');
+}
+
+function renderGuideDots() {
+  const dots = document.getElementById('guide-dots');
+  dots.innerHTML = '';
+  for (let i = 0; i < GUIDE_SLIDES; i++) {
+    const d = document.createElement('span');
+    d.className = 'guide-dot' + (i === guideIndex ? ' active' : '');
+    d.onclick = () => { guideIndex = i; updateGuide(); };
+    dots.appendChild(d);
+  }
+}
+
+function updateGuide() {
+  document.getElementById('guide-track').style.transform = `translateX(-${guideIndex * 100}%)`;
+  document.querySelectorAll('#guide-dots .guide-dot').forEach((d, i) => d.classList.toggle('active', i === guideIndex));
+  document.getElementById('guide-btn').textContent = (guideIndex === GUIDE_SLIDES - 1) ? "C'est parti !" : 'Suivant';
+}
+
+function guideNext() {
+  if (guideIndex < GUIDE_SLIDES - 1) { guideIndex++; updateGuide(); }
+  else closeGuide();
+}
+
+function closeGuide() {
+  goTo(guideContext === 'onboarding' ? 'screen-shop' : 'screen-search');
+}
+
+// Swipe tactile sur le carrousel
+(function () {
+  const vp = document.getElementById('guide-viewport');
+  if (!vp) return;
+  let x0 = null;
+  vp.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  vp.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (dx < -40 && guideIndex < GUIDE_SLIDES - 1) { guideIndex++; updateGuide(); }
+    else if (dx > 40 && guideIndex > 0) { guideIndex--; updateGuide(); }
+    x0 = null;
+  }, { passive: true });
+})();
 
 // Shake keyframe
 const style = document.createElement('style');
