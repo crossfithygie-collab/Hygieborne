@@ -940,8 +940,9 @@
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
     .hero-headline { font-size: 30px; }
     #screen-shop { padding-bottom: 110px; }
-    .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-    .product-emoji, .product-img { height: 132px; }
+    .products-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
+    .product-card { padding: 16px; }
+    .product-emoji, .product-img { height: 120px; }
     .numpad { grid-template-columns: repeat(3, 76px); grid-template-rows: repeat(4, 76px); gap: 10px; }
     .numpad-btn { font-size: 23px; }
   }
