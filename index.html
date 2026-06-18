@@ -920,13 +920,14 @@
   }
   .howto-btn:active { border-color: var(--accent); color: var(--accent); }
 
-  .pin-block { display: contents; }
+  .pin-block, .pin-keypad, .home-left, .home-right { display: contents; }
 
   /* ═══ ADAPTATION PAYSAGE (iPad en mode horizontal) ═══ */
   @media (orientation: landscape) {
     /* écrans code : deux colonnes (infos à gauche, clavier à droite) */
     #screen-pin, #screen-setpin { flex-direction: row; justify-content: center; align-items: center; gap: 90px; }
     #screen-pin .pin-block, #screen-setpin .pin-block { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    #screen-pin .pin-keypad, #screen-setpin .pin-keypad { display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .screen {
       justify-content: flex-start;
       overflow-y: auto;
@@ -938,6 +939,13 @@
     /* mode recherche : input remonté + liste plafonnée au-dessus du clavier iOS */
     #screen-search.searching { padding-top: 64px; gap: 12px; }
     #screen-search.searching .members-list { max-height: 32vh; }
+    /* accueil (hors recherche) : deux colonnes — branding à gauche, identification à droite */
+    #screen-search:not(.searching) { flex-direction: row; justify-content: center; align-items: center; gap: 60px; }
+    #screen-search:not(.searching) .home-left { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; width: 46%; max-width: 560px; }
+    #screen-search:not(.searching) .home-left .hero-headline,
+    #screen-search:not(.searching) .home-left .hero-sub { text-align: left; }
+    #screen-search:not(.searching) .home-right { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 420px; flex: 0 0 auto; }
+    #screen-search:not(.searching) .hero-products { display: none; }
     #screen-verify { padding-top: 28px; }
     #screen-guide { padding-top: 18px; padding-bottom: 18px; }
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
@@ -957,13 +965,15 @@
 <!-- ═══════════════ SCREEN 1 : SEARCH ═══════════════ -->
 <div class="screen active" id="screen-search">
   <button class="search-cancel-btn" onclick="cancelSearch()">← Retour</button>
-  <div class="logo">HYGIE CROSSFIT</div>
-
-  <div class="hero-message">
-    <div class="hero-headline">Tu t'es <em>dépensé</em>,<br>maintenant recharge.</div>
-    <p class="hero-sub">Nocco, Fitaid, C4, barres protéinées. Commande en 10 secondes, réglée sur ton crédit rechargé ou par prélèvement en début de mois prochain.</p>
+  <div class="home-left">
+    <div class="logo">HYGIE CROSSFIT</div>
+    <div class="hero-message">
+      <div class="hero-headline">Tu t'es <em>dépensé</em>,<br>maintenant recharge.</div>
+      <p class="hero-sub">Nocco, Fitaid, C4, barres protéinées. Commande en 10 secondes, réglée sur ton crédit rechargé ou par prélèvement en début de mois prochain.</p>
+    </div>
   </div>
 
+  <div class="home-right">
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
     <input type="text" id="search-input" placeholder="S'identifier" autocomplete="off" autocorrect="off" spellcheck="false">
@@ -973,6 +983,7 @@
   <div class="members-list" id="members-list"></div>
 
   <button class="howto-btn" onclick="startGuide('info')">Comment ça marche ?</button>
+  </div>
 
   <div class="hero-products">
     <div class="hero-track" id="hero-track"></div>
@@ -1024,7 +1035,9 @@
     <div class="logo">HYGIE<span>.</span></div>
     <p class="selected-name" id="pin-member-name"></p>
     <p class="pin-hint" id="pin-hint">Première connexion ? Tape le code 1234</p>
+  </div>
 
+  <div class="pin-keypad">
     <div class="pin-dots">
       <div class="pin-dot" id="dot-0"></div>
       <div class="pin-dot" id="dot-1"></div>
@@ -1033,9 +1046,8 @@
     </div>
 
     <p class="pin-error" id="pin-error"></p>
-  </div>
 
-  <div class="numpad">
+    <div class="numpad">
     <button class="numpad-btn" onclick="pinInput('1')">1</button>
     <button class="numpad-btn" onclick="pinInput('2')">2</button>
     <button class="numpad-btn" onclick="pinInput('3')">3</button>
@@ -1048,6 +1060,7 @@
     <button class="numpad-btn empty"></button>
     <button class="numpad-btn" onclick="pinInput('0')">0</button>
     <button class="numpad-btn del" onclick="pinDelete()">⌫</button>
+    </div>
   </div>
 </div>
 
@@ -1074,7 +1087,9 @@
     <div class="logo">HYGIE<span>.</span></div>
     <p class="selected-name" id="setpin-member-name"></p>
     <p class="setpin-instruction" id="setpin-instruction">Bienvenue ! Choisis ton code à 4 chiffres</p>
+  </div>
 
+  <div class="pin-keypad">
     <div class="pin-dots">
       <div class="pin-dot" id="sdot-0"></div>
       <div class="pin-dot" id="sdot-1"></div>
@@ -1083,9 +1098,8 @@
     </div>
 
     <p class="pin-error" id="setpin-error"></p>
-  </div>
 
-  <div class="numpad">
+    <div class="numpad">
     <button class="numpad-btn" onclick="setPinInput('1')">1</button>
     <button class="numpad-btn" onclick="setPinInput('2')">2</button>
     <button class="numpad-btn" onclick="setPinInput('3')">3</button>
@@ -1098,6 +1112,7 @@
     <button class="numpad-btn empty"></button>
     <button class="numpad-btn" onclick="setPinInput('0')">0</button>
     <button class="numpad-btn del" onclick="setPinDelete()">⌫</button>
+    </div>
   </div>
 </div>
 
