@@ -928,9 +928,13 @@
       justify-content: flex-start;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      bottom: auto;
+      height: 100dvh;
       padding-top: 24px;
-      padding-bottom: 24px;
+      padding-bottom: calc(28px + env(safe-area-inset-bottom));
     }
+    /* la boutique a une barre fixe en bas → encore plus de marge */
+    #screen-shop { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
     #screen-search { justify-content: flex-start; gap: 20px; padding-top: 28px; padding-bottom: 28px; }
     /* mode recherche : input remonté + liste plafonnée au-dessus du clavier iOS */
     #screen-search.searching { padding-top: 64px; gap: 12px; }
@@ -939,7 +943,6 @@
     #screen-guide { padding-top: 18px; padding-bottom: 18px; }
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
     .hero-headline { font-size: 30px; }
-    #screen-shop { padding-bottom: 110px; }
     .products-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
     .product-card { padding: 16px; }
     .product-emoji, .product-img { height: 120px; }
