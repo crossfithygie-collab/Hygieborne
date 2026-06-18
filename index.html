@@ -920,8 +920,13 @@
   }
   .howto-btn:active { border-color: var(--accent); color: var(--accent); }
 
+  .pin-block { display: contents; }
+
   /* ═══ ADAPTATION PAYSAGE (iPad en mode horizontal) ═══ */
   @media (orientation: landscape) {
+    /* écrans code : deux colonnes (infos à gauche, clavier à droite) */
+    #screen-pin, #screen-setpin { flex-direction: row; justify-content: center; align-items: center; gap: 90px; }
+    #screen-pin .pin-block, #screen-setpin .pin-block { display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .screen {
       justify-content: flex-start;
       overflow-y: auto;
@@ -1015,18 +1020,20 @@
     <button class="nav-btn" onclick="goTo('screen-search')">← Retour</button>
     <button class="nav-btn" onclick="resetApp()">⌂ Se déconnecter</button>
   </div>
-  <div class="logo">HYGIE<span>.</span></div>
-  <p class="selected-name" id="pin-member-name"></p>
-  <p class="pin-hint" id="pin-hint">Première connexion ? Tape le code 1234</p>
+  <div class="pin-block">
+    <div class="logo">HYGIE<span>.</span></div>
+    <p class="selected-name" id="pin-member-name"></p>
+    <p class="pin-hint" id="pin-hint">Première connexion ? Tape le code 1234</p>
 
-  <div class="pin-dots">
-    <div class="pin-dot" id="dot-0"></div>
-    <div class="pin-dot" id="dot-1"></div>
-    <div class="pin-dot" id="dot-2"></div>
-    <div class="pin-dot" id="dot-3"></div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="dot-0"></div>
+      <div class="pin-dot" id="dot-1"></div>
+      <div class="pin-dot" id="dot-2"></div>
+      <div class="pin-dot" id="dot-3"></div>
+    </div>
+
+    <p class="pin-error" id="pin-error"></p>
   </div>
-
-  <p class="pin-error" id="pin-error"></p>
 
   <div class="numpad">
     <button class="numpad-btn" onclick="pinInput('1')">1</button>
@@ -1063,18 +1070,20 @@
   <div class="nav-bar">
     <button class="nav-btn" onclick="resetApp()">⌂ Se déconnecter</button>
   </div>
-  <div class="logo">HYGIE<span>.</span></div>
-  <p class="selected-name" id="setpin-member-name"></p>
-  <p class="setpin-instruction" id="setpin-instruction">Bienvenue ! Choisis ton code à 4 chiffres</p>
+  <div class="pin-block">
+    <div class="logo">HYGIE<span>.</span></div>
+    <p class="selected-name" id="setpin-member-name"></p>
+    <p class="setpin-instruction" id="setpin-instruction">Bienvenue ! Choisis ton code à 4 chiffres</p>
 
-  <div class="pin-dots">
-    <div class="pin-dot" id="sdot-0"></div>
-    <div class="pin-dot" id="sdot-1"></div>
-    <div class="pin-dot" id="sdot-2"></div>
-    <div class="pin-dot" id="sdot-3"></div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="sdot-0"></div>
+      <div class="pin-dot" id="sdot-1"></div>
+      <div class="pin-dot" id="sdot-2"></div>
+      <div class="pin-dot" id="sdot-3"></div>
+    </div>
+
+    <p class="pin-error" id="setpin-error"></p>
   </div>
-
-  <p class="pin-error" id="setpin-error"></p>
 
   <div class="numpad">
     <button class="numpad-btn" onclick="setPinInput('1')">1</button>
