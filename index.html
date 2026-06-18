@@ -924,10 +924,6 @@
 
   /* ═══ ADAPTATION PAYSAGE (iPad en mode horizontal) ═══ */
   @media (orientation: landscape) {
-    /* écrans code : deux colonnes (infos à gauche, clavier à droite) */
-    #screen-pin, #screen-setpin { flex-direction: row; justify-content: center; align-items: center; gap: 90px; }
-    #screen-pin .pin-block, #screen-setpin .pin-block { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    #screen-pin .pin-keypad, #screen-setpin .pin-keypad { display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .screen {
       justify-content: flex-start;
       overflow-y: auto;
@@ -939,13 +935,6 @@
     /* mode recherche : input remonté + liste plafonnée au-dessus du clavier iOS */
     #screen-search.searching { padding-top: 64px; gap: 12px; }
     #screen-search.searching .members-list { max-height: 32vh; }
-    /* accueil (hors recherche) : deux colonnes — branding à gauche, identification à droite */
-    #screen-search:not(.searching) { flex-direction: row; justify-content: center; align-items: center; gap: 60px; }
-    #screen-search:not(.searching) .home-left { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; width: 46%; max-width: 560px; }
-    #screen-search:not(.searching) .home-left .hero-headline,
-    #screen-search:not(.searching) .home-left .hero-sub { text-align: left; }
-    #screen-search:not(.searching) .home-right { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 420px; flex: 0 0 auto; }
-    #screen-search:not(.searching) .hero-products { display: none; }
     #screen-verify { padding-top: 28px; }
     #screen-guide { padding-top: 18px; padding-bottom: 18px; }
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
