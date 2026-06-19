@@ -1738,8 +1738,17 @@ function goToConfirm() {
 // Ventes en mémoire (session)
 let salesLog = [];
 
+// Remises silencieuses : nom normalisé (cf. normalize()) -> taux de remise.
+// JAMAIS affichées sur la borne : appliquées uniquement au montant enregistré
+// dans le Google Sheet (donc répercutées sur la facturation Hiboutik en aval).
+const REMISES = { 'antoine boucau': 0.20 };
+
 function confirmOrder() {
   const total = getCartTotal();
+  const taux = REMISES[normalize(currentMember.name)] || 0;
+  const totalSheet = +(total * (1 - taux)).toFixed(2);   // montant remisé pour le Sheet
+
+  // Affichage client : TOUJOURS le prix plein (la remise reste invisible sur la borne)
   document.getElementById('success-amount').textContent = total.toFixed(2).replace('.', ',') + ' €';
 
   const items = PRODUCTS
@@ -1750,17 +1759,17 @@ function confirmOrder() {
     time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
     membre: currentMember.name,
     items: items,
-    total: total
+    total: total               // journal interne borne : prix plein (remise invisible ici aussi)
   });
 
-  // Envoi vers Google Sheets
+  // Envoi vers Google Sheets — total éventuellement remisé (pris en compte dans le tableau)
   sendToSheet({
     action: 'vente',
     date: new Date().toLocaleDateString('fr-FR'),
     heure: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
     membre: currentMember.name,
     articles: items.join(', '),
-    total: total.toFixed(2).replace('.', ',')
+    total: totalSheet.toFixed(2).replace('.', ',')
   });
 
   goTo('screen-success');
