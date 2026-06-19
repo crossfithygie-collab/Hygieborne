@@ -934,30 +934,65 @@
 
   /* ═══ ADAPTATION PAYSAGE (iPad en mode horizontal) ═══ */
   @media (orientation: landscape) {
+    /* Base : chaque écran remplit la hauteur, contenu centré, padding-top qui
+       DÉGAGE la nav-bar flottante (top:20px, h:42 → ~62px) → aucun chevauchement.
+       overflow-y:auto = filet de sécurité, mais le contenu est calibré pour tenir. */
     .screen {
-      justify-content: flex-start;
+      height: 100dvh;
+      justify-content: center;
+      padding: 70px 32px calc(20px + env(safe-area-inset-bottom));
+      overflow-x: hidden;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      bottom: auto;
-      height: 100dvh;
-      padding-top: 24px;
-      padding-bottom: calc(28px + env(safe-area-inset-bottom));
     }
-    /* la boutique a une barre fixe en bas → encore plus de marge */
-    #screen-shop { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
-    #screen-search { justify-content: flex-start; gap: 20px; padding-top: 28px; padding-bottom: 28px; }
-    /* mode recherche : input remonté + liste plafonnée au-dessus du clavier iOS */
-    #screen-search.searching { padding-top: 64px; gap: 12px; }
-    #screen-search.searching .members-list { max-height: 32vh; }
-    #screen-verify { padding-top: 28px; }
+
+    /* RECHERCHE : pas de nav-bar ; bandeau décoratif masqué (gain de place + zéro mouvement horizontal) */
+    #screen-search { justify-content: center; gap: 16px; padding-top: 28px; }
+    #screen-search.searching { justify-content: flex-start; padding-top: 70px; gap: 12px; }
+    #screen-search.searching .members-list { max-height: 42vh; }
+    .hero-products { display: none; }
+    .hero-headline { font-size: 30px; }
+
+    /* VÉRIF IDENTITÉ : collé en haut pour rester au-dessus du clavier iOS */
+    #screen-verify { justify-content: flex-start; padding-top: 56px; gap: 14px; }
+
+    /* DIGICODE : pavé compact, tout tient sans chevaucher la nav */
+    #screen-pin, #screen-setpin, #screen-admin-login { justify-content: center; gap: 14px; }
+    .selected-name { font-size: 32px; }
+    .numpad { grid-template-columns: repeat(3, 72px); grid-template-rows: repeat(4, 72px); gap: 10px; }
+    .numpad-btn { font-size: 22px; }
+
+    /* GUIDE (1ère utilisation) */
     #screen-guide { padding-top: 18px; padding-bottom: 18px; }
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
-    .hero-headline { font-size: 30px; }
-    .products-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
-    .product-card { padding: 16px; }
-    .product-emoji, .product-img { height: 120px; }
-    .numpad { grid-template-columns: repeat(3, 76px); grid-template-rows: repeat(4, 76px); gap: 10px; }
-    .numpad-btn { font-size: 23px; }
+
+    /* BOUTIQUE : header figé + grille = LA SEULE zone qui défile (vertical).
+       Grille multi-rangées (auto-fit ~7 colonnes) → 8 à 14 produits visibles. */
+    #screen-shop {
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 70px 24px 10px;
+      overflow: hidden;            /* l'écran ne scrolle pas… */
+    }
+    #screen-shop .shop-header { flex: 0 0 auto; }
+    #screen-shop .products-grid {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;            /* …seule la grille produits défile, verticalement */
+      -webkit-overflow-scrolling: touch;
+      align-content: start;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-auto-rows: min-content;
+      gap: 10px;
+      padding-bottom: calc(80px + env(safe-area-inset-bottom)); /* place pour la barre de validation fixe */
+    }
+    .product-card { padding: 12px; gap: 6px; }
+    .product-emoji, .product-img { height: 96px; }
+    .product-emoji { font-size: 52px; }
+    .product-name { font-size: 14px; line-height: 1.25; }
+    .product-price { font-size: 22px; }
+    .qty-controls { gap: 10px; margin-top: 2px; }
+    .qty-btn { width: 34px; height: 34px; font-size: 20px; }
   }
 </style>
 </head>
@@ -1076,7 +1111,7 @@
   <p class="selected-name" id="verify-member-name"></p>
   <p class="verify-question" id="verify-question">Quelle est l'adresse mail de ton compte Resawod ?</p>
   <p class="verify-hint" id="verify-hint"></p>
-  <input type="text" id="verify-input" class="verify-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <input type="text" id="verify-input" class="verify-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();checkVerify();}">
   <p class="pin-error" id="verify-error"></p>
   <button class="verify-btn" onclick="checkVerify()">Valider</button>
 </div>
