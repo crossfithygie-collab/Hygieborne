@@ -266,6 +266,16 @@
   .members-list::-webkit-scrollbar { width: 3px; }
   .members-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
+  .no-result {
+    width: 100%; max-width: 460px; margin: 0 auto;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 22px; text-align: center;
+  }
+  .no-result-title { font-size: 17px; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  .no-result-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .no-result-text + .no-result-text { margin-top: 8px; }
+  .no-result-text strong { color: var(--white); font-weight: 600; }
+
   .member-item {
     background: var(--surface);
     border: 1px solid transparent;
@@ -1309,7 +1319,12 @@ function renderMembers(query) {
   const results = members.filter(m => normalize(m.name).includes(q)).slice(0, 8);
 
   if (results.length === 0) {
-    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;font-size:14px">Aucun résultat</p>';
+    list.innerHTML = `
+      <div class="no-result">
+        <p class="no-result-title">Ton nom n'apparaît pas&nbsp;?</p>
+        <p class="no-result-text">C'est soit que ton <strong>RIB ne nous a pas encore été communiqué</strong>, soit que tu n'as <strong>pas de crédit disponible</strong>.</p>
+        <p class="no-result-text">Rapproche-toi de <strong>Jérémy</strong> pour t'inscrire. 💪</p>
+      </div>`;
     return;
   }
 
