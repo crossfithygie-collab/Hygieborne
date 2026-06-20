@@ -1820,7 +1820,7 @@ let salesLog = [];
 // Remises silencieuses : nom normalisé (cf. normalize()) -> taux de remise.
 // JAMAIS affichées sur la borne : appliquées uniquement au montant enregistré
 // dans le Google Sheet (donc répercutées sur la facturation Hiboutik en aval).
-const REMISES = { 'antoine boucau': 0.20 };
+const REMISES = { 'antoine boucau': 0.20, 'jeremy doise': 1.0 };
 
 function confirmOrder() {
   const total = getCartTotal();
