@@ -867,6 +867,8 @@
   }
   .admin-row-name { font-weight: 400; color: var(--white); flex: 1; }
   .admin-row-pin { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 3px; color: var(--accent); }
+  .admin-row-del { background: transparent; border: none; color: var(--subtle); font-size: 15px; cursor: pointer; padding: 4px 9px; margin-left: 8px; border-radius: 6px; flex: 0 0 auto; transition: all 0.12s; }
+  .admin-row-del:active { background: var(--danger); color: #fff; }
 
   .admin-form { display: flex; flex-direction: column; gap: 10px; max-width: 440px; }
   .admin-label { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--subtle); margin-top: 6px; }
@@ -1233,7 +1235,9 @@
 
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchTab('tab-list')">Liste membres</button>
+      <button class="admin-tab" onclick="switchTab('tab-add')">Ajouter</button>
       <button class="admin-tab" onclick="switchTab('tab-pin')">Changer PIN</button>
+      <button class="admin-tab" onclick="switchTab('tab-settings')">Réglages</button>
       <button class="admin-tab" onclick="switchTab('tab-sales')">Ventes du jour</button>
     </div>
 
@@ -1243,6 +1247,21 @@
         <input type="text" id="admin-search" placeholder="Rechercher un membre…" oninput="renderAdminList(this.value)" autocomplete="off">
       </div>
       <div class="admin-members-table" id="admin-members-table"></div>
+    </div>
+
+    <!-- TAB : AJOUTER UN CLIENT -->
+    <div class="admin-tab-content" id="tab-add">
+      <div class="admin-form">
+        <label class="admin-label">Nom complet</label>
+        <input type="text" id="add-name" class="admin-input" placeholder="Prénom Nom" autocomplete="off">
+        <label class="admin-label">Email</label>
+        <input type="email" id="add-email" class="admin-input" placeholder="email@exemple.com" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <label class="admin-label">Téléphone</label>
+        <input type="tel" id="add-tel" class="admin-input" placeholder="33612345678" autocomplete="off">
+        <p style="font-size:12px;color:var(--subtle);line-height:1.45;margin-top:-2px">Code <b>1234</b> par défaut (le client choisira le sien à sa 1ʳᵉ connexion). L'email et le téléphone doivent correspondre à Resawod pour la vérification d'identité.</p>
+        <button class="btn-admin-action" onclick="addClient()">Ajouter le client</button>
+        <p class="admin-feedback" id="add-feedback"></p>
+      </div>
     </div>
 
     <!-- TAB : CHANGER PIN -->
@@ -1259,6 +1278,18 @@
           <button class="btn-admin-action" onclick="changePin()">Enregistrer le nouveau PIN</button>
           <p class="admin-feedback" id="pin-feedback"></p>
         </div>
+      </div>
+    </div>
+
+    <!-- TAB : RÉGLAGES (code admin) -->
+    <div class="admin-tab-content" id="tab-settings">
+      <div class="admin-form">
+        <label class="admin-label">Nouveau code admin (4 chiffres)</label>
+        <input type="text" id="admin-code-new" class="admin-input" placeholder="4 chiffres" maxlength="4" inputmode="numeric">
+        <label class="admin-label">Confirmer le code</label>
+        <input type="text" id="admin-code-confirm" class="admin-input" placeholder="4 chiffres" maxlength="4" inputmode="numeric">
+        <button class="btn-admin-action" onclick="changeAdminCode()">Enregistrer le code admin</button>
+        <p class="admin-feedback" id="admin-code-feedback"></p>
       </div>
     </div>
 
@@ -1848,7 +1879,7 @@ function resetApp() {
 //  ADMIN
 // ═══════════════════════════════════════════════
 
-const ADMIN_CODE = '1404'; // ← code admin à changer ici
+let ADMIN_CODE = localStorage.getItem('hygie_admin_code') || '1404'; // modifiable depuis l'admin (onglet Réglages), stocké dans le Sheet + cache local
 let adminPinBuffer = '';
 let selectedMemberIndex = null;
 
@@ -1881,6 +1912,11 @@ async function loadMembers() {
           logo: p.logo || ''
         }));
         try { localStorage.setItem('hygie_products_cache', JSON.stringify(PRODUCTS)); } catch(e) {}
+      }
+      // Code admin éventuellement renvoyé par le script (propriété de script)
+      if (data.adminCode) {
+        ADMIN_CODE = String(data.adminCode);
+        try { localStorage.setItem('hygie_admin_code', ADMIN_CODE); } catch(e) {}
       }
       try { localStorage.setItem('hygie_members_cache', JSON.stringify(members)); } catch(e) {}
       refreshAfterLoad();
@@ -1981,6 +2017,9 @@ function openAdminPanel() {
   document.getElementById('pin-change-form').style.display = 'none';
   document.getElementById('pin-search-results').innerHTML = '';
   document.getElementById('pin-feedback').textContent = '';
+  // reset des onglets Ajouter / Réglages
+  ['add-name','add-email','add-tel','admin-code-new','admin-code-confirm'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  ['add-feedback','admin-code-feedback'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ''; });
   selectedMemberIndex = null;
   renderAdminList('');
   goTo('screen-admin');
@@ -1988,7 +2027,7 @@ function openAdminPanel() {
 
 // --- TABS ---
 function switchTab(tabId) {
-  const ids = ['tab-list', 'tab-pin', 'tab-sales'];
+  const ids = ['tab-list', 'tab-add', 'tab-pin', 'tab-settings', 'tab-sales'];
   document.querySelectorAll('.admin-tab').forEach((t, i) => {
     t.classList.toggle('active', ids[i] === tabId);
   });
@@ -2014,6 +2053,7 @@ function renderAdminList(query) {
     `<div class="admin-row">
       <span class="admin-row-name">${m.name}</span>
       <span class="admin-row-pin">${m.pin}</span>
+      <button class="admin-row-del" title="Supprimer ce client" onclick="deleteClient('${m.name.replace(/'/g, "\\'")}')">✕</button>
     </div>`
   ).join('');
 
@@ -2072,6 +2112,70 @@ function changePin() {
   selectedMemberIndex = null;
   setTimeout(() => { fb.textContent = ''; }, 4000);
 }
+
+// --- AJOUTER UN CLIENT ---
+function normTel(t) {
+  let d = String(t || '').replace(/[^\d+]/g, '');
+  if (d.startsWith('+')) d = d.slice(1);
+  else if (d.startsWith('00')) d = d.slice(2);
+  else if (d.startsWith('0') && d.length === 10) d = '33' + d.slice(1);
+  return d;
+}
+
+function addClient() {
+  const fb = document.getElementById('add-feedback');
+  fb.className = 'admin-feedback';
+  const name = document.getElementById('add-name').value.trim().replace(/\s+/g, ' ');
+  const email = document.getElementById('add-email').value.trim().toLowerCase();
+  const tel = normTel(document.getElementById('add-tel').value);
+
+  if (!name) { fb.className += ' error'; fb.textContent = 'Le nom est obligatoire.'; return; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { fb.className += ' error'; fb.textContent = 'Email invalide.'; return; }
+  if (!/^\d{8,15}$/.test(tel)) { fb.className += ' error'; fb.textContent = 'Téléphone invalide (chiffres uniquement, ex. 33612345678).'; return; }
+  if (members.some(m => normalize(m.name) === normalize(name))) { fb.className += ' error'; fb.textContent = 'Ce client existe déjà dans la base.'; return; }
+
+  const client = { name: name, pin: '1234', email: email, tel: tel, credit: '' };
+  members.push(client);
+  try { localStorage.setItem('hygie_members_cache', JSON.stringify(members)); } catch(e) {}
+  sendToSheet({ action: 'addClient', name: name, pin: '1234', email: email, tel: tel, credit: '' });
+
+  fb.textContent = '✓ ' + name + ' ajouté (code 1234 pour sa 1ʳᵉ connexion).';
+  document.getElementById('add-name').value = '';
+  document.getElementById('add-email').value = '';
+  document.getElementById('add-tel').value = '';
+  setTimeout(() => { fb.textContent = ''; }, 6000);
+}
+
+// --- SUPPRIMER UN CLIENT ---
+function deleteClient(name) {
+  if (!confirm('Supprimer définitivement « ' + name + ' » de la base ?')) return;
+  const idx = members.findIndex(m => m.name === name);
+  if (idx === -1) return;
+  members.splice(idx, 1);
+  try { localStorage.setItem('hygie_members_cache', JSON.stringify(members)); } catch(e) {}
+  sendToSheet({ action: 'deleteClient', name: name });
+  renderAdminList(document.getElementById('admin-search').value);
+}
+
+// --- CHANGER LE CODE ADMIN ---
+function changeAdminCode() {
+  const fb = document.getElementById('admin-code-feedback');
+  fb.className = 'admin-feedback';
+  const a = document.getElementById('admin-code-new').value.trim();
+  const b = document.getElementById('admin-code-confirm').value.trim();
+  if (!/^\d{4}$/.test(a)) { fb.className += ' error'; fb.textContent = 'Le code doit faire exactement 4 chiffres.'; return; }
+  if (a !== b) { fb.className += ' error'; fb.textContent = 'Les deux codes ne correspondent pas.'; return; }
+
+  ADMIN_CODE = a;
+  try { localStorage.setItem('hygie_admin_code', a); } catch(e) {}
+  sendToSheet({ action: 'setAdmin', code: a });
+
+  fb.textContent = '✓ Nouveau code admin enregistré.';
+  document.getElementById('admin-code-new').value = '';
+  document.getElementById('admin-code-confirm').value = '';
+  setTimeout(() => { fb.textContent = ''; }, 6000);
+}
+
 // --- VENTES DU JOUR ---
 function renderSales() {
   const summary = document.getElementById('sales-summary');
