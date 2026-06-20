@@ -966,32 +966,30 @@
     #screen-guide { padding-top: 18px; padding-bottom: 18px; }
     .guide-emoji { width: 92px; height: 92px; font-size: 48px; }
 
-    /* BOUTIQUE : header figé + grille = LA SEULE zone qui défile (vertical).
-       Grille multi-rangées (auto-fit ~7 colonnes) → 8 à 14 produits visibles. */
+    /* BOUTIQUE : grille PLEINE LARGEUR, 4 produits MAX par ligne, AUCUN défilement.
+       Les rangées se partagent la hauteur disponible → tout tient à l'écran. */
     #screen-shop {
       justify-content: flex-start;
-      gap: 12px;
-      padding: 70px 24px 10px;
-      overflow: hidden;            /* l'écran ne scrolle pas… */
+      gap: 10px;
+      padding: 70px 24px calc(78px + env(safe-area-inset-bottom)); /* place pour la barre de validation fixe */
+      overflow: hidden;
     }
     #screen-shop .shop-header { flex: 0 0 auto; }
     #screen-shop .products-grid {
       flex: 1 1 auto;
       min-height: 0;
-      overflow-y: auto;            /* …seule la grille produits défile, verticalement */
-      -webkit-overflow-scrolling: touch;
-      align-content: start;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      grid-auto-rows: min-content;
-      gap: 10px;
-      padding-bottom: calc(80px + env(safe-area-inset-bottom)); /* place pour la barre de validation fixe */
+      overflow: hidden;                        /* pas de défilement */
+      grid-template-columns: repeat(4, 1fr);   /* pleine largeur, 4 max par ligne */
+      grid-auto-rows: 1fr;                      /* rangées à hauteur égale qui remplissent l'espace */
+      gap: 12px;
     }
-    .product-card { padding: 12px; gap: 6px; }
-    .product-emoji, .product-img { height: 96px; }
-    .product-emoji { font-size: 52px; }
-    .product-name { font-size: 14px; line-height: 1.25; }
+    .product-card { padding: 12px; gap: 4px; min-height: 0; overflow: hidden; justify-content: center; }
+    .product-emoji, .product-img { flex: 1 1 auto; height: auto; min-height: 0; }
+    .product-img img { width: 100%; height: 100%; object-fit: contain; }
+    .product-emoji { font-size: 48px; }
+    .product-name { font-size: 14px; line-height: 1.2; }
     .product-price { font-size: 22px; }
-    .qty-controls { gap: 10px; margin-top: 2px; }
+    .qty-controls { flex: 0 0 auto; gap: 10px; margin-top: 0; }
     .qty-btn { width: 34px; height: 34px; font-size: 20px; }
   }
 </style>
