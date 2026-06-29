@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver — CrossFit Hygie</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0A0B0C; --red:#E22118; --muted:#8A909A; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{
+    font-family:'Archivo',system-ui,Helvetica,Arial,sans-serif;
+    background:var(--ink); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:28px;
+  }
+  .wrap{ max-width:420px; width:100%; }
+  .mark{ font-weight:900; font-size:22px; letter-spacing:2px; }
+  .bar{ width:54px; height:4px; background:var(--red); border-radius:2px; margin:12px auto 28px; }
+  h1{ font-weight:900; font-size:26px; margin:0 0 10px; text-transform:uppercase; letter-spacing:-.5px; }
+  p{ color:var(--muted); font-size:15px; line-height:1.6; margin:0 0 26px; }
+  .spinner{ width:34px; height:34px; border:3px solid rgba(255,255,255,.15); border-top-color:var(--red);
+            border-radius:50%; margin:0 auto 26px; animation:spin .9s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  a.btn{
+    display:block; width:100%; padding:16px; margin:10px 0; border-radius:12px;
+    font-weight:800; font-size:15px; text-decoration:none; text-transform:uppercase; letter-spacing:.4px;
+  }
+  .btn-red{ background:var(--red); color:#fff; box-shadow:0 8px 26px rgba(226,33,24,.34); }
+  .btn-ghost{ background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.22); }
+  .hint{ font-size:12px; color:#5B626C; margin-top:18px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">CROSSFIT HYGIE</div>
+    <div class="bar"></div>
+    <div class="spinner" id="sp"></div>
+    <h1>Ouverture de Resawod…</h1>
+    <p>On t'envoie vers l'appli pour réserver ta séance. Si rien ne se passe, utilise un bouton ci-dessous.</p>
+
+    <a class="btn btn-red"  id="primary" href="https://box.resawod.com/login">Ouvrir l'appli Resawod</a>
+    <a class="btn btn-ghost" href="https://box.resawod.com/login">Réserver sur le web</a>
+
+    <div class="hint">CrossFit Hygie · Seclin</div>
+  </div>
+
+<script>
+(function () {
+  var PKG      = "com.Nubapp.Resawod";
+  var IOS_ID   = "925337499";
+  var PLAY     = "https://play.google.com/store/apps/details?id=" + PKG;
+  var APPSTORE = "https://apps.apple.com/app/id" + IOS_ID;
+  var WEB      = "https://box.resawod.com/login";
+
+  var ua  = navigator.userAgent || navigator.vendor || "";
+  var isAndroid = /android/i.test(ua);
+  var isIOS     = /iphone|ipad|ipod/i.test(ua) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad iOS13+
+
+  var primary = document.getElementById("primary");
+
+  if (isAndroid) {
+    // Lance l'appli installée (intent), sinon Play Store via fallback
+    var intent = "intent://#Intent;package=" + PKG +
+                 ";S.browser_fallback_url=" + encodeURIComponent(PLAY) + ";end";
+    primary.setAttribute("href", PLAY);
+    window.location.href = intent;
+  } else if (isIOS) {
+    // Tente le schéma de l'appli, repli App Store si non installée
+    primary.setAttribute("href", APPSTORE);
+    var t = setTimeout(function () { window.location.href = APPSTORE; }, 1200);
+    window.addEventListener("pagehide", function () { clearTimeout(t); });
+    window.location.href = "resawod://";
+  } else {
+    // Desktop / autre → web-app de réservation
+    document.getElementById("sp").style.display = "none";
+    primary.setAttribute("href", WEB);
+    window.location.href = WEB;
+  }
+})();
+</script>
+</body>
+</html>
