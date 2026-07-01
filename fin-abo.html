@@ -66,7 +66,7 @@
           <p style="margin:8px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;">Ton coach validera avec toi l'option exacte (RX, engagement, tarif).</p></div>
           <div class="field"><p class="q">À partir de quand veux-tu repartir ?</p>
             <input type="date" id="reprise" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);background:#fff;">
-            <p style="margin:8px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;">Laisse vide pour enchaîner dès la fin de ton abonnement actuel.</p>
+            <p style="margin:8px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;">Une date indicative, ton coach l'ajustera avec toi.</p>
           </div>
           <div class="field"><p class="q">Tu veux qu'un coach te recontacte pour finaliser ?</p><div class="opts" data-name="rappel">
             <label class="opt"><input type="radio" name="rappel" value="Oui">Oui, avec plaisir</label>
@@ -119,8 +119,12 @@
       var lbl = e.target.closest('.opt'); if(!lbl) return;
       g.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});
       lbl.classList.add('sel'); lbl.querySelector('input').checked = true;
+      g.style.outline = '';
     });
   });
+
+  var repriseEl = document.getElementById('reprise');
+  if (repriseEl) repriseEl.addEventListener('input', function(){ this.style.borderColor = ''; });
 
   function val(n){ var el=document.querySelector('input[name="'+n+'"]:checked'); return el?el.value:''; }
 
@@ -133,6 +137,21 @@
       miss.style.borderColor = '#E22118'; miss.focus();
       alert("Merci d'indiquer ton prénom et ton nom avant d'envoyer.");
       return;
+    }
+    var reqs = isOui
+      ? [['radio','formule'],['date','reprise'],['radio','rappel']]
+      : [['radio','frein_dep']];
+    for (var i = 0; i < reqs.length; i++) {
+      var t = reqs[i][0], key = reqs[i][1];
+      var ok = t === 'radio' ? !!val(key) : !!document.getElementById(key).value.trim();
+      if (!ok) {
+        var el = t === 'radio' ? document.querySelector('.opts[data-name="'+key+'"]') : document.getElementById(key);
+        if (t === 'radio') { el.style.outline = '2px solid #E22118'; el.style.borderRadius = '12px'; }
+        else el.style.borderColor = '#E22118';
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        alert("Merci de répondre à toutes les questions avant d'envoyer.");
+        return;
+      }
     }
     var btn = document.getElementById('submit'); btn.disabled = true; btn.textContent = "Envoi…";
     var data = {
