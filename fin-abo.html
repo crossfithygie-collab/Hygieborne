@@ -55,20 +55,20 @@
         </div>
 
         <div id="branchOui" class="hide">
-          <div class="field"><p class="q">Quelle formule t'intéresse pour la suite ?</p><div class="opts" data-name="formule">
-            <label class="opt"><input type="radio" name="formule" value="La même">La même formule</label>
-            <label class="opt"><input type="radio" name="formule" value="Plus de séances">Plus de séances</label>
-            <label class="opt"><input type="radio" name="formule" value="Moins de séances">Moins de séances</label>
-            <label class="opt"><input type="radio" name="formule" value="Un carnet">Un carnet de séances</label>
-            <label class="opt"><input type="radio" name="formule" value="Je ne sais pas encore">Je ne sais pas encore</label>
-          </div></div>
-          <div class="field"><p class="q">Un frein à lever avant de continuer ?</p><div class="opts" data-name="frein">
-            <label class="opt"><input type="radio" name="frein" value="Rien, tout roule">Rien, tout roule</label>
-            <label class="opt"><input type="radio" name="frein" value="Le tarif">Le tarif</label>
-            <label class="opt"><input type="radio" name="frein" value="Mes horaires / dispos">Mes horaires / dispos</label>
-            <label class="opt"><input type="radio" name="frein" value="Autre">Autre</label>
-          </div></div>
-          <div class="field"><p class="q">Tu veux qu'un coach te recontacte pour caler ça ?</p><div class="opts" data-name="rappel">
+          <div class="field"><p class="q">Sur quelle formule veux-tu repartir ?</p><div class="opts" data-name="formule">
+            <label class="opt"><input type="radio" name="formule" value="2 séances / semaine">2 séances / semaine</label>
+            <label class="opt"><input type="radio" name="formule" value="3 séances / semaine">3 séances / semaine</label>
+            <label class="opt"><input type="radio" name="formule" value="6 séances / semaine">6 séances / semaine</label>
+            <label class="opt"><input type="radio" name="formule" value="Formule illimité">Formule illimité</label>
+            <label class="opt"><input type="radio" name="formule" value="Carnet 10 séances">Carnet 10 séances</label>
+            <label class="opt"><input type="radio" name="formule" value="Je ne sais pas, un coach m'oriente">Je ne sais pas encore, un coach m'oriente</label>
+          </div>
+          <p style="margin:8px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;">Ton coach validera avec toi l'option exacte (RX, engagement, tarif).</p></div>
+          <div class="field"><p class="q">À partir de quand veux-tu repartir ?</p>
+            <input type="date" id="reprise" style="width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);background:#fff;">
+            <p style="margin:8px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;">Laisse vide pour enchaîner dès la fin de ton abonnement actuel.</p>
+          </div>
+          <div class="field"><p class="q">Tu veux qu'un coach te recontacte pour finaliser ?</p><div class="opts" data-name="rappel">
             <label class="opt"><input type="radio" name="rappel" value="Oui">Oui, avec plaisir</label>
             <label class="opt"><input type="radio" name="rappel" value="Non">Non, ça ira</label>
           </div></div>
@@ -135,7 +135,7 @@
       reponse: isOui ? 'Oui, je continue' : "J'hésite / j'arrête",
       prenom: document.getElementById('prenom').value.trim(),
       nom: document.getElementById('nom').value.trim(),
-      formule: val('formule'), frein: val('frein'), rappel: val('rappel'),
+      formule: val('formule'), reprise: (document.getElementById('reprise')||{}).value || '', rappel: val('rappel'),
       frein_depart: val('frein_dep'), mieux: (document.getElementById('mieux')||{}).value || '', offre: val('offre'),
       date: new Date().toISOString()
     };
