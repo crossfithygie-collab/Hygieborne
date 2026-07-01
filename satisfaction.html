@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ton avis compte — CrossFit Hygie</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#ECEDEF;--bg:#F4F4F2;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);}
+  .wrap{max-width:560px;margin:0 auto;padding:24px 14px 60px;}
+  .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(10,11,12,.10);}
+  .head{background:#fff;border-bottom:3px solid var(--red);padding:26px 32px 18px;text-align:center;}
+  .head img{height:96px;width:auto;max-width:70%;display:block;margin:0 auto;}
+  .head .k{margin:10px 0 0;font-weight:700;font-size:11px;letter-spacing:4px;color:#8A909A;text-transform:uppercase;}
+  .body{padding:30px 32px 34px;}
+  h1{margin:0 0 8px;font-weight:900;font-size:26px;line-height:1.1;text-transform:uppercase;letter-spacing:-.5px;}
+  .sub{margin:0 0 26px;font-size:15px;line-height:1.55;color:var(--muted);}
+  .q{margin:0 0 10px;font-weight:800;font-size:16px;}
+  .field{margin:0 0 26px;}
+  input[type=text],textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);background:#fff;}
+  input[type=text]:focus,textarea:focus{outline:none;border-color:var(--red);}
+  textarea{resize:vertical;min-height:80px;}
+  .rate{display:flex;gap:8px;}
+  .chip{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:13px 0;text-align:center;font-weight:800;font-size:17px;cursor:pointer;color:var(--ink);transition:.1s;user-select:none;}
+  .chip:hover{border-color:#CFD3D9;}
+  .chip.sel{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 6px 18px rgba(226,33,24,.28);}
+  .scale{display:flex;justify-content:space-between;margin:7px 2px 0;font-size:12px;color:#8A909A;}
+  .btn{display:block;width:100%;border:0;background:var(--red);color:#fff;border-radius:12px;padding:17px;font-family:'Archivo';font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;box-shadow:0 8px 26px rgba(226,33,24,.34);margin-top:6px;}
+  .btn:disabled{opacity:.5;box-shadow:none;cursor:default;}
+  .foot{background:var(--ink);color:#8A909A;text-align:center;padding:20px;font-size:12px;line-height:1.6;}
+  .foot a{color:#EE5249;text-decoration:none;}
+  .hide{display:none;}
+  .thanks{text-align:center;padding:20px 0;}
+  .thanks h1{margin-bottom:12px;}
+  .wa{display:block;margin:14px 0 0;text-align:center;background:#0A0B0C;color:#fff;border-radius:12px;padding:15px;font-weight:800;font-size:15px;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <img src="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png?v=2" alt="CrossFit Hygie">
+      <p class="k">Ton avis compte</p>
+    </div>
+    <div class="body">
+      <form id="form">
+        <h1>Dis-nous tout</h1>
+        <p class="sub">Deux minutes pour nous aider à progresser. Il n'y a pas de mauvaise réponse : on veut ton ressenti, sincère. Note de 1 (pas du tout) à 5 (au top).</p>
+
+        <div class="field">
+          <p class="q">Ton prénom et nom</p>
+          <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required style="margin-bottom:10px;">
+          <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
+        </div>
+
+        <div class="field"><p class="q">Ton expérience globale chez Hygie</p>
+          <div class="rate" data-name="global"></div>
+          <div class="scale"><span>Décevante</span><span>Au top</span></div></div>
+
+        <div class="field"><p class="q">Les coachs et l'accompagnement</p>
+          <div class="rate" data-name="coachs"></div>
+          <div class="scale"><span>À revoir</span><span>Excellents</span></div></div>
+
+        <div class="field"><p class="q">L'ambiance et la communauté</p>
+          <div class="rate" data-name="ambiance"></div>
+          <div class="scale"><span>Froide</span><span>Géniale</span></div></div>
+
+        <div class="field"><p class="q">Les créneaux et le planning</p>
+          <div class="rate" data-name="planning"></div>
+          <div class="scale"><span>Pas adaptés</span><span>Parfaits</span></div></div>
+
+        <div class="field"><p class="q">Ta progression et tes résultats</p>
+          <div class="rate" data-name="progression"></div>
+          <div class="scale"><span>Aucune</span><span>Énorme</span></div></div>
+
+        <div class="field"><p class="q">Le rapport qualité-prix</p>
+          <div class="rate" data-name="prix"></div>
+          <div class="scale"><span>Trop cher</span><span>Très juste</span></div></div>
+
+        <div class="field"><p class="q">Recommanderais-tu Hygie à un proche ?</p>
+          <div class="rate" data-name="reco"></div>
+          <div class="scale"><span>Jamais</span><span>À fond</span></div></div>
+
+        <div class="field"><p class="q">Qu'est-ce qui t'a fait partir, ou qu'aurait-on pu faire mieux ?</p>
+          <textarea id="raison" placeholder="Ton retour, même bref, compte énormément pour nous."></textarea></div>
+
+        <div class="field"><p class="q">Un dernier mot ? (facultatif)</p>
+          <textarea id="mot" placeholder="Ce que tu veux nous dire."></textarea></div>
+
+        <button type="submit" class="btn" id="submit">Envoyer mon avis</button>
+      </form>
+
+      <div id="thanks" class="thanks hide">
+        <h1>Merci !</h1>
+        <p class="sub">Ton retour compte énormément et va nous aider à progresser. On garde la porte grande ouverte, tu seras toujours le bienvenu à la box.</p>
+        <a class="wa" href="https://wa.me/33756825154?text=Bonjour%20Hygie%2C%20je%20reviens%20vers%20vous%20suite%20%C3%A0%20mon%20questionnaire.">Une question ? Écris-nous sur WhatsApp</a>
+      </div>
+    </div>
+    <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
+  </div>
+</div>
+
+<script>
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbyil8gx2f802OIXdgJaDD4rwkm1mfW32wPfjg8WzAuO7-cdxSjf6YtywDCYO0hu6Z3J/exec";
+  var params = new URLSearchParams(location.search);
+
+  // construit les puces 1..5 pour chaque échelle
+  document.querySelectorAll('.rate').forEach(function(g){
+    for (var i=1;i<=5;i++){
+      var c=document.createElement('div'); c.className='chip'; c.dataset.v=i; c.textContent=i;
+      g.appendChild(c);
+    }
+    g.addEventListener('click', function(e){
+      var c=e.target.closest('.chip'); if(!c) return;
+      g.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});
+      c.classList.add('sel'); g.dataset.value=c.dataset.v;
+    });
+  });
+
+  function rate(n){ var g=document.querySelector('.rate[data-name="'+n+'"]'); return g?(g.dataset.value||''):''; }
+
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn=document.getElementById('submit'); btn.disabled=true; btn.textContent="Envoi…";
+    var data={
+      type:'satisfaction_survey',
+      prenom:document.getElementById('prenom').value.trim(),
+      nom:document.getElementById('nom').value.trim(),
+      global:rate('global'), coachs:rate('coachs'), ambiance:rate('ambiance'),
+      planning:rate('planning'), progression:rate('progression'), prix:rate('prix'), reco:rate('reco'),
+      raison:document.getElementById('raison').value.trim(),
+      mot:document.getElementById('mot').value.trim(),
+      source:params.get('r')||'', date:new Date().toISOString()
+    };
+    var send = SHEET_URL.indexOf('http')===0
+      ? fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:new URLSearchParams(data).toString()}).catch(function(){})
+      : Promise.resolve();
+    send.finally(function(){
+      document.getElementById('form').classList.add('hide');
+      document.getElementById('thanks').classList.remove('hide');
+      window.scrollTo(0,0);
+    });
+  });
+</script>
+</body>
+</html>
