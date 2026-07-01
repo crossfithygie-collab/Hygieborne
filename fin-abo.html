@@ -106,7 +106,8 @@
 </div>
 
 <script>
-  var SHEET_URL = "https://script.google.com/macros/s/AKfycbwBfFjzLtldF4MyKv603wWaZBybKN4QzmtJqHYx0k4DlJ7Z74RRAanm8RSI6O8Hts8h2w/exec";
+  // Sheet dédié « Fin d'abo — Satisfaction ». Remplacer par l'URL /exec du déploiement Apps Script.
+  var SHEET_URL = "__WEBAPP_URL_FIN_ABO__";
   var params = new URLSearchParams(location.search);
   var r = (params.get('r') || '').toLowerCase();
   var isOui = r === 'oui';
@@ -139,10 +140,11 @@
       frein_depart: val('frein_dep'), mieux: (document.getElementById('mieux')||{}).value || '', offre: val('offre'),
       date: new Date().toISOString()
     };
-    fetch(SHEET_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body: new URLSearchParams(data).toString()})
-      .catch(function(){})
-      .finally(function(){
+    var send = SHEET_URL.indexOf('http') === 0
+      ? fetch(SHEET_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body: new URLSearchParams(data).toString()}).catch(function(){})
+      : Promise.resolve();
+    send.finally(function(){
         document.getElementById('form').classList.add('hide');
         var t = document.getElementById('thanks'); t.classList.remove('hide');
         document.getElementById('thanksMsg').textContent = isOui
