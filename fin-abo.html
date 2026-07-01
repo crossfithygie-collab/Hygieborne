@@ -126,6 +126,14 @@
 
   document.getElementById('form').addEventListener('submit', function(e){
     e.preventDefault();
+    var prenomV = document.getElementById('prenom').value.trim();
+    var nomV = document.getElementById('nom').value.trim();
+    if (!prenomV || !nomV) {
+      var miss = !prenomV ? document.getElementById('prenom') : document.getElementById('nom');
+      miss.style.borderColor = '#E22118'; miss.focus();
+      alert("Merci d'indiquer ton prénom et ton nom avant d'envoyer.");
+      return;
+    }
     var btn = document.getElementById('submit'); btn.disabled = true; btn.textContent = "Envoi…";
     var data = {
       type: 'satisfaction_abo',
