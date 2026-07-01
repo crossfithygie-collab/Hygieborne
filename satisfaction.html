@@ -114,7 +114,7 @@
     }
     g.addEventListener('click', function(e){
       var c=e.target.closest('.chip'); if(!c) return;
-      g.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel');});
+      g.querySelectorAll('.chip').forEach(function(x){x.classList.remove('sel'); x.style.borderColor='';});
       c.classList.add('sel'); g.dataset.value=c.dataset.v;
     });
   });
@@ -129,6 +129,15 @@
       var miss=!prenomV?document.getElementById('prenom'):document.getElementById('nom');
       miss.style.borderColor='#E22118'; miss.focus();
       alert("Merci d'indiquer ton prénom et ton nom avant d'envoyer.");
+      return;
+    }
+    var rnames=['global','coachs','ambiance','planning','progression','prix','reco'];
+    var missing=rnames.filter(function(n){return !rate(n);});
+    if(missing.length){
+      var g=document.querySelector('.rate[data-name="'+missing[0]+'"]');
+      g.querySelectorAll('.chip').forEach(function(x){x.style.borderColor='#E22118';});
+      g.scrollIntoView({behavior:'smooth',block:'center'});
+      alert('Merci de donner une note à chaque question (de 1 à 5). Les champs texte, eux, restent facultatifs.');
       return;
     }
     var btn=document.getElementById('submit'); btn.disabled=true; btn.textContent="Envoi…";
