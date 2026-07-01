@@ -106,8 +106,8 @@
 </div>
 
 <script>
-  // Sheet dédié « Fin d'abo — Satisfaction ». Remplacer par l'URL /exec du déploiement Apps Script.
-  var SHEET_URL = "__WEBAPP_URL_FIN_ABO__";
+  // Sheet dédié « Fin d'abo — Satisfaction » (Apps Script autonome).
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbwrBbCUZKVlczjYkcyxlX06YAWl59aalJvljxdJ-Ea23_pmWb1UQc2G32UjFps6WD_D/exec";
   var params = new URLSearchParams(location.search);
   var r = (params.get('r') || '').toLowerCase();
   var isOui = r === 'oui';
