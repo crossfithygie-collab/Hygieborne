@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOD Parent / Enfant — CrossFit Hygie</title>
+<meta property="og:title" content="WOD Parent / Enfant — CrossFit Hygie">
+<meta property="og:description" content="Samedi 25 juillet 2026, 14h–16h à Seclin. Un WOD à partager avec ton enfant. Places limitées, inscription gratuite.">
+<meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#ECEDEF;--bg:#F4F4F2;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);}
+  .wrap{max-width:560px;margin:0 auto;padding:24px 14px 60px;}
+  .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(10,11,12,.10);}
+  .head{background:#fff;border-bottom:3px solid var(--red);padding:26px 32px 18px;text-align:center;}
+  .head img{height:96px;width:auto;max-width:70%;display:block;margin:0 auto;}
+  .head .k{margin:10px 0 0;font-weight:700;font-size:11px;letter-spacing:4px;color:#8A909A;text-transform:uppercase;}
+  .body{padding:30px 32px 34px;}
+  h1{margin:0 0 4px;font-weight:900;font-size:30px;line-height:1.05;text-transform:uppercase;letter-spacing:-.5px;}
+  h1 .accent{color:var(--red);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px;}
+  .chip{background:#FDEBEA;color:var(--red);font-weight:800;font-size:13.5px;padding:9px 13px;border-radius:999px;white-space:nowrap;}
+  .sub{margin:0 0 18px;font-size:15px;line-height:1.55;color:var(--muted);}
+  .points{list-style:none;margin:0 0 8px;padding:0;}
+  .points li{position:relative;padding:0 0 10px 26px;font-size:14.5px;line-height:1.5;color:var(--ink);}
+  .points li::before{content:'✓';position:absolute;left:2px;top:0;color:var(--red);font-weight:900;}
+  .sec{display:flex;align-items:center;gap:12px;margin:28px 0 12px;font-weight:800;font-size:12px;letter-spacing:2.5px;color:var(--red);text-transform:uppercase;}
+  .sec::after{content:'';flex:1;height:1.5px;background:var(--line);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:440px){.grid2{grid-template-columns:1fr;}}
+  input[type=text],input[type=email],input[type=tel]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;font-size:15px;color:var(--ink);background:#fff;}
+  input:focus{outline:none;border-color:var(--red);}
+  .field{margin:0 0 10px;}
+  .decharge{border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:6px 0 20px;background:#FAFAF9;}
+  .decharge.err{border-color:var(--red);}
+  .decharge label{display:flex;gap:12px;cursor:pointer;align-items:flex-start;}
+  .decharge input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--red);cursor:pointer;}
+  .decharge .txt{font-size:13px;line-height:1.55;color:var(--ink);}
+  .decharge .txt strong{display:block;margin-bottom:6px;font-size:13.5px;}
+  .btn{display:block;width:100%;border:0;background:var(--red);color:#fff;border-radius:12px;padding:17px;font-family:'Archivo';font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;box-shadow:0 8px 26px rgba(226,33,24,.34);margin-top:4px;}
+  .btn:disabled{opacity:.5;box-shadow:none;cursor:default;}
+  .note{margin:12px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.5;text-align:center;}
+  .banner{display:none;border:1.5px solid var(--red);background:#FDEBEA;color:var(--red);border-radius:12px;padding:13px 15px;font-size:14px;font-weight:700;line-height:1.45;margin:0 0 16px;}
+  .banner.show{display:block;}
+  .foot{background:var(--ink);color:#8A909A;text-align:center;padding:20px;font-size:12px;line-height:1.6;}
+  .foot a{color:#EE5249;text-decoration:none;}
+  .hide{display:none;}
+  .thanks{text-align:center;padding:14px 0 6px;}
+  .thanks .big{font-size:52px;line-height:1;margin:0 0 14px;}
+  .thanks h1{font-size:26px;margin-bottom:10px;}
+  .recap{border:1.5px solid var(--line);border-radius:14px;padding:16px;margin:18px 0;text-align:left;font-size:14.5px;line-height:1.7;}
+  .recap b{font-weight:800;}
+  .cal{display:inline-block;margin-top:6px;color:var(--red);font-weight:800;font-size:14px;text-decoration:none;border:1.5px solid var(--red);border-radius:999px;padding:10px 18px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <img src="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png?v=2" alt="CrossFit Hygie">
+      <p class="k">Événement spécial</p>
+    </div>
+    <div class="body">
+
+      <div id="formZone">
+        <h1>WOD <span class="accent">Parent / Enfant</span></h1>
+        <div class="chips">
+          <span class="chip">📅 Samedi 25 juillet 2026</span>
+          <span class="chip">🕑 14h – 16h</span>
+          <span class="chip">📍 CrossFit Hygie, Seclin</span>
+        </div>
+        <p class="sub">Un entraînement à partager en duo avec ton enfant : des ateliers ludiques, des défis à deux et une vraie ambiance de box. Aucun niveau requis, les coachs adaptent tout.</p>
+        <ul class="points">
+          <li>Séance encadrée par les coachs Hygie, matériel adapté aux enfants</li>
+          <li>Ouvert à tous, membre de la box ou non</li>
+          <li>Places limitées — une seule inscription par duo parent/enfant</li>
+        </ul>
+
+        <form id="form" novalidate>
+          <div class="sec">Le parent</div>
+          <div class="grid2 field">
+            <input type="text" id="pPrenom" placeholder="Prénom" autocomplete="given-name" required>
+            <input type="text" id="pNom" placeholder="Nom" autocomplete="family-name" required>
+          </div>
+          <div class="field"><input type="email" id="pEmail" placeholder="Adresse email" autocomplete="email" required></div>
+          <div class="field"><input type="tel" id="pTel" placeholder="Téléphone" autocomplete="tel" required></div>
+
+          <div class="sec">L'enfant invité</div>
+          <div class="grid2 field">
+            <input type="text" id="ePrenom" placeholder="Prénom de l'enfant" required>
+            <input type="text" id="eNom" placeholder="Nom de l'enfant" required>
+          </div>
+
+          <div class="sec">Autorisation parentale</div>
+          <div class="decharge" id="dechargeBox">
+            <label>
+              <input type="checkbox" id="decharge">
+              <span class="txt">
+                <strong>Je certifie être le représentant légal de l'enfant inscrit et j'accepte les conditions suivantes :</strong>
+                j'autorise mon enfant à participer au WOD Parent/Enfant du samedi 25 juillet 2026 chez CrossFit Hygie ; j'atteste qu'il ne présente aucune contre-indication médicale à la pratique d'une activité physique ; je m'engage à rester présent(e) à ses côtés et à l'encadrer pendant toute la durée de l'événement ; je décharge CrossFit Hygie de toute responsabilité en cas d'accident résultant du non-respect des consignes données par les coachs. Des photos pourront être prises pendant l'événement — signale-nous sur place si tu ne le souhaites pas.
+              </span>
+            </label>
+          </div>
+
+          <div class="banner" id="banner"></div>
+          <button type="submit" class="btn" id="submit">Je réserve nos places</button>
+          <p class="note">Une seule inscription par personne (vérifiée sur le nom et l'email).<br>Pour inscrire un deuxième enfant, contacte-nous directement.</p>
+        </form>
+      </div>
+
+      <div id="thanks" class="thanks hide">
+        <p class="big">🎉</p>
+        <h1>C'est noté !</h1>
+        <p class="sub">Vos places sont réservées. On a hâte de vous voir tous les deux à la box.</p>
+        <div class="recap" id="recap"></div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=WOD%20Parent%2FEnfant%20%E2%80%94%20CrossFit%20Hygie&dates=20260725T120000Z/20260725T140000Z&details=WOD%20Parent%2FEnfant%20chez%20CrossFit%20Hygie.%20Pense%20%C3%A0%20une%20gourde%20et%20une%20tenue%20de%20sport%20!&location=CrossFit%20Hygie%2C%20257%20rue%20de%20l%27industrie%2C%2059113%20Seclin" target="_blank" rel="noopener">＋ Ajouter à mon agenda</a>
+        <p class="note">Pense à une tenue de sport et une gourde pour chacun.<br>Rendez-vous 10 minutes en avance pour l'accueil.</p>
+      </div>
+
+    </div>
+    <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
+  </div>
+</div>
+
+<script>
+  // Apps Script dédié « Hygie WOD Famille » (voir Borne/wod_famille_apps_script.gs).
+  var SHEET_URL = "";
+
+  function showBanner(msg){
+    var b = document.getElementById('banner');
+    b.textContent = msg; b.classList.add('show');
+    b.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
+
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    hideBanner();
+    var ids = ['pPrenom','pNom','pEmail','pTel','ePrenom','eNom'];
+    var vals = {};
+    for (var i = 0; i < ids.length; i++) {
+      var el = document.getElementById(ids[i]);
+      el.style.borderColor = '';
+      vals[ids[i]] = el.value.trim();
+      if (!vals[ids[i]]) {
+        el.style.borderColor = 'var(--red)'; el.focus();
+        showBanner("Merci de remplir tous les champs avant d'envoyer.");
+        return;
+      }
+    }
+    var emailEl = document.getElementById('pEmail');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.pEmail)) {
+      emailEl.style.borderColor = 'var(--red)'; emailEl.focus();
+      showBanner("L'adresse email ne semble pas valide.");
+      return;
+    }
+    var telEl = document.getElementById('pTel');
+    if (vals.pTel.replace(/\D/g,'').length < 8) {
+      telEl.style.borderColor = 'var(--red)'; telEl.focus();
+      showBanner("Le numéro de téléphone ne semble pas valide.");
+      return;
+    }
+    var dBox = document.getElementById('dechargeBox');
+    dBox.classList.remove('err');
+    if (!document.getElementById('decharge').checked) {
+      dBox.classList.add('err');
+      dBox.scrollIntoView({behavior:'smooth', block:'center'});
+      showBanner("Merci de cocher l'autorisation parentale pour valider l'inscription.");
+      return;
+    }
+    if (SHEET_URL.indexOf('http') !== 0) {
+      showBanner("Les inscriptions ouvrent très bientôt. Reviens dans un petit moment !");
+      return;
+    }
+
+    var btn = document.getElementById('submit');
+    btn.disabled = true; btn.textContent = 'Envoi…';
+    var qs = new URLSearchParams({
+      action: 'register',
+      parent_prenom: vals.pPrenom, parent_nom: vals.pNom,
+      email: vals.pEmail, tel: vals.pTel,
+      enfant_prenom: vals.ePrenom, enfant_nom: vals.eNom,
+      decharge: 'oui'
+    });
+    fetch(SHEET_URL + '?' + qs.toString())
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (res && res.ok) {
+          document.getElementById('recap').innerHTML =
+            '<b>' + esc(vals.pPrenom) + ' ' + esc(vals.pNom) + '</b> &amp; <b>' + esc(vals.ePrenom) + ' ' + esc(vals.eNom) + '</b><br>' +
+            'Samedi 25 juillet 2026 · 14h – 16h<br>CrossFit Hygie, 257 rue de l\'industrie, Seclin';
+          document.getElementById('formZone').classList.add('hide');
+          document.getElementById('thanks').classList.remove('hide');
+          window.scrollTo({top:0, behavior:'smooth'});
+        } else if (res && res.error === 'deja_inscrit') {
+          btn.disabled = false; btn.textContent = 'Je réserve nos places';
+          showBanner("Une inscription existe déjà à ce nom ou avec cet email — vos places sont déjà réservées ! Pour toute question, contacte-nous directement.");
+        } else {
+          throw new Error((res && res.error) || 'inconnu');
+        }
+      })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = 'Je réserve nos places';
+        showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie — sinon contacte-nous directement.");
+      });
+  });
+
+  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+</script>
+</body>
+</html>
