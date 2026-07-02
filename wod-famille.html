@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WOD Parent / Enfant — CrossFit Hygie</title>
-<meta property="og:title" content="WOD Parent / Enfant — CrossFit Hygie">
-<meta property="og:description" content="Samedi 25 juillet 2026, 14h–16h à Seclin. Un WOD à partager avec ton enfant. Réservé aux adhérents Hygie, places limitées.">
+<title>WOD Parent / Enfant · CrossFit Hygie</title>
+<meta property="og:title" content="WOD Parent / Enfant · CrossFit Hygie">
+<meta property="og:description" content="Samedi 25 juillet 2026, de 14h à 16h à Seclin. Un WOD à partager avec ton enfant. Réservé aux adhérents Hygie, places limitées.">
 <meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -68,7 +68,7 @@
         <h1>WOD <span class="accent">Parent / Enfant</span></h1>
         <div class="chips">
           <span class="chip">📅 Samedi 25 juillet 2026</span>
-          <span class="chip">🕑 14h – 16h</span>
+          <span class="chip">🕑 14h à 16h</span>
           <span class="chip">📍 CrossFit Hygie, Seclin</span>
         </div>
         <form id="form" novalidate>
@@ -93,7 +93,7 @@
               <input type="checkbox" id="decharge">
               <span class="txt">
                 <strong>Je certifie être le représentant légal de l'enfant inscrit et j'accepte les conditions suivantes :</strong>
-                j'autorise mon enfant à participer au WOD Parent/Enfant du samedi 25 juillet 2026 chez CrossFit Hygie ; j'atteste qu'il ne présente aucune contre-indication médicale à la pratique d'une activité physique ; je m'engage à rester présent(e) à ses côtés et à l'encadrer pendant toute la durée de l'événement ; je décharge CrossFit Hygie de toute responsabilité en cas d'accident résultant du non-respect des consignes données par les coachs. Des photos pourront être prises pendant l'événement — signale-nous sur place si tu ne le souhaites pas.
+                j'autorise mon enfant à participer au WOD Parent/Enfant du samedi 25 juillet 2026 chez CrossFit Hygie ; j'atteste qu'il ne présente aucune contre-indication médicale à la pratique d'une activité physique ; je m'engage à rester présent(e) à ses côtés et à l'encadrer pendant toute la durée de l'événement ; je décharge CrossFit Hygie de toute responsabilité en cas d'accident résultant du non-respect des consignes données par les coachs. Des photos pourront être prises pendant l'événement, signale-nous sur place si tu ne le souhaites pas.
               </span>
             </label>
           </div>
@@ -184,13 +184,13 @@
         if (res && res.ok) {
           document.getElementById('recap').innerHTML =
             '<b>' + esc(vals.pPrenom) + ' ' + esc(vals.pNom) + '</b> &amp; <b>' + esc(vals.ePrenom) + ' ' + esc(vals.eNom) + '</b><br>' +
-            'Samedi 25 juillet 2026 · 14h – 16h<br>CrossFit Hygie, 257 rue de l\'industrie, Seclin';
+            'Samedi 25 juillet 2026 · 14h à 16h<br>CrossFit Hygie, 257 rue de l\'industrie, Seclin';
           document.getElementById('formZone').classList.add('hide');
           document.getElementById('thanks').classList.remove('hide');
           window.scrollTo({top:0, behavior:'smooth'});
         } else if (res && res.error === 'deja_inscrit') {
           btn.disabled = false; btn.textContent = 'Je réserve nos places';
-          showBanner("Une inscription existe déjà à ce nom ou avec cet email — vos places sont déjà réservées ! Pour toute question, contacte-nous directement.");
+          showBanner("Une inscription existe déjà à ce nom ou avec cet email, vos places sont déjà réservées ! Pour toute question, contacte-nous directement.");
         } else if (res && res.error === 'non_adherent') {
           btn.disabled = false; btn.textContent = 'Je réserve nos places';
           showBanner("L'événement est réservé aux adhérents Hygie avec un abonnement ou un carnet actif, et on ne te retrouve pas dans la liste. Vérifie que tu as bien utilisé le nom et l'email de ton compte Resawod, sinon contacte-nous, on regarde ça ensemble.");
@@ -203,7 +203,7 @@
       })
       .catch(function(){
         btn.disabled = false; btn.textContent = 'Je réserve nos places';
-        showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie — sinon contacte-nous directement.");
+        showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie, sinon contacte-nous directement.");
       });
   });
 
