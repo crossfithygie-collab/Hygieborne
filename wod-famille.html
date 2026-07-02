@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WOD Parent / Enfant — CrossFit Hygie</title>
 <meta property="og:title" content="WOD Parent / Enfant — CrossFit Hygie">
-<meta property="og:description" content="Samedi 25 juillet 2026, 14h–16h à Seclin. Un WOD à partager avec ton enfant. Places limitées, inscription gratuite.">
+<meta property="og:description" content="Samedi 25 juillet 2026, 14h–16h à Seclin. Un WOD à partager avec ton enfant. Réservé aux adhérents Hygie, places limitées.">
 <meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -74,12 +74,13 @@
         <p class="sub">Un entraînement à partager en duo avec ton enfant : des ateliers ludiques, des défis à deux et une vraie ambiance de box. Aucun niveau requis, les coachs adaptent tout.</p>
         <ul class="points">
           <li>Séance encadrée par les coachs Hygie, matériel adapté aux enfants</li>
-          <li>Ouvert à tous, membre de la box ou non</li>
+          <li>Réservé aux adhérents Hygie (abonnement ou carnet actif)</li>
           <li>Places limitées — une seule inscription par duo parent/enfant</li>
         </ul>
 
         <form id="form" novalidate>
           <div class="sec">Le parent</div>
+          <p style="margin:0 0 10px;font-size:12.5px;color:#8A909A;line-height:1.5;">Indique le nom et l'email de ton compte Resawod : l'inscription est réservée aux adhérents avec un abonnement ou carnet actif.</p>
           <div class="grid2 field">
             <input type="text" id="pPrenom" placeholder="Prénom" autocomplete="given-name" required>
             <input type="text" id="pNom" placeholder="Nom" autocomplete="family-name" required>
@@ -106,7 +107,7 @@
 
           <div class="banner" id="banner"></div>
           <button type="submit" class="btn" id="submit">Je réserve nos places</button>
-          <p class="note">Une seule inscription par personne (vérifiée sur le nom et l'email).<br>Pour inscrire un deuxième enfant, contacte-nous directement.</p>
+          <p class="note">Réservé aux adhérents Hygie · une seule inscription par personne (vérifiée sur le nom et l'email).<br>Pour inscrire un deuxième enfant, contacte-nous directement.</p>
         </form>
       </div>
 
@@ -197,6 +198,12 @@
         } else if (res && res.error === 'deja_inscrit') {
           btn.disabled = false; btn.textContent = 'Je réserve nos places';
           showBanner("Une inscription existe déjà à ce nom ou avec cet email — vos places sont déjà réservées ! Pour toute question, contacte-nous directement.");
+        } else if (res && res.error === 'non_adherent') {
+          btn.disabled = false; btn.textContent = 'Je réserve nos places';
+          showBanner("L'événement est réservé aux adhérents Hygie avec un abonnement ou un carnet actif, et on ne te retrouve pas dans la liste. Vérifie que tu as bien utilisé le nom et l'email de ton compte Resawod — sinon contacte-nous, on regarde ça ensemble.");
+        } else if (res && res.error === 'liste_indisponible') {
+          btn.disabled = false; btn.textContent = 'Je réserve nos places';
+          showBanner("Les inscriptions ne sont pas encore ouvertes (liste des adhérents en cours de préparation). Réessaie un peu plus tard !");
         } else {
           throw new Error((res && res.error) || 'inconnu');
         }
