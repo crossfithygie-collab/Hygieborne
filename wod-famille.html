@@ -200,7 +200,7 @@
           showBanner("Une inscription existe déjà à ce nom ou avec cet email — vos places sont déjà réservées ! Pour toute question, contacte-nous directement.");
         } else if (res && res.error === 'non_adherent') {
           btn.disabled = false; btn.textContent = 'Je réserve nos places';
-          showBanner("L'événement est réservé aux adhérents Hygie avec un abonnement ou un carnet actif, et on ne te retrouve pas dans la liste. Vérifie que tu as bien utilisé le nom et l'email de ton compte Resawod — sinon contacte-nous, on regarde ça ensemble.");
+          showBanner("L'événement est réservé aux adhérents Hygie avec un abonnement ou un carnet actif, et on ne te retrouve pas dans la liste. Vérifie que tu as bien utilisé le nom et l'email de ton compte Resawod, sinon contacte-nous, on regarde ça ensemble.");
         } else if (res && res.error === 'liste_indisponible') {
           btn.disabled = false; btn.textContent = 'Je réserve nos places';
           showBanner("Les inscriptions ne sont pas encore ouvertes (liste des adhérents en cours de préparation). Réessaie un peu plus tard !");
