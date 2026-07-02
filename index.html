@@ -749,6 +749,8 @@
   .success-sub { font-size: 16px; color: var(--subtle); text-align: center; line-height: 1.7; max-width: 440px; text-wrap: balance; }
   .success-serve { font-size: 20px; font-weight: 700; color: var(--white); text-align: center; }
   .success-amount { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: var(--accent); letter-spacing: 2px; }
+  .success-warn { background: #e8231a; color: #fff; font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 14px; text-align: center; max-width: 460px; line-height: 1.4; }
+  .success-warn[hidden] { display: none; }
 
   .progress-bar { width: 160px; height: 1px; background: var(--border); border-radius: 1px; overflow: hidden; }
   .progress-fill { height: 100%; background: var(--subtle); width: 0%; transition: width 4s linear; }
@@ -1309,6 +1311,7 @@
   <div class="success-amount" id="success-amount"></div>
   <p class="success-sub">Ta consommation a été enregistrée. Montant réglé sur ton crédit rechargé ou par prélèvement en début de mois prochain.</p>
   <p class="success-serve">Tu peux aller te servir 💪</p>
+  <div class="success-warn" id="success-warn" hidden>⚠️ Vente NON enregistrée — préviens Jérémy. Elle sera renvoyée automatiquement au prochain démarrage.</div>
   <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
 </div>
 
@@ -1624,6 +1627,7 @@ function validateSetPin() {
     currentMember.pin = newPin;
     const idx = members.findIndex(m => m.name === currentMember.name);
     if (idx !== -1) members[idx].pin = newPin;
+    try { localStorage.setItem('hygie_members_cache', JSON.stringify(members)); } catch (e) {}
     sendToSheet({ action: 'changePin', name: currentMember.name, pin: newPin });
 
     // Accès direct au shop
@@ -1816,6 +1820,7 @@ function goToConfirm() {
 
 // Ventes en mémoire (session)
 let salesLog = [];
+let resetTimer = null;   // timer d'effacement de l'écran succès (repoussé si échec d'écriture)
 
 // Remises silencieuses : nom normalisé (cf. normalize()) -> taux de remise.
 // JAMAIS affichées sur la borne : appliquées uniquement au montant enregistré
@@ -1842,13 +1847,23 @@ function confirmOrder() {
   });
 
   // Envoi vers Google Sheets — total éventuellement remisé (pris en compte dans le tableau)
-  sendToSheet({
+  const ventePayload = {
     action: 'vente',
     date: new Date().toLocaleDateString('fr-FR'),
     heure: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
     membre: currentMember.name,
     articles: items.join(', '),
     total: totalSheet.toFixed(2).replace('.', ',')
+  };
+  document.getElementById('success-warn').hidden = true;   // reset avertissement
+  // Écriture VÉRIFIÉE : si ça n'aboutit pas, on garde la vente localement + on alerte
+  postSheet(ventePayload).then(res => {
+    if (!res.ok) {
+      queuePending(ventePayload);
+      document.getElementById('success-warn').hidden = false;
+      clearTimeout(resetTimer);                      // on laisse l'écran affiché
+      resetTimer = setTimeout(() => { resetApp(); }, 15000);
+    }
   });
 
   goTo('screen-success');
@@ -1856,7 +1871,7 @@ function confirmOrder() {
   setTimeout(() => {
     document.getElementById('progress-fill').style.width = '100%';
   }, 100);
-  setTimeout(() => { resetApp(); }, 4500);
+  resetTimer = setTimeout(() => { resetApp(); }, 4500);
 }
 
 function resetApp() {
@@ -1968,11 +1983,48 @@ function renderHeroBanner() {
 }
 
 // Envoyer une action au Sheets (vente, ajout, changement de PIN)
+// Écriture VÉRIFIÉE (on lit la réponse {ok:true} du script) + anti-perte :
+// si l'écriture échoue, la charge est mise en file d'attente locale et RENVOYÉE
+// automatiquement (démarrage + toutes les 5 min). N'auto-réessaie QUE les actions
+// idempotentes / dédup-safe : 'changePin' (idempotent) et 'vente' (le sync
+// borne_sync dédoublonne par signature date|heure|membre|articles|total).
 function sendToSheet(payload) {
-  fetch(SHEET_URL, {
-    method: 'POST',
-    body: JSON.stringify(payload)
-  }).catch(() => {});
+  postSheet(payload).then(res => {
+    if (!res.ok && payload.action === 'changePin') queuePending(payload);
+  });
+}
+
+async function postSheet(payload) {
+  try {
+    const r = await fetch(SHEET_URL, { method: 'POST', body: JSON.stringify(payload) });
+    let ok = r.ok;
+    try { const j = await r.json(); if (j && typeof j.ok === 'boolean') ok = j.ok; } catch (e) {}
+    return { ok };
+  } catch (e) {
+    return { ok: false, error: String(e) };
+  }
+}
+
+// File d'attente locale des écritures non abouties (ventes + changePin).
+function queuePending(payload) {
+  try {
+    const q = JSON.parse(localStorage.getItem('hygie_pending_writes') || '[]');
+    q.push(payload);
+    localStorage.setItem('hygie_pending_writes', JSON.stringify(q));
+  } catch (e) {}
+}
+
+// Renvoie les écritures en attente ; ne garde que celles qui échouent encore.
+async function flushPending() {
+  let q;
+  try { q = JSON.parse(localStorage.getItem('hygie_pending_writes') || '[]'); } catch (e) { q = []; }
+  if (!q.length) return;
+  const remain = [];
+  for (const v of q) {
+    const res = await postSheet(v);
+    if (!res.ok) remain.push(v);
+  }
+  try { localStorage.setItem('hygie_pending_writes', JSON.stringify(remain)); } catch (e) {}
 }
 
 // --- LOGIN ADMIN ---
@@ -2103,6 +2155,7 @@ function changePin() {
 
   const oldPin = members[selectedMemberIndex].pin;
   members[selectedMemberIndex].pin = newPin;
+  try { localStorage.setItem('hygie_members_cache', JSON.stringify(members)); } catch (e) {}
   sendToSheet({ action: 'changePin', name: members[selectedMemberIndex].name, pin: newPin });
 
   fb.textContent = `✓ PIN de ${members[selectedMemberIndex].name} changé (${oldPin} → ${newPin})`;
@@ -2230,9 +2283,12 @@ try {
 } catch(e) {}
 renderHeroBanner();
 loadMembers();
+flushPending();   // renvoie les écritures restées en attente (échec précédent)
 
 // Rafraîchit les données depuis le Sheet toutes les 30 min (pas Hiboutik, juste le Sheet)
 setInterval(loadMembers, 30 * 60 * 1000);
+// Réessaie d'écouler la file d'attente des écritures toutes les 5 min
+setInterval(flushPending, 5 * 60 * 1000);
 
 </script>
 </body>
