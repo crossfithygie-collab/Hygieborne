@@ -24,6 +24,8 @@
   h1 .accent{color:var(--red);display:block;}
   .meta{display:flex;align-items:center;white-space:nowrap;margin:22px 0 0;font-weight:800;font-size:clamp(10px,2.9vw,14px);letter-spacing:.6px;text-transform:uppercase;color:#fff;}
   .meta .slash{color:var(--red);margin:0 .55em;font-style:italic;font-weight:900;}
+  .places{display:inline-block;margin:16px 0 0;background:var(--red);color:#fff;font-weight:900;font-style:italic;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border-radius:999px;}
+  .places.full{background:#fff;color:var(--ink);}
 
   .body{padding:30px 30px 36px;}
   .sec{display:flex;align-items:baseline;gap:10px;margin:30px 0 14px;}
@@ -40,6 +42,9 @@
   input:focus{outline:none;border-color:var(--ink);}
   .field{margin:0 0 10px;}
 
+  .addp{display:none;width:100%;border:1.5px dashed #C9CCD1;background:none;border-radius:12px;padding:13px;font-family:'Archivo';font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#5B626C;cursor:pointer;margin:2px 0 10px;transition:.12s;}
+  .addp.on{display:block;}
+  .addp:hover{border-color:var(--red);color:var(--red);}
   .decharge{border:1.5px solid var(--line);border-radius:14px;padding:18px;margin:4px 0 22px;background:#FAFAF8;}
   .decharge.err{border-color:var(--red);}
   .decharge label{display:flex;gap:14px;cursor:pointer;align-items:flex-start;}
@@ -82,6 +87,7 @@
       <p class="kicker">Événement spécial</p>
       <h1>WOD <span class="accent">Parent / Enfant</span></h1>
       <p class="meta">Samedi 25 juillet 2026<span class="slash">/</span>14h à 16h<span class="slash">/</span>Seclin</p>
+      <p class="places hide" id="places"></p>
     </div>
 
     <div class="body">
@@ -95,6 +101,15 @@
           </div>
           <div class="field"><input type="email" id="pEmail" placeholder="Adresse email" autocomplete="email" required></div>
           <div class="field"><input type="tel" id="pTel" placeholder="Téléphone" autocomplete="tel" required></div>
+          <button type="button" class="addp" id="addParent">+ Ajouter un deuxième parent</button>
+          <div id="parent2" class="hide">
+            <p class="hint">Le deuxième parent doit aussi être adhérent Hygie (abonnement ou carnet actif). Il compte une place de plus.</p>
+            <div class="grid2 field">
+              <input type="text" id="p2Prenom" placeholder="Prénom du 2e parent">
+              <input type="text" id="p2Nom" placeholder="Nom du 2e parent">
+            </div>
+            <div class="field"><input type="email" id="p2Email" placeholder="Email du 2e parent (optionnel)"></div>
+          </div>
 
           <div class="sec"><span class="num">02</span><span class="lbl">L'enfant invité</span></div>
           <div class="grid2 field">
@@ -143,6 +158,42 @@
   }
   function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
 
+  // Jauge : affiche les places restantes et active le bouton « deuxième parent »
+  // (uniquement si le script déployé est en v2, sinon dégradation silencieuse).
+  var eventFull = false;
+  if (SHEET_URL.indexOf('http') === 0) {
+    fetch(SHEET_URL).then(function(r){ return r.json(); }).then(function(info){
+      if (!info || !info.ok || typeof info.places_restantes === 'undefined') return;
+      document.getElementById('addParent').classList.add('on');
+      var pl = document.getElementById('places');
+      if (info.places_restantes <= 0) {
+        eventFull = true;
+        pl.textContent = 'Complet';
+        pl.classList.add('full');
+        document.getElementById('submit').disabled = true;
+        showBanner("L'événement est complet ! Contacte-nous directement pour être prévenu si une place se libère.");
+      } else {
+        pl.textContent = info.places_restantes + ' places restantes';
+      }
+      pl.classList.remove('hide');
+    }).catch(function(){});
+  }
+
+  // Deuxième parent : bouton + pour ouvrir, ✕ pour retirer.
+  document.getElementById('addParent').addEventListener('click', function(){
+    var z = document.getElementById('parent2');
+    if (z.classList.contains('hide')) {
+      z.classList.remove('hide');
+      this.textContent = '✕ Retirer le deuxième parent';
+    } else {
+      z.classList.add('hide');
+      this.textContent = '+ Ajouter un deuxième parent';
+      ['p2Prenom','p2Nom','p2Email'].forEach(function(id){
+        var el = document.getElementById(id); el.value = ''; el.style.borderColor = '';
+      });
+    }
+  });
+
   document.getElementById('form').addEventListener('submit', function(e){
     e.preventDefault();
     hideBanner();
@@ -170,6 +221,25 @@
       showBanner("Le numéro de téléphone ne semble pas valide.");
       return;
     }
+    var p2open = !document.getElementById('parent2').classList.contains('hide');
+    var p2 = { prenom: '', nom: '', email: '' };
+    if (p2open) {
+      p2.prenom = document.getElementById('p2Prenom').value.trim();
+      p2.nom = document.getElementById('p2Nom').value.trim();
+      p2.email = document.getElementById('p2Email').value.trim();
+      if (!p2.prenom || !p2.nom) {
+        var miss2 = document.getElementById(!p2.prenom ? 'p2Prenom' : 'p2Nom');
+        miss2.style.borderColor = 'var(--red)'; miss2.focus();
+        showBanner("Complète le prénom et le nom du deuxième parent, ou retire-le.");
+        return;
+      }
+      if (p2.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(p2.email)) {
+        var e2 = document.getElementById('p2Email');
+        e2.style.borderColor = 'var(--red)'; e2.focus();
+        showBanner("L'email du deuxième parent ne semble pas valide.");
+        return;
+      }
+    }
     var dBox = document.getElementById('dechargeBox');
     dBox.classList.remove('err');
     if (!document.getElementById('decharge').checked) {
@@ -190,14 +260,18 @@
       parent_prenom: vals.pPrenom, parent_nom: vals.pNom,
       email: vals.pEmail, tel: vals.pTel,
       enfant_prenom: vals.ePrenom, enfant_nom: vals.eNom,
+      parent2_prenom: p2.prenom, parent2_nom: p2.nom, parent2_email: p2.email,
       decharge: 'oui'
     });
     fetch(SHEET_URL + '?' + qs.toString())
       .then(function(r){ return r.json(); })
       .then(function(res){
         if (res && res.ok) {
+          var noms = esc(vals.pPrenom) + ' ' + esc(vals.pNom) +
+            (p2.prenom ? ' &amp; ' + esc(p2.prenom) + ' ' + esc(p2.nom) : '') +
+            ' &amp; ' + esc(vals.ePrenom) + ' ' + esc(vals.eNom);
           document.getElementById('recap').innerHTML =
-            '<span class="big">' + esc(vals.pPrenom) + ' ' + esc(vals.pNom) + ' &amp; ' + esc(vals.ePrenom) + ' ' + esc(vals.eNom) + '</span><br>' +
+            '<span class="big">' + noms + '</span><br>' +
             'Samedi 25 juillet 2026 · 14h à 16h<br>CrossFit Hygie, 257 rue de l\'industrie, Seclin';
           document.getElementById('formZone').classList.add('hide');
           document.getElementById('thanks').classList.remove('hide');
@@ -208,6 +282,14 @@
         } else if (res && res.error === 'non_adherent') {
           resetBtn(btn);
           showBanner("L'événement est réservé aux adhérents Hygie avec un abonnement ou un carnet actif, et on ne te retrouve pas dans la liste. Vérifie que tu as bien utilisé le nom et l'email de ton compte Resawod, sinon contacte-nous, on regarde ça ensemble.");
+        } else if (res && res.error === 'parent2_non_adherent') {
+          resetBtn(btn);
+          showBanner("Le deuxième parent doit aussi être adhérent Hygie avec un abonnement ou un carnet actif, et on ne le retrouve pas dans la liste. Vérifie son nom et son email tels qu'ils sont sur Resawod, sinon contacte-nous.");
+        } else if (res && res.error === 'complet') {
+          resetBtn(btn);
+          showBanner(res.restantes > 0
+            ? "Il ne reste que " + res.restantes + " place" + (res.restantes > 1 ? "s" : "") + ", pas assez pour cette inscription. Contacte-nous directement, on trouvera une solution."
+            : "L'événement est complet ! Contacte-nous directement pour être prévenu si une place se libère.");
         } else if (res && res.error === 'liste_indisponible') {
           resetBtn(btn);
           showBanner("Les inscriptions ne sont pas encore ouvertes (liste des adhérents en cours de préparation). Réessaie un peu plus tard !");
