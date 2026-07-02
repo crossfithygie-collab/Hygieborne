@@ -20,8 +20,8 @@
   .body{padding:30px 32px 34px;}
   h1{margin:0 0 4px;font-weight:900;font-size:30px;line-height:1.05;text-transform:uppercase;letter-spacing:-.5px;}
   h1 .accent{color:var(--red);}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px;}
-  .chip{background:#FDEBEA;color:var(--red);font-weight:800;font-size:13.5px;padding:9px 13px;border-radius:999px;white-space:nowrap;}
+  .chips{display:flex;flex-wrap:nowrap;gap:6px;margin:16px 0 18px;}
+  .chip{background:#FDEBEA;color:var(--red);font-weight:800;font-size:clamp(9.5px,2.6vw,13.5px);padding:.65em .95em;border-radius:999px;white-space:nowrap;}
   .sub{margin:0 0 18px;font-size:15px;line-height:1.55;color:var(--muted);}
   .points{list-style:none;margin:0 0 8px;padding:0;}
   .points li{position:relative;padding:0 0 10px 26px;font-size:14.5px;line-height:1.5;color:var(--ink);}
@@ -69,7 +69,7 @@
         <div class="chips">
           <span class="chip">📅 Samedi 25 juillet 2026</span>
           <span class="chip">🕑 14h à 16h</span>
-          <span class="chip">📍 CrossFit Hygie, Seclin</span>
+          <span class="chip">📍 Seclin</span>
         </div>
         <form id="form" novalidate>
           <div class="sec">Le parent</div>
