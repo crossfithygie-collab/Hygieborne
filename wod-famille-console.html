@@ -24,6 +24,7 @@
   .btn:disabled{opacity:.5;cursor:default;}
   .err{color:var(--red);font-weight:700;font-size:14px;margin:10px 0 0;display:none;}
   .hide{display:none;}
+  .placesline{margin:-6px 0 14px;text-align:center;font-size:12.5px;font-weight:700;color:#8A909A;}
   .counts{display:flex;gap:10px;margin:0 0 14px;}
   .count{flex:1;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;}
   .count .n{font-weight:900;font-size:26px;line-height:1;}
@@ -77,6 +78,7 @@
           <div class="count red"><div class="n" id="nHere">…</div><div class="l">Présents</div></div>
           <div class="count"><div class="n" id="nWait">…</div><div class="l">Attendus</div></div>
         </div>
+        <p class="placesline" id="placesLine"></p>
         <div class="toolbar">
           <input type="search" id="search" placeholder="Rechercher un nom…">
           <button class="refresh" id="refresh" title="Actualiser">⟳</button>
@@ -127,6 +129,8 @@
     document.getElementById('nTotal').textContent = rows.length;
     document.getElementById('nHere').textContent = here;
     document.getElementById('nWait').textContent = rows.length - here;
+    var places = rows.reduce(function(n, r){ return n + 2 + (r.parent2_prenom ? 1 : 0); }, 0);
+    document.getElementById('placesLine').textContent = places + ' places réservées sur 24 (parents + enfants)';
     var list = document.getElementById('list');
     var shown = rows.filter(function(r){
       if (!q) return true;
@@ -148,7 +152,9 @@
       return '<div class="row' + (r.present ? ' here' : '') + '" data-row="' + r.row + '">' +
         '<div class="who">' +
           '<div class="kid">' + esc(r.enfant_prenom) + ' ' + esc(r.enfant_nom) + '</div>' +
-          '<div class="parent">avec ' + esc(r.parent_prenom) + ' ' + esc(r.parent_nom) + (when ? ' · inscrit le ' + when : '') + '</div>' +
+          '<div class="parent">avec ' + esc(r.parent_prenom) + ' ' + esc(r.parent_nom) +
+            (r.parent2_prenom ? ' et ' + esc(r.parent2_prenom) + ' ' + esc(r.parent2_nom) : '') +
+            (when ? ' · inscrit le ' + when : '') + '</div>' +
           '<div class="contact"><a href="tel:' + esc(tel) + '">' + esc(tel) + '</a><span>·</span><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a></div>' +
         '</div>' +
         '<button class="tick' + (r.present ? ' on' : '') + '">' + (r.present ? '✓ Présent' : 'Présent ?') + '</button>' +
