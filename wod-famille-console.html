@@ -134,6 +134,9 @@
       return;
     }
     list.innerHTML = shown.map(function(r){
+      // Répare les numéros dont Sheets a mangé le 0 initial (stockés en nombre).
+      var tel = String(r.tel || '');
+      if (/^[1-9]\d{8}$/.test(tel)) tel = '0' + tel;
       var when = '';
       try {
         var d = new Date(r.date);
@@ -143,7 +146,7 @@
         '<div class="who">' +
           '<div class="kid">' + esc(r.enfant_prenom) + ' ' + esc(r.enfant_nom) + '</div>' +
           '<div class="parent">avec ' + esc(r.parent_prenom) + ' ' + esc(r.parent_nom) + (when ? ' · inscrit le ' + when : '') + '</div>' +
-          '<div class="contact"><a href="tel:' + esc(r.tel) + '">' + esc(r.tel) + '</a><span>·</span><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a></div>' +
+          '<div class="contact"><a href="tel:' + esc(tel) + '">' + esc(tel) + '</a><span>·</span><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a></div>' +
         '</div>' +
         '<button class="tick' + (r.present ? ' on' : '') + '">' + (r.present ? '✓ Présent' : 'Présent ?') + '</button>' +
       '</div>';
