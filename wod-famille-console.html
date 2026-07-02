@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Console — WOD Parent / Enfant</title>
+<title>Console · WOD Parent / Enfant</title>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#ECEDEF;--bg:#F4F4F2;}
@@ -63,7 +63,7 @@
 
       <div id="lock">
         <h1>WOD Parent / Enfant</h1>
-        <p class="sub">Samedi 25 juillet 2026 · 14h – 16h. Entre le code coach pour voir les inscriptions et faire l'appel.</p>
+        <p class="sub">Samedi 25 juillet 2026 · 14h à 16h. Entre le code coach pour voir les inscriptions et faire l'appel.</p>
         <input type="password" id="code" placeholder="Code coach" autocomplete="off">
         <button class="btn" id="enter">Ouvrir la console</button>
         <p class="err" id="lockErr">Code incorrect.</p>
@@ -71,11 +71,11 @@
 
       <div id="main" class="hide">
         <h1>L'appel</h1>
-        <p class="sub">Samedi 25 juillet 2026 · 14h – 16h. Touche « Présent » à l'arrivée de chaque duo.</p>
+        <p class="sub">Samedi 25 juillet 2026 · 14h à 16h. Touche « Présent » à l'arrivée de chaque duo.</p>
         <div class="counts">
-          <div class="count"><div class="n" id="nTotal">–</div><div class="l">Inscrits</div></div>
-          <div class="count red"><div class="n" id="nHere">–</div><div class="l">Présents</div></div>
-          <div class="count"><div class="n" id="nWait">–</div><div class="l">Attendus</div></div>
+          <div class="count"><div class="n" id="nTotal">…</div><div class="l">Inscrits</div></div>
+          <div class="count red"><div class="n" id="nHere">…</div><div class="l">Présents</div></div>
+          <div class="count"><div class="n" id="nWait">…</div><div class="l">Attendus</div></div>
         </div>
         <div class="toolbar">
           <input type="search" id="search" placeholder="Rechercher un nom…">
@@ -191,7 +191,7 @@
         r.present = target;
         render();
       })
-      .catch(function(){ toast("Échec de l'enregistrement — réessaie."); })
+      .catch(function(){ toast("Échec de l'enregistrement, réessaie."); })
       .finally(function(){ btn.disabled = false; });
   });
 
