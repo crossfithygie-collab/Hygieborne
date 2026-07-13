@@ -131,6 +131,35 @@ input:-webkit-autofill{-webkit-text-fill-color:#fff;transition:background-color 
 .foot{text-align:center;padding:56px 22px 6px;font-size:12px;line-height:1.7;color:var(--soft2);}
 .foot a{color:#fff;text-decoration:none;font-weight:700;border-bottom:1.5px solid var(--hair);}
 
+/* Sélecteur de division + champs inscription */
+.divisions{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:0 0 6px;}
+.divopt{position:relative;display:block;border:2px solid var(--hair);border-radius:14px;padding:16px 15px;cursor:pointer;transition:border-color .15s,background .15s,transform .12s;}
+.divopt input{position:absolute;opacity:0;width:0;height:0;}
+.divopt .dn{display:block;font-weight:900;font-style:italic;font-size:18px;letter-spacing:-.3px;}
+.divopt .dp{display:block;margin-top:5px;font-size:12px;font-weight:700;color:var(--soft);letter-spacing:.3px;}
+.divopt:hover{border-color:var(--soft);}
+.divopt.on{border-color:#fff;background:var(--fill);}
+.divopt:has(input:checked){border-color:#fff;background:var(--fill);}
+select{width:100%;border:1.6px solid var(--hair);border-radius:12px;padding:16px;font:inherit;font-size:15px;font-weight:600;color:#fff;
+  background-color:var(--fill);appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='white' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat:no-repeat;background-position:right 16px center;}
+select:focus{outline:none;border-color:#fff;}
+select:invalid{color:rgba(255,255,255,.5);}
+select option{color:#111;background:#fff;}
+input[type=date]{width:100%;border:1.6px solid var(--hair);border-radius:12px;padding:16px;font:inherit;font-size:15px;font-weight:600;
+  color:#fff;background:var(--fill);color-scheme:dark;transition:border-color .15s,background .15s;}
+input[type=date]:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.15);}
+.athlete{border:2px solid var(--hair);border-radius:16px;padding:18px 16px;margin:0 0 14px;}
+.athlete .ah{font-weight:900;font-style:italic;font-size:15px;text-transform:uppercase;letter-spacing:1px;margin:0 0 14px;color:#fff;}
+.rules{border:2px solid var(--hair);border-radius:14px;padding:18px;margin:6px 0 4px;}
+.rules.err{border-color:#fff;background:rgba(255,255,255,.10);}
+.rules label{display:flex;gap:14px;cursor:pointer;align-items:flex-start;}
+.rules input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:#fff;cursor:pointer;}
+.rules .txt{font-size:13px;line-height:1.55;color:var(--soft);}
+.rules .txt a{color:#fff;font-weight:700;}
+.price-tag{text-align:center;margin:4px 0 0;font-weight:900;font-style:italic;font-size:15px;letter-spacing:.5px;}
+
 /* ══ Animations (coupées si prefers-reduced-motion) ══ */
 @media (prefers-reduced-motion: no-preference){
   body{animation:drift 26s linear infinite;}
