@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accès anticipé · Hygie Race 4</title>
+<meta property="og:title" content="Accès anticipé · Hygie Race 4">
+<meta property="og:description" content="Laisse tes coordonnées et inscris-toi en avant-première à la Hygie Race 4. Accès anticipé dès le 23 juillet, places limitées.">
+<meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/race4-logo.png">
+<meta name="theme-color" content="#1800AD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="race4.css?v=2">
+</head>
+<body>
+<div class="frame"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<nav class="nav">
+  <ul>
+    <li><a href="race4.html">Accueil</a></li>
+    <li><a href="race4-inscription.html" class="active">Accès anticipé</a></li>
+    <li><a href="race4-leaderboard.html">Leaderboard</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <div class="logo-wrap anim" style="animation-delay:.05s"><img class="logo" src="race4-logo.png" alt="RAC4 · CrossFit Hygie"></div>
+
+  <div id="formZone">
+    <div class="hero" style="margin-bottom:8px">
+      <span class="stamp">04 · 10 · 26</span>
+      <p class="kicker anim" style="animation-delay:.16s">Accès anticipé</p>
+      <h1 class="anim" style="animation-delay:.26s">Rejoins<br>la Race</h1>
+      <p class="limit">Places limitées</p>
+    </div>
+
+    <p class="intro" style="text-align:center;margin-top:26px">L'accès anticipé ouvre le <strong>23 juillet 2026</strong>. Laisse tes coordonnées pour t'<strong>inscrire en avant-première</strong> : on te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
+
+    <form id="regform" novalidate>
+      <div class="sec"><span class="num">01</span><span class="lbl">Tes coordonnées</span></div>
+      <div class="grid2 field">
+        <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required>
+        <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
+      </div>
+      <div class="field"><input type="email" id="email" placeholder="Adresse email" autocomplete="email" required></div>
+      <div class="field"><input type="tel" id="tel" placeholder="Téléphone" autocomplete="tel" required></div>
+
+      <div class="banner" id="banner"></div>
+      <button type="submit" class="btn" id="submit">Je veux l'accès anticipé <span class="arrow">→</span></button>
+      <p class="note">Une seule inscription par personne (vérifiée sur l'email).<br>Tes coordonnées servent uniquement à te donner l'accès anticipé et à te tenir informé de la Hygie Race 4.</p>
+    </form>
+  </div>
+
+  <div id="thanks" class="thanks hide">
+    <span class="stamp">04 · 10 · 26</span>
+    <h1>Tu es <span>dedans.</span></h1>
+    <p class="sub">Ton inscription en accès anticipé est enregistrée. On te prévient par email dès l'ouverture, le 23 juillet, avec ton accès en avant-première.</p>
+    <div class="recap" id="recap"></div>
+    <p class="note">Ajoute contact@crossfit-hygie.fr à tes contacts pour ne pas rater l'ouverture.</p>
+  </div>
+
+  <div class="foot"><a href="race4.html">← Retour à l'accueil</a><br><br>CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin</div>
+</div>
+
+<script>
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbzn3YgLG2Bh_l5CRfqPiMnyinNrUAdu4AbabB2BNe33jksBG--Tfcyt0EcKZZMK5Ku6/exec";
+
+  function showBanner(msg){ var b=document.getElementById('banner'); b.textContent=msg; b.classList.add('show'); b.scrollIntoView({block:'center'}); }
+  function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
+  function resetBtn(btn){ btn.disabled=false; btn.innerHTML='Je veux l\'accès anticipé <span class="arrow">→</span>'; }
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+  document.getElementById('regform').addEventListener('submit', function(e){
+    e.preventDefault();
+    hideBanner();
+    var ids = ['prenom','nom','email','tel'], vals = {};
+    for (var i=0;i<ids.length;i++){
+      var el=document.getElementById(ids[i]); el.style.borderColor='';
+      vals[ids[i]]=el.value.trim();
+      if(!vals[ids[i]]){ el.style.borderColor='#fff'; el.focus(); showBanner("Merci de remplir tous les champs avant d'envoyer."); return; }
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.email)){ document.getElementById('email').style.borderColor='#fff'; document.getElementById('email').focus(); showBanner("L'adresse email ne semble pas valide."); return; }
+    if(vals.tel.replace(/\D/g,'').length<8){ document.getElementById('tel').style.borderColor='#fff'; document.getElementById('tel').focus(); showBanner("Le numéro de téléphone ne semble pas valide."); return; }
+
+    if(SHEET_URL.indexOf('http')!==0){ showBanner("L'accès anticipé ouvre très bientôt. Reviens dans un petit moment !"); return; }
+
+    var btn=document.getElementById('submit');
+    btn.disabled=true; btn.textContent='Envoi…';
+    var qs=new URLSearchParams({action:'register',prenom:vals.prenom,nom:vals.nom,email:vals.email,tel:vals.tel});
+    fetch(SHEET_URL+'?'+qs.toString())
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if(res && res.ok){
+          document.getElementById('recap').innerHTML='<span class="big">'+esc(vals.prenom)+' '+esc(vals.nom)+'</span>'+esc(vals.email)+'<br>'+esc(vals.tel);
+          document.getElementById('formZone').classList.add('hide');
+          document.getElementById('thanks').classList.remove('hide');
+          window.scrollTo({top:0,behavior:'smooth'});
+        } else if(res && res.error==='deja_inscrit'){
+          resetBtn(btn); showBanner("Tu es déjà inscrit avec cet email, tout est bon ! On te préviendra dès l'ouverture.");
+        } else { throw new Error((res&&res.error)||'inconnu'); }
+      })
+      .catch(function(){ resetBtn(btn); showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie, sinon contacte-nous directement."); });
+  });
+</script>
+</body>
+</html>
