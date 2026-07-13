@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accès anticipé · Hygie Race 4</title>
-<meta property="og:title" content="Accès anticipé · Hygie Race 4">
-<meta property="og:description" content="Laisse tes coordonnées et inscris-toi en avant-première à la Hygie Race 4. Accès anticipé dès le 23 juillet, places limitées.">
+<title>Inscription · Hygie Race 4</title>
+<meta property="og:title" content="Inscription · Hygie Race 4">
+<meta property="og:description" content="Inscris ton équipe à la Hygie Race 4. En duo, 5 divisions, 75 € par équipe. Places limitées.">
 <meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/race4-logo.png">
 <meta name="theme-color" content="#1800AD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Permanent+Marker&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="race4.css?v=3">
+<link rel="stylesheet" href="race4.css?v=4">
 </head>
 <body>
 <div class="frame"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
@@ -18,7 +18,7 @@
 <nav class="nav">
   <ul>
     <li><a href="race4.html">Accueil</a></li>
-    <li><a href="race4-inscription.html" class="active">Accès anticipé</a></li>
+    <li><a href="race4-inscription.html" class="active">Inscription</a></li>
     <li><a href="race4-leaderboard.html">Leaderboard</a></li>
   </ul>
 </nav>
@@ -29,74 +29,158 @@
   <div id="formZone">
     <div class="hero" style="margin-bottom:8px">
       <span class="stamp">04 · 10 · 26</span>
-      <p class="kicker anim" style="animation-delay:.16s">Accès anticipé</p>
+      <p class="kicker anim" style="animation-delay:.16s">Inscription</p>
       <h1 class="anim" style="animation-delay:.26s">Rejoins<br>la Race</h1>
       <p class="limit">Places limitées</p>
     </div>
 
-    <p class="intro" style="text-align:center;margin-top:26px">L'accès anticipé ouvre le <strong>23 juillet 2026</strong>. Laisse tes coordonnées pour t'<strong>inscrire en avant-première</strong> : on te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
+    <p class="intro" style="text-align:center;margin-top:26px">La Hygie Race 4 se court <strong>en équipe de 2</strong>. Choisis ta division, présente ton duo, et règle les <strong>75 € par équipe</strong> en ligne. Ta place est confirmée une fois le paiement reçu.</p>
 
     <form id="regform" novalidate>
-      <div class="sec"><span class="num">01</span><span class="lbl">Tes coordonnées</span></div>
-      <div class="grid2 field">
-        <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required>
-        <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
+      <div class="sec"><span class="num">01</span><span class="lbl">Ta division</span></div>
+      <div class="divisions">
+        <label class="divopt"><input type="radio" name="division" value="FF Open" required><span class="dn">FF Open</span><span class="dp">Duo féminin · 75 €</span></label>
+        <label class="divopt"><input type="radio" name="division" value="FF Pro"><span class="dn">FF Pro</span><span class="dp">Duo féminin · 75 €</span></label>
+        <label class="divopt"><input type="radio" name="division" value="HH Open"><span class="dn">HH Open</span><span class="dp">Duo masculin · 75 €</span></label>
+        <label class="divopt"><input type="radio" name="division" value="HH Pro"><span class="dn">HH Pro</span><span class="dp">Duo masculin · 75 €</span></label>
+        <label class="divopt"><input type="radio" name="division" value="HF Mixte"><span class="dn">HF Mixte</span><span class="dp">Duo mixte · 75 €</span></label>
       </div>
-      <div class="field"><input type="email" id="email" placeholder="Adresse email" autocomplete="email" required></div>
-      <div class="field"><input type="tel" id="tel" placeholder="Téléphone" autocomplete="tel" required></div>
+
+      <div class="sec" style="margin-top:30px"><span class="num">02</span><span class="lbl">Ton équipe</span></div>
+      <div class="field"><input type="text" id="team" placeholder="Nom de l'équipe" autocomplete="off" required></div>
+
+      <div class="sec" style="margin-top:30px"><span class="num">03</span><span class="lbl">Athlète 1</span></div>
+      <div class="athlete">
+        <div class="grid2 field">
+          <input type="text" id="a1prenom" placeholder="Prénom" autocomplete="off" required>
+          <input type="text" id="a1nom" placeholder="Nom" autocomplete="off" required>
+        </div>
+        <div class="grid2 field">
+          <select id="a1sexe" required><option value="" disabled selected>Sexe</option><option>Femme</option><option>Homme</option></select>
+          <input type="date" id="a1dob" required>
+        </div>
+        <div class="field"><input type="email" id="a1email" placeholder="Email" autocomplete="off" required></div>
+        <div class="field"><input type="tel" id="a1tel" placeholder="Téléphone" autocomplete="off" required></div>
+      </div>
+
+      <div class="sec" style="margin-top:22px"><span class="num">04</span><span class="lbl">Athlète 2</span></div>
+      <div class="athlete">
+        <div class="grid2 field">
+          <input type="text" id="a2prenom" placeholder="Prénom" autocomplete="off" required>
+          <input type="text" id="a2nom" placeholder="Nom" autocomplete="off" required>
+        </div>
+        <div class="grid2 field">
+          <select id="a2sexe" required><option value="" disabled selected>Sexe</option><option>Femme</option><option>Homme</option></select>
+          <input type="date" id="a2dob" required>
+        </div>
+        <div class="field"><input type="email" id="a2email" placeholder="Email" autocomplete="off" required></div>
+        <div class="field"><input type="tel" id="a2tel" placeholder="Téléphone" autocomplete="off" required></div>
+      </div>
+
+      <div class="sec" style="margin-top:22px"><span class="num">05</span><span class="lbl">Règlement</span></div>
+      <div class="rules" id="rulesBox">
+        <label>
+          <input type="checkbox" id="rules">
+          <span class="txt">Je certifie que les deux athlètes sont majeurs (ou autorisés par leur représentant légal), aptes à la pratique sportive, et j'accepte le règlement de la Hygie Race 4 ainsi que le droit à l'image pendant l'événement.</span>
+        </label>
+      </div>
 
       <div class="banner" id="banner"></div>
-      <button type="submit" class="btn" id="submit">Je veux l'accès anticipé <span class="arrow">→</span></button>
-      <p class="note">Une seule inscription par personne (vérifiée sur l'email).<br>Tes coordonnées servent uniquement à te donner l'accès anticipé et à te tenir informé de la Hygie Race 4.</p>
+      <p class="price-tag">Total : 75 € par équipe</p>
+      <button type="submit" class="btn" id="submit">Valider et payer 75 € <span class="arrow">→</span></button>
+      <p class="note">Une équipe est confirmée une fois le paiement reçu. Une inscription par équipe.<br>Paiement sécurisé par Stripe.</p>
     </form>
   </div>
 
   <div id="thanks" class="thanks hide">
     <span class="stamp">04 · 10 · 26</span>
-    <h1>Tu es <span>dedans.</span></h1>
-    <p class="sub">Ton inscription en accès anticipé est enregistrée. On te prévient par email dès l'ouverture, le 23 juillet, avec ton accès en avant-première.</p>
+    <h1>Presque <span>là.</span></h1>
+    <p class="sub" id="thanksSub">Ton équipe est enregistrée. Dernière étape : le paiement des 75 € pour confirmer ta place.</p>
     <div class="recap" id="recap"></div>
-    <p class="note">Ajoute contact@crossfit-hygie.fr à tes contacts pour ne pas rater l'ouverture.</p>
+    <a class="cta hide" id="payBtn" href="#">Payer 75 € <span class="arrow">→</span></a>
+    <p class="note">Un souci de paiement ? Écris-nous à contact@crossfit-hygie.fr</p>
   </div>
 
   <div class="foot"><a href="race4.html">← Retour à l'accueil</a><br><br>CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin</div>
 </div>
 
 <script>
+  // Backend Apps Script « Hygie Race 4 » (action inscription).
   var SHEET_URL = "https://script.google.com/macros/s/AKfycbzn3YgLG2Bh_l5CRfqPiMnyinNrUAdu4AbabB2BNe33jksBG--Tfcyt0EcKZZMK5Ku6/exec";
+  // Lien de paiement Stripe (Payment Link 75 €). À coller quand il sera créé (dashboard.stripe.com → Payment Links).
+  var STRIPE_PAYMENT_LINK = "";
+
+  // Surbrillance de la division choisie (fallback si :has non supporté).
+  Array.prototype.forEach.call(document.querySelectorAll('.divopt input'), function(r){
+    r.addEventListener('change', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.divopt'), function(l){ l.classList.remove('on'); });
+      r.closest('.divopt').classList.add('on');
+    });
+  });
 
   function showBanner(msg){ var b=document.getElementById('banner'); b.textContent=msg; b.classList.add('show'); b.scrollIntoView({block:'center'}); }
   function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
-  function resetBtn(btn){ btn.disabled=false; btn.innerHTML='Je veux l\'accès anticipé <span class="arrow">→</span>'; }
+  function resetBtn(btn){ btn.disabled=false; btn.innerHTML='Valider et payer 75 € <span class="arrow">→</span>'; }
   function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+  function val(id){ return (document.getElementById(id).value||'').trim(); }
 
   document.getElementById('regform').addEventListener('submit', function(e){
     e.preventDefault();
     hideBanner();
-    var ids = ['prenom','nom','email','tel'], vals = {};
-    for (var i=0;i<ids.length;i++){
-      var el=document.getElementById(ids[i]); el.style.borderColor='';
-      vals[ids[i]]=el.value.trim();
-      if(!vals[ids[i]]){ el.style.borderColor='#fff'; el.focus(); showBanner("Merci de remplir tous les champs avant d'envoyer."); return; }
+
+    var div = document.querySelector('.divopt input:checked');
+    if(!div){ showBanner("Choisis ta division avant de continuer."); window.scrollTo({top:0,behavior:'smooth'}); return; }
+
+    var text = ['team','a1prenom','a1nom','a1dob','a1email','a1tel','a2prenom','a2nom','a2dob','a2email','a2tel'];
+    for(var i=0;i<text.length;i++){
+      var el=document.getElementById(text[i]); el.style.borderColor='';
+      if(!el.value.trim()){ el.style.borderColor='#fff'; el.focus(); showBanner("Merci de remplir tous les champs de l'équipe."); return; }
     }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.email)){ document.getElementById('email').style.borderColor='#fff'; document.getElementById('email').focus(); showBanner("L'adresse email ne semble pas valide."); return; }
-    if(vals.tel.replace(/\D/g,'').length<8){ document.getElementById('tel').style.borderColor='#fff'; document.getElementById('tel').focus(); showBanner("Le numéro de téléphone ne semble pas valide."); return; }
+    ['a1sexe','a2sexe'].forEach(function(id){ document.getElementById(id).style.borderColor=''; });
+    if(!val('a1sexe')){ document.getElementById('a1sexe').style.borderColor='#fff'; document.getElementById('a1sexe').focus(); showBanner("Indique le sexe de l'athlète 1."); return; }
+    if(!val('a2sexe')){ document.getElementById('a2sexe').style.borderColor='#fff'; document.getElementById('a2sexe').focus(); showBanner("Indique le sexe de l'athlète 2."); return; }
+    var re=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if(!re.test(val('a1email'))){ document.getElementById('a1email').style.borderColor='#fff'; document.getElementById('a1email').focus(); showBanner("L'email de l'athlète 1 ne semble pas valide."); return; }
+    if(!re.test(val('a2email'))){ document.getElementById('a2email').style.borderColor='#fff'; document.getElementById('a2email').focus(); showBanner("L'email de l'athlète 2 ne semble pas valide."); return; }
 
-    if(SHEET_URL.indexOf('http')!==0){ showBanner("L'accès anticipé ouvre très bientôt. Reviens dans un petit moment !"); return; }
+    var rBox=document.getElementById('rulesBox'); rBox.classList.remove('err');
+    if(!document.getElementById('rules').checked){ rBox.classList.add('err'); rBox.scrollIntoView({block:'center'}); showBanner("Merci d'accepter le règlement pour valider."); return; }
 
-    var btn=document.getElementById('submit');
-    btn.disabled=true; btn.textContent='Envoi…';
-    var qs=new URLSearchParams({action:'register',prenom:vals.prenom,nom:vals.nom,email:vals.email,tel:vals.tel});
+    if(SHEET_URL.indexOf('http')!==0){ showBanner("Les inscriptions ouvrent très bientôt. Reviens dans un petit moment !"); return; }
+
+    var btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Enregistrement…';
+    var qs=new URLSearchParams({
+      action:'inscription', division:div.value, team:val('team'),
+      a1prenom:val('a1prenom'), a1nom:val('a1nom'), a1sexe:val('a1sexe'), a1dob:val('a1dob'), a1email:val('a1email'), a1tel:val('a1tel'),
+      a2prenom:val('a2prenom'), a2nom:val('a2nom'), a2sexe:val('a2sexe'), a2dob:val('a2dob'), a2email:val('a2email'), a2tel:val('a2tel')
+    });
     fetch(SHEET_URL+'?'+qs.toString())
       .then(function(r){ return r.json(); })
       .then(function(res){
         if(res && res.ok){
-          document.getElementById('recap').innerHTML='<span class="big">'+esc(vals.prenom)+' '+esc(vals.nom)+'</span>'+esc(vals.email)+'<br>'+esc(vals.tel);
-          document.getElementById('formZone').classList.add('hide');
-          document.getElementById('thanks').classList.remove('hide');
-          window.scrollTo({top:0,behavior:'smooth'});
+          document.getElementById('recap').innerHTML=
+            '<span class="big">'+esc(val('team'))+' · '+esc(div.value)+'</span>'+
+            esc(val('a1prenom'))+' '+esc(val('a1nom'))+' &amp; '+esc(val('a2prenom'))+' '+esc(val('a2nom'))+
+            (res.order?'<br>Commande '+esc(res.order):'');
+          // Redirection vers le paiement Stripe si le lien est configuré.
+          if(STRIPE_PAYMENT_LINK.indexOf('http')===0){
+            var sep = STRIPE_PAYMENT_LINK.indexOf('?')>-1 ? '&' : '?';
+            var url = STRIPE_PAYMENT_LINK + sep + 'client_reference_id=' + encodeURIComponent(res.order||val('team')) + '&prefilled_email=' + encodeURIComponent(val('a1email'));
+            var pay=document.getElementById('payBtn'); pay.href=url; pay.classList.remove('hide');
+            document.getElementById('formZone').classList.add('hide');
+            document.getElementById('thanks').classList.remove('hide');
+            window.scrollTo({top:0,behavior:'smooth'});
+            setTimeout(function(){ window.location.href=url; }, 1200); // redirection auto vers Stripe
+          } else {
+            document.getElementById('thanksSub').textContent="Ton équipe est enregistrée. On te recontacte tout de suite pour finaliser le paiement des 75 € et confirmer ta place.";
+            document.getElementById('formZone').classList.add('hide');
+            document.getElementById('thanks').classList.remove('hide');
+            window.scrollTo({top:0,behavior:'smooth'});
+          }
         } else if(res && res.error==='deja_inscrit'){
-          resetBtn(btn); showBanner("Tu es déjà inscrit avec cet email, tout est bon ! On te préviendra dès l'ouverture.");
+          resetBtn(btn); showBanner("Une inscription existe déjà pour cette équipe ou cet email. Contacte-nous si besoin.");
+        } else if(res && res.error==='complet'){
+          resetBtn(btn); showBanner("Les inscriptions sont complètes ! Contacte-nous pour la liste d'attente.");
         } else { throw new Error((res&&res.error)||'inconnu'); }
       })
       .catch(function(){ resetBtn(btn); showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie, sinon contacte-nous directement."); });
