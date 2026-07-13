@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription confirmée · Hygie Race 4</title>
+<meta name="theme-color" content="#1800AD">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="race4.css?v=4">
+</head>
+<body>
+<div class="frame"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<nav class="nav">
+  <ul>
+    <li><a href="race4.html">Accueil</a></li>
+    <li><a href="race4-inscription.html">Inscription</a></li>
+    <li><a href="race4-leaderboard.html">Leaderboard</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <div class="logo-wrap anim" style="animation-delay:.05s"><img class="logo" src="race4-logo.png" alt="RAC4 · CrossFit Hygie"></div>
+
+  <div class="thanks">
+    <span class="stamp">04 · 10 · 26</span>
+    <h1>Ta place est <span>prise.</span></h1>
+    <p class="sub">Paiement reçu, ton équipe est officiellement inscrite à la Hygie Race 4. Tu vas recevoir un email de confirmation. Rendez-vous le 4 octobre 2026 !</p>
+    <div class="recap" id="recap">Inscription confirmée.</div>
+    <div class="cta-wrap" style="margin-top:30px"><a class="cta" href="race4.html">Retour à l'accueil <span class="arrow">→</span></a></div>
+    <p class="note">Une question ? Écris-nous à contact@crossfit-hygie.fr</p>
+  </div>
+
+  <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
+</div>
+
+<script>
+  var order = new URLSearchParams(location.search).get('order');
+  if(order){ var d=document.createElement('div'); d.textContent='Commande '+order+' · confirmée'; document.getElementById('recap').innerHTML='<span class="big">'+d.innerHTML+'</span>Merci et bonne prépa pour le jour J.'; }
+</script>
+</body>
+</html>
