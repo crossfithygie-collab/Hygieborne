@@ -48,7 +48,7 @@ h1{margin:0;font-weight:900;font-style:italic;font-size:clamp(46px,14vw,76px);li
 .cta-wrap{margin:30px 0 12px;text-align:center;}
 .presale{margin:0;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);text-align:center;}
 .presale b{color:#fff;}
-.limit{margin:16px 0 0;text-align:center;font-family:'Permanent Marker',cursive;font-size:clamp(38px,12.5vw,64px);line-height:.92;
+.limit{margin:44px 0 18px;text-align:center;font-family:'Permanent Marker',cursive;font-size:clamp(38px,12.5vw,64px);line-height:.92;
   text-transform:uppercase;color:#fff;transform:rotate(-2.5deg);text-shadow:4px 4px 0 rgba(255,255,255,.20);}
 
 hr.sep{border:0;border-top:2px solid var(--hair);margin:56px 0;}
