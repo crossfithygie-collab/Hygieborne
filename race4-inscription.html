@@ -107,8 +107,7 @@
 <script>
   // Backend Apps Script « Hygie Race 4 » (action inscription).
   var SHEET_URL = "https://script.google.com/macros/s/AKfycbzn3YgLG2Bh_l5CRfqPiMnyinNrUAdu4AbabB2BNe33jksBG--Tfcyt0EcKZZMK5Ku6/exec";
-  // Lien de paiement Stripe (Payment Link 75 €). À coller quand il sera créé (dashboard.stripe.com → Payment Links).
-  var STRIPE_PAYMENT_LINK = "";
+  // Le paiement Stripe est généré côté serveur (action « checkout », clé Stripe dans les propriétés du script).
 
   // Surbrillance de la division choisie (fallback si :has non supporté).
   Array.prototype.forEach.call(document.querySelectorAll('.divopt input'), function(r){
@@ -162,21 +161,21 @@
             '<span class="big">'+esc(val('team'))+' · '+esc(div.value)+'</span>'+
             esc(val('a1prenom'))+' '+esc(val('a1nom'))+' &amp; '+esc(val('a2prenom'))+' '+esc(val('a2nom'))+
             (res.order?'<br>Commande '+esc(res.order):'');
-          // Redirection vers le paiement Stripe si le lien est configuré.
-          if(STRIPE_PAYMENT_LINK.indexOf('http')===0){
-            var sep = STRIPE_PAYMENT_LINK.indexOf('?')>-1 ? '&' : '?';
-            var url = STRIPE_PAYMENT_LINK + sep + 'client_reference_id=' + encodeURIComponent(res.order||val('team')) + '&prefilled_email=' + encodeURIComponent(val('a1email'));
-            var pay=document.getElementById('payBtn'); pay.href=url; pay.classList.remove('hide');
-            document.getElementById('formZone').classList.add('hide');
-            document.getElementById('thanks').classList.remove('hide');
-            window.scrollTo({top:0,behavior:'smooth'});
-            setTimeout(function(){ window.location.href=url; }, 1200); // redirection auto vers Stripe
-          } else {
-            document.getElementById('thanksSub').textContent="Ton équipe est enregistrée. On te recontacte tout de suite pour finaliser le paiement des 75 € et confirmer ta place.";
-            document.getElementById('formZone').classList.add('hide');
-            document.getElementById('thanks').classList.remove('hide');
-            window.scrollTo({top:0,behavior:'smooth'});
-          }
+          document.getElementById('formZone').classList.add('hide');
+          document.getElementById('thanks').classList.remove('hide');
+          window.scrollTo({top:0,behavior:'smooth'});
+          // Génère la session de paiement Stripe (côté serveur) puis redirige.
+          function noPay(){ document.getElementById('thanksSub').textContent="Ton équipe est enregistrée. On te recontacte tout de suite pour finaliser le paiement des 75 € et confirmer ta place."; }
+          var q2=new URLSearchParams({action:'checkout', order:res.order||val('team'), division:div.value, team:val('team'), email:val('a1email')});
+          fetch(SHEET_URL+'?'+q2.toString())
+            .then(function(r){ return r.json(); })
+            .then(function(pay){
+              if(pay && pay.ok && pay.url){
+                var b=document.getElementById('payBtn'); b.href=pay.url; b.classList.remove('hide');
+                setTimeout(function(){ window.location.href=pay.url; }, 1000);
+              } else { noPay(); }
+            })
+            .catch(noPay);
         } else if(res && res.error==='deja_inscrit'){
           resetBtn(btn); showBanner("Une inscription existe déjà pour cette équipe ou cet email. Contacte-nous si besoin.");
         } else if(res && res.error==='complet'){
