@@ -3,71 +3,99 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hygie Race 4 · Accès prévente</title>
-<meta property="og:title" content="Hygie Race 4 · Accès prévente">
-<meta property="og:description" content="4 octobre 2026, Seclin. Laisse tes coordonnées et accède aux préventes de la Hygie Race 4 en avant-première, avant l'ouverture au public.">
+<title>Hygie Race 4 · 4 octobre 2026 · CrossFit Hygie</title>
+<meta property="og:title" content="Hygie Race 4 · 4 octobre 2026">
+<meta property="og:description" content="La Hygie Race revient pour sa 4e édition. En équipe de 2, 5 catégories. Préventes à partir du 23 juillet : laisse tes coordonnées pour y accéder en avant-première.">
 <meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/race4-logo.png">
 <meta name="theme-color" content="#1800AD">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blue:#1800AD;        /* bleu exact du logo */
-    --blue-lo:#12007F;
-    --white:#fff;
-    --soft:rgba(255,255,255,.62);
-    --soft2:rgba(255,255,255,.42);
-    --hair:rgba(255,255,255,.30);
+    --blue:#1800AD; --white:#fff;
+    --soft:rgba(255,255,255,.64); --soft2:rgba(255,255,255,.44); --hair:rgba(255,255,255,.28);
+    --fill:rgba(255,255,255,.07);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;background:var(--blue);}
-  body{
-    font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--white);
-    -webkit-font-smoothing:antialiased;position:relative;min-height:100vh;
-    /* texture : fines hachures diagonales façon ombres crayonnées du logo */
-    background-color:var(--blue);
-    background-image:repeating-linear-gradient(48deg,rgba(255,255,255,.035) 0 1.5px,transparent 1.5px 11px);
-  }
+  body{font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--white);-webkit-font-smoothing:antialiased;
+    position:relative;min-height:100vh;background-color:var(--blue);
+    background-image:repeating-linear-gradient(48deg,rgba(255,255,255,.035) 0 1.5px,transparent 1.5px 11px);}
 
-  /* Cadre à repères (crop marks) façon logo, fixé autour de l'écran */
-  .frame{position:fixed;inset:13px;border:2px solid rgba(255,255,255,.42);border-radius:5px;pointer-events:none;z-index:8;}
+  /* Cadre à repères — NON flottant : suit le contenu (absolute sur toute la hauteur du document) */
+  .frame{position:absolute;top:13px;left:13px;right:13px;bottom:13px;border:2px solid rgba(255,255,255,.4);border-radius:5px;pointer-events:none;z-index:8;}
   .frame i{position:absolute;width:16px;height:16px;}
   .frame i::before,.frame i::after{content:'';position:absolute;background:#fff;}
-  .frame i::before{width:16px;height:2px;top:-1px;}
-  .frame i::after{height:16px;width:2px;left:-1px;}
+  .frame i::before{width:16px;height:2px;top:-1px;} .frame i::after{height:16px;width:2px;left:-1px;}
   .frame .tl{top:-2px;left:-2px;} .frame .tr{top:-2px;right:-2px;transform:scaleX(-1);}
   .frame .bl{bottom:-2px;left:-2px;transform:scaleY(-1);} .frame .br{bottom:-2px;right:-2px;transform:scale(-1);}
 
-  .wrap{max-width:560px;margin:0 auto;padding:40px 26px 60px;position:relative;z-index:2;}
+  .wrap{max-width:580px;margin:0 auto;padding:40px 26px 60px;position:relative;z-index:2;}
 
-  /* ── Logo ── */
-  .logo{display:block;width:210px;max-width:64%;margin:6px auto 30px;}
-
+  /* Hero */
+  .logo-wrap{margin:4px auto 26px;text-align:center;}
+  .logo{display:block;width:340px;max-width:88%;margin:0 auto;}
   .hero{text-align:center;}
-  .stamp{display:inline-block;font-family:'Permanent Marker',cursive;font-size:14px;letter-spacing:1px;
-    color:var(--white);border:2px solid var(--white);border-radius:10px;padding:5px 14px;transform:rotate(-4deg);
-    margin:0 0 20px;opacity:.92;}
+  .stamp{display:inline-block;font-family:'Permanent Marker',cursive;font-size:14px;letter-spacing:1px;color:#fff;
+    border:2px solid #fff;border-radius:10px;padding:5px 14px;transform:rotate(-4deg);margin:0 0 20px;opacity:.92;}
   .kicker{margin:0 0 14px;font-weight:800;font-size:11px;letter-spacing:6px;color:var(--soft);text-transform:uppercase;}
-  h1{margin:0;font-weight:900;font-style:italic;font-size:clamp(46px,14vw,78px);line-height:.86;text-transform:uppercase;letter-spacing:-2px;}
+  h1{margin:0;font-weight:900;font-style:italic;font-size:clamp(46px,14vw,76px);line-height:.86;text-transform:uppercase;letter-spacing:-2px;}
   .scribble{display:block;width:min(300px,78%);height:16px;margin:6px auto 0;overflow:visible;}
   .scribble path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;}
   .meta{display:flex;justify-content:center;align-items:center;white-space:nowrap;flex-wrap:wrap;margin:24px 0 0;
     font-weight:800;font-size:clamp(11px,3.1vw,14px);letter-spacing:1px;text-transform:uppercase;}
   .meta .slash{color:var(--soft2);margin:0 .6em;font-style:italic;font-weight:900;}
+  .cta-hero{display:inline-block;margin:26px 0 10px;background:#fff;color:var(--blue);border-radius:999px;padding:16px 30px;
+    font-weight:900;font-style:italic;font-size:15px;text-transform:uppercase;letter-spacing:.5px;text-decoration:none;
+    box-shadow:0 14px 34px rgba(0,0,0,.30);transition:transform .12s;}
+  .cta-hero:hover{transform:translateY(-2px);}
+  .presale{margin:0;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);}
+  .presale b{color:#fff;}
 
-  hr.sep{border:0;border-top:2px solid var(--hair);margin:34px 0;}
+  hr.sep{border:0;border-top:2px solid var(--hair);margin:40px 0;}
 
-  .lead{margin:0 0 4px;font-size:15.5px;line-height:1.62;color:var(--soft);text-align:center;}
-  .lead strong{color:var(--white);font-weight:800;}
-
-  .sec{display:flex;align-items:center;gap:12px;margin:30px 0 16px;}
-  .sec .num{font-style:italic;font-weight:900;font-size:14px;border:2px solid var(--white);border-radius:7px;padding:3px 9px;line-height:1;}
-  .sec .lbl{font-weight:900;font-size:13px;letter-spacing:3px;text-transform:uppercase;}
+  .sec{display:flex;align-items:center;gap:12px;margin:0 0 20px;}
+  .sec .num{font-style:italic;font-weight:900;font-size:14px;border:2px solid #fff;border-radius:7px;padding:3px 9px;line-height:1;}
+  .sec .lbl{font-weight:900;font-size:14px;letter-spacing:3px;text-transform:uppercase;}
   .sec::after{content:'';flex:1;height:2px;background:var(--hair);}
+  .intro{margin:0 0 22px;font-size:15.5px;line-height:1.62;color:var(--soft);}
+  .intro strong{color:#fff;font-weight:800;}
 
-  input[type=text],input[type=email],input[type=tel]{
-    width:100%;border:1.6px solid var(--hair);border-radius:12px;padding:15px 16px;font:inherit;font-size:15px;font-weight:600;
-    color:#fff;background:rgba(255,255,255,.07);transition:border-color .15s,background .15s;}
+  .stats{display:flex;gap:10px;margin:0 0 24px;}
+  .stat{flex:1;border:2px solid var(--hair);border-radius:14px;padding:15px 8px;text-align:center;}
+  .stat b{display:block;font-weight:900;font-style:italic;font-size:clamp(20px,6vw,26px);line-height:1;}
+  .stat span{display:block;margin-top:6px;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--soft2);}
+
+  .wod{list-style:none;padding:0;margin:0 0 4px;}
+  .wod li{display:flex;align-items:center;gap:16px;padding:14px 2px;border-bottom:1.5px solid var(--hair);}
+  .wod li:first-child{border-top:1.5px solid var(--hair);}
+  .wod .rep{font-weight:900;font-style:italic;font-size:20px;min-width:78px;letter-spacing:-.5px;}
+  .wod .mv{font-weight:600;font-size:15px;line-height:1.3;}
+  .callout{border-left:4px solid #fff;background:rgba(255,255,255,.10);border-radius:10px;padding:15px 17px;margin:20px 0 0;
+    font-size:13.5px;font-weight:600;line-height:1.55;}
+  .callout b{font-weight:900;font-style:italic;}
+
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  @media(max-width:430px){.cats{grid-template-columns:1fr;}}
+  .cat{border:2px solid var(--hair);border-radius:15px;padding:17px 16px;transition:transform .15s,border-color .15s,background .15s;}
+  .cat:hover{transform:translateY(-3px);border-color:#fff;background:var(--fill);}
+  .cat .code{font-weight:900;font-style:italic;font-size:23px;letter-spacing:-.5px;}
+  .cat .tag{display:inline-block;margin-left:7px;font-size:9.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;
+    border:1.5px solid var(--soft2);border-radius:999px;padding:2px 8px;vertical-align:middle;color:var(--soft);}
+  .cat .tag.pro{border-color:#fff;color:#fff;}
+  .cat .desc{margin:8px 0 0;font-size:12.5px;line-height:1.45;color:var(--soft);}
+
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:2px 0 0;border-radius:12px;}
+  table{border-collapse:collapse;width:100%;min-width:472px;}
+  th,td{padding:12px 12px;text-align:center;border-bottom:1.5px solid var(--hair);font-size:14px;white-space:nowrap;}
+  th{font-weight:900;text-transform:uppercase;letter-spacing:.8px;font-size:10.5px;color:var(--soft);}
+  th:first-child,td:first-child{text-align:left;}
+  td.c{font-weight:900;font-style:italic;font-size:15px;}
+  tbody tr:last-child td{border-bottom:0;}
+  .tnote{margin:12px 2px 0;font-size:12px;color:var(--soft2);line-height:1.6;}
+
+  input[type=text],input[type=email],input[type=tel]{width:100%;border:1.6px solid var(--hair);border-radius:12px;padding:15px 16px;
+    font:inherit;font-size:15px;font-weight:600;color:#fff;background:var(--fill);transition:border-color .15s,background .15s;}
   input::placeholder{font-weight:500;color:rgba(255,255,255,.5);}
   input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.15);}
   input:-webkit-autofill{-webkit-text-fill-color:#fff;transition:background-color 9999s;}
@@ -75,13 +103,12 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
   @media(max-width:430px){.grid2{grid-template-columns:1fr;}}
 
-  .btn{display:block;text-align:center;width:100%;border:0;background:#fff;color:var(--blue);
-    border-radius:999px;padding:19px 24px;margin-top:16px;font-family:'Archivo';font-weight:900;font-style:italic;font-size:16px;
-    line-height:1.15;text-transform:uppercase;letter-spacing:.5px;cursor:pointer;box-shadow:0 14px 34px rgba(0,0,0,.30);transition:transform .12s,box-shadow .12s;}
-  .btn .arrow{margin-left:8px;}
+  .btn{display:block;text-align:center;width:100%;border:0;background:#fff;color:var(--blue);border-radius:999px;padding:19px 24px;
+    margin-top:16px;font-family:'Archivo';font-weight:900;font-style:italic;font-size:16px;line-height:1.15;text-transform:uppercase;
+    letter-spacing:.5px;cursor:pointer;box-shadow:0 14px 34px rgba(0,0,0,.30);transition:transform .12s,box-shadow .12s;}
   .btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.36);}
   .btn:disabled{opacity:.55;box-shadow:none;cursor:default;transform:none;}
-  .btn .arrow{font-style:normal;font-weight:800;}
+  .btn .arrow{margin-left:8px;font-style:normal;font-weight:800;display:inline-block;}
   .note{margin:16px 4px 0;font-size:12px;color:var(--soft2);line-height:1.65;text-align:center;}
 
   .banner{display:none;border-left:4px solid #fff;background:rgba(255,255,255,.12);color:#fff;border-radius:10px;
@@ -90,56 +117,173 @@
 
   .hide{display:none;}
   .thanks{text-align:center;padding:10px 0;}
-  .thanks .stamp{transform:rotate(-4deg);}
-  .thanks h1{font-size:clamp(44px,13vw,66px);margin:0 0 14px;}
-  .thanks .sub{margin:0 auto 26px;max-width:420px;font-size:15.5px;line-height:1.58;color:var(--soft);}
+  .thanks h1{font-size:clamp(44px,13vw,64px);margin:0 0 14px;}
+  .thanks .sub{margin:0 auto 26px;max-width:430px;font-size:15.5px;line-height:1.58;color:var(--soft);}
   .recap{border:2px solid var(--hair);border-radius:14px;padding:20px 22px;margin:0 0 8px;font-size:14.5px;line-height:1.85;text-align:center;}
   .recap .big{display:block;font-weight:900;font-style:italic;font-size:19px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px;}
 
-  .foot{text-align:center;padding:40px 22px 6px;font-size:12px;line-height:1.7;color:var(--soft2);}
+  .foot{text-align:center;padding:44px 22px 6px;font-size:12px;line-height:1.7;color:var(--soft2);}
   .foot a{color:#fff;text-decoration:none;font-weight:700;border-bottom:1.5px solid var(--hair);}
+
+  /* ══ ANIMATIONS (désactivées si l'utilisateur préfère moins d'animations) ══ */
+  @media (prefers-reduced-motion: no-preference){
+    /* fond hachuré qui glisse doucement */
+    body{animation:drift 26s linear infinite;}
+    @keyframes drift{from{background-position:0 0;}to{background-position:190px 0;}}
+
+    /* entrée du hero, en cascade */
+    .anim{opacity:0;transform:translateY(20px);animation:rise .8s cubic-bezier(.18,.7,.2,1) forwards;}
+    @keyframes rise{to{opacity:1;transform:none;}}
+
+    /* logo : petit flottement continu après l'entrée */
+    .logo{animation:float 5.5s ease-in-out .9s infinite;}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+
+    /* tampon : petit balancement */
+    .stamp{animation:wob 3.4s ease-in-out infinite;}
+    @keyframes wob{0%,100%{transform:rotate(-4deg);}50%{transform:rotate(-1.5deg);}}
+
+    /* trait griffonné qui se dessine */
+    .scribble path{stroke-dasharray:330;stroke-dashoffset:330;animation:draw 1s ease .95s forwards;}
+    @keyframes draw{to{stroke-dashoffset:0;}}
+
+    /* flèches qui poussent */
+    .cta-hero .a,.btn .arrow{display:inline-block;animation:nudge 1.5s ease-in-out infinite;}
+    @keyframes nudge{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+
+    /* révélation au scroll (activée par JS via body.js-anim) */
+    body.js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .65s cubic-bezier(.18,.7,.2,1);}
+    body.js-anim .reveal.in{opacity:1;transform:none;}
+    body.js-anim .reveal .wod li{opacity:0;transform:translateX(-12px);transition:opacity .5s ease,transform .5s ease;}
+    body.js-anim .reveal.in .wod li{opacity:1;transform:none;}
+    body.js-anim .reveal.in .wod li:nth-child(1){transition-delay:.05s;}
+    body.js-anim .reveal.in .wod li:nth-child(2){transition-delay:.11s;}
+    body.js-anim .reveal.in .wod li:nth-child(3){transition-delay:.17s;}
+    body.js-anim .reveal.in .wod li:nth-child(4){transition-delay:.23s;}
+    body.js-anim .reveal.in .wod li:nth-child(5){transition-delay:.29s;}
+    body.js-anim .reveal.in .wod li:nth-child(6){transition-delay:.35s;}
+    body.js-anim .reveal.in .wod li:nth-child(7){transition-delay:.41s;}
+    body.js-anim .reveal.in .wod li:nth-child(8){transition-delay:.47s;}
+    body.js-anim .reveal .cat{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+    body.js-anim .reveal.in .cat{opacity:1;transform:none;}
+    body.js-anim .reveal.in .cat:nth-child(2){transition-delay:.07s;}
+    body.js-anim .reveal.in .cat:nth-child(3){transition-delay:.14s;}
+    body.js-anim .reveal.in .cat:nth-child(4){transition-delay:.21s;}
+    body.js-anim .reveal.in .cat:nth-child(5){transition-delay:.28s;}
+  }
 </style>
 </head>
 <body>
 <div class="frame"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
 
 <div class="wrap">
-  <img class="logo" src="race4-logo.png" alt="RAC4 · CrossFit Hygie">
+  <div class="logo-wrap anim" style="animation-delay:.05s"><img class="logo" src="race4-logo.png" alt="RAC4 · CrossFit Hygie"></div>
 
-  <div id="formZone">
-    <div class="hero">
-      <span class="stamp">04 · 10 · 26</span>
-      <p class="kicker">Accès prévente</p>
-      <h1>Sois devant<br>la ligne</h1>
-      <svg class="scribble" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M4 11 C 60 3, 110 15, 160 8 S 250 3, 296 9"/>
-      </svg>
-      <p class="meta">4 octobre 2026<span class="slash">/</span>Seclin<span class="slash">/</span>Édition 04</p>
+  <div class="hero">
+    <span class="stamp">04 · 10 · 26</span>
+    <p class="kicker anim" style="animation-delay:.16s">Accès prévente</p>
+    <h1 class="anim" style="animation-delay:.26s">Sois devant<br>la ligne</h1>
+    <svg class="scribble" viewBox="0 0 300 16" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 11 C 60 3, 110 15, 160 8 S 250 3, 296 9"/>
+    </svg>
+    <p class="meta anim" style="animation-delay:.46s">4 octobre 2026<span class="slash">/</span>CrossFit Hygie<span class="slash">/</span>4e édition</p>
+    <a class="cta-hero anim" style="animation-delay:.58s" href="#form">Je veux l'accès prévente <span class="a">→</span></a>
+    <p class="presale anim" style="animation-delay:.68s">Préventes dès le <b>23 juillet 2026</b> · <b>40 places</b> en équipe</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- L'épreuve -->
+  <section class="reveal">
+    <div class="sec"><span class="num">01</span><span class="lbl">L'épreuve</span></div>
+    <p class="intro">Une seule épreuve, <strong>en équipe de 2</strong>. Un chipper à enchaîner le plus vite possible, avec la course qui tombe toutes les 3 minutes. Objectif : franchir la ligne avant le time cap.</p>
+    <div class="stats">
+      <div class="stat"><b>80'</b><span>Time cap</span></div>
+      <div class="stat"><b>×2</b><span>Équipe</span></div>
+      <div class="stat"><b>200 m</b><span>Run / 3 min</span></div>
     </div>
+    <ul class="wod">
+      <li><span class="rep">100</span><span class="mv">Wall ball shots</span></li>
+      <li><span class="rep">1000 m</span><span class="mv">SkiErg</span></li>
+      <li><span class="rep">100</span><span class="mv">Deadlifts</span></li>
+      <li><span class="rep">1000 m</span><span class="mv">Rameur</span></li>
+      <li><span class="rep">100</span><span class="mv">Burpees over the line</span></li>
+      <li><span class="rep">2000 m</span><span class="mv">Bike erg</span></li>
+      <li><span class="rep">100</span><span class="mv">Kettlebell swings (american style)</span></li>
+      <li><span class="rep">100</span><span class="mv">DB box step-ups alternés (50'')</span></li>
+    </ul>
+    <div class="callout">
+      <b>Toutes les 3 minutes</b>, à partir de la minute zéro : 200 m de course à pied.<br>
+      Tous les mouvements se partagent librement dans le duo, <b>sauf le run, synchronisé à 2</b>.
+    </div>
+  </section>
 
-    <hr class="sep">
+  <hr class="sep">
 
-    <p class="lead">Laisse tes coordonnées pour <strong>accéder aux préventes en avant-première</strong>. On te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
+  <!-- Catégories -->
+  <section class="reveal">
+    <div class="sec"><span class="num">02</span><span class="lbl">Les catégories</span></div>
+    <p class="intro">Cinq catégories en duo, pour que chacun trouve sa place, du premier engagement à la performance.</p>
+    <div class="cats">
+      <div class="cat"><span class="code">FF Open</span><span class="tag">Open</span><p class="desc">Duo 100&nbsp;% féminin, charges accessibles.</p></div>
+      <div class="cat"><span class="code">FF Pro</span><span class="tag pro">Pro</span><p class="desc">Duo 100&nbsp;% féminin, niveau confirmé.</p></div>
+      <div class="cat"><span class="code">HH Open</span><span class="tag">Open</span><p class="desc">Duo 100&nbsp;% masculin, charges standard.</p></div>
+      <div class="cat"><span class="code">HH Pro</span><span class="tag pro">Pro</span><p class="desc">Duo 100&nbsp;% masculin, charges lourdes.</p></div>
+      <div class="cat"><span class="code">HF Mixte</span><span class="tag">Mixte</span><p class="desc">Duo mixte, une femme et un homme.</p></div>
+    </div>
+  </section>
 
-    <form id="form" novalidate>
-      <div class="sec"><span class="num">01</span><span class="lbl">Tes coordonnées</span></div>
-      <div class="grid2 field">
-        <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required>
-        <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
-      </div>
-      <div class="field"><input type="email" id="email" placeholder="Adresse email" autocomplete="email" required></div>
-      <div class="field"><input type="tel" id="tel" placeholder="Téléphone" autocomplete="tel" required></div>
+  <hr class="sep">
 
-      <div class="banner" id="banner"></div>
-      <button type="submit" class="btn" id="submit">Je veux l'accès prévente <span class="arrow">→</span></button>
-      <p class="note">Une seule préinscription par personne (vérifiée sur l'email).<br>Tes coordonnées servent uniquement à te donner l'accès prévente et à te tenir informé de la Hygie Race 4.</p>
-    </form>
+  <!-- Charges -->
+  <section class="reveal">
+    <div class="sec"><span class="num">03</span><span class="lbl">Les charges</span></div>
+    <p class="intro">Les charges par catégorie pour les quatre mouvements chargés.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Catégorie</th><th>Wall ball</th><th>Deadlift</th><th>Kettlebell</th><th>DB step-up</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="c">FF Open</td><td>4 kg</td><td>39 kg</td><td>12 kg</td><td>10 kg</td></tr>
+          <tr><td class="c">FF Pro</td><td>6 kg</td><td>52 kg</td><td>16 kg</td><td>15 kg</td></tr>
+          <tr><td class="c">HH Open</td><td>6 kg</td><td>52 kg</td><td>16 kg</td><td>15 kg</td></tr>
+          <tr><td class="c">HH Pro</td><td>9 kg</td><td>61 kg</td><td>24 kg</td><td>20 kg</td></tr>
+          <tr><td class="c">HF Mixte</td><td>6 kg</td><td>52 kg</td><td>16 kg</td><td>15 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">SkiErg, rameur, bike erg, burpees et wall ball restent aux distances et reps indiquées pour toutes les catégories. Seules les charges ci-dessus changent.</p>
+  </section>
+
+  <hr class="sep">
+
+  <!-- Préinscription -->
+  <div id="form"></div>
+  <div id="formZone">
+    <section class="reveal">
+      <div class="sec"><span class="num">04</span><span class="lbl">Accès prévente</span></div>
+      <p class="intro">Les préventes ouvrent le <strong>23 juillet 2026</strong>, avec seulement <strong>40 places en équipe de 2</strong>. Laisse tes coordonnées pour y <strong>accéder en avant-première</strong> : on te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
+
+      <form id="regform" novalidate>
+        <div class="grid2 field">
+          <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required>
+          <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
+        </div>
+        <div class="field"><input type="email" id="email" placeholder="Adresse email" autocomplete="email" required></div>
+        <div class="field"><input type="tel" id="tel" placeholder="Téléphone" autocomplete="tel" required></div>
+
+        <div class="banner" id="banner"></div>
+        <button type="submit" class="btn" id="submit">Je veux l'accès prévente <span class="arrow">→</span></button>
+        <p class="note">Une seule préinscription par personne (vérifiée sur l'email).<br>Tes coordonnées servent uniquement à te donner l'accès prévente et à te tenir informé de la Hygie Race 4.</p>
+      </form>
+    </section>
   </div>
 
   <div id="thanks" class="thanks hide">
     <span class="stamp">04 · 10 · 26</span>
     <h1>Tu es <span>dedans.</span></h1>
-    <p class="sub">Ta préinscription est enregistrée. On te prévient par email dès l'ouverture des préventes, avec ton accès en avant-première.</p>
+    <p class="sub">Ta préinscription est enregistrée. On te prévient par email dès l'ouverture des préventes, le 23 juillet, avec ton accès en avant-première.</p>
     <div class="recap" id="recap"></div>
     <p class="note">Ajoute contact@crossfit-hygie.fr à tes contacts pour ne pas rater l'ouverture.</p>
   </div>
@@ -152,76 +296,64 @@
   // Laisser vide tant que le backend n'est pas déployé : la page affiche alors un message d'attente.
   var SHEET_URL = "";
 
-  function showBanner(msg){
-    var b = document.getElementById('banner');
-    b.textContent = msg; b.classList.add('show');
-    b.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-  function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
-  function resetBtn(btn){ btn.disabled = false; btn.innerHTML = 'Je veux l\'accès prévente <span class="arrow">→</span>'; }
-  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-  document.getElementById('form').addEventListener('submit', function(e){
-    e.preventDefault();
-    hideBanner();
-
-    var ids = ['prenom','nom','email','tel'];
-    var vals = {};
-    for (var i = 0; i < ids.length; i++) {
-      var el = document.getElementById(ids[i]);
-      el.style.borderColor = '';
-      vals[ids[i]] = el.value.trim();
-      if (!vals[ids[i]]) {
-        el.style.borderColor = '#fff'; el.focus();
-        showBanner("Merci de remplir tous les champs avant d'envoyer.");
-        return;
+  // Révélation au scroll — basée sur la position réelle (robuste), avec vérif au chargement
+  // + filet de sécurité : sans JS tout reste visible, et rien ne peut rester bloqué invisible.
+  (function(){
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if(!els.length) return;
+    document.body.classList.add('js-anim');
+    function reveal(el){ el.classList.add('in'); }
+    function check(){
+      var h = window.innerHeight || 800;
+      for(var i=0;i<els.length;i++){
+        var el = els[i];
+        if(el.classList.contains('in')) continue;
+        var r = el.getBoundingClientRect();
+        if(r.top < h*0.9 && r.bottom > 0) reveal(el);
       }
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.email)) {
-      document.getElementById('email').style.borderColor = '#fff';
-      document.getElementById('email').focus();
-      showBanner("L'adresse email ne semble pas valide.");
-      return;
-    }
-    if (vals.tel.replace(/\D/g,'').length < 8) {
-      document.getElementById('tel').style.borderColor = '#fff';
-      document.getElementById('tel').focus();
-      showBanner("Le numéro de téléphone ne semble pas valide.");
-      return;
-    }
+    window.addEventListener('scroll', check, {passive:true});
+    window.addEventListener('resize', check);
+    check();
+    setTimeout(check, 250);
+    setTimeout(function(){ els.forEach(reveal); }, 3000); // filet : jamais de contenu bloqué
+  })();
 
-    if (SHEET_URL.indexOf('http') !== 0) {
-      showBanner("Les préinscriptions ouvrent très bientôt. Reviens dans un petit moment !");
-      return;
-    }
+  function showBanner(msg){ var b=document.getElementById('banner'); b.textContent=msg; b.classList.add('show'); b.scrollIntoView({behavior:'smooth',block:'center'}); }
+  function hideBanner(){ document.getElementById('banner').classList.remove('show'); }
+  function resetBtn(btn){ btn.disabled=false; btn.innerHTML='Je veux l\'accès prévente <span class="arrow">→</span>'; }
+  function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-    var btn = document.getElementById('submit');
-    btn.disabled = true; btn.textContent = 'Envoi…';
-    var qs = new URLSearchParams({
-      action: 'register',
-      prenom: vals.prenom, nom: vals.nom, email: vals.email, tel: vals.tel
-    });
-    fetch(SHEET_URL + '?' + qs.toString())
+  document.getElementById('regform').addEventListener('submit', function(e){
+    e.preventDefault();
+    hideBanner();
+    var ids = ['prenom','nom','email','tel'], vals = {};
+    for (var i=0;i<ids.length;i++){
+      var el=document.getElementById(ids[i]); el.style.borderColor='';
+      vals[ids[i]]=el.value.trim();
+      if(!vals[ids[i]]){ el.style.borderColor='#fff'; el.focus(); showBanner("Merci de remplir tous les champs avant d'envoyer."); return; }
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(vals.email)){ document.getElementById('email').style.borderColor='#fff'; document.getElementById('email').focus(); showBanner("L'adresse email ne semble pas valide."); return; }
+    if(vals.tel.replace(/\D/g,'').length<8){ document.getElementById('tel').style.borderColor='#fff'; document.getElementById('tel').focus(); showBanner("Le numéro de téléphone ne semble pas valide."); return; }
+
+    if(SHEET_URL.indexOf('http')!==0){ showBanner("Les préinscriptions ouvrent très bientôt. Reviens dans un petit moment !"); return; }
+
+    var btn=document.getElementById('submit');
+    btn.disabled=true; btn.textContent='Envoi…';
+    var qs=new URLSearchParams({action:'register',prenom:vals.prenom,nom:vals.nom,email:vals.email,tel:vals.tel});
+    fetch(SHEET_URL+'?'+qs.toString())
       .then(function(r){ return r.json(); })
       .then(function(res){
-        if (res && res.ok) {
-          document.getElementById('recap').innerHTML =
-            '<span class="big">' + esc(vals.prenom) + ' ' + esc(vals.nom) + '</span>' +
-            esc(vals.email) + '<br>' + esc(vals.tel);
+        if(res && res.ok){
+          document.getElementById('recap').innerHTML='<span class="big">'+esc(vals.prenom)+' '+esc(vals.nom)+'</span>'+esc(vals.email)+'<br>'+esc(vals.tel);
           document.getElementById('formZone').classList.add('hide');
           document.getElementById('thanks').classList.remove('hide');
-          window.scrollTo({top:0, behavior:'smooth'});
-        } else if (res && res.error === 'deja_inscrit') {
-          resetBtn(btn);
-          showBanner("Tu es déjà préinscrit avec cet email, tout est bon ! On te préviendra dès l'ouverture des préventes.");
-        } else {
-          throw new Error((res && res.error) || 'inconnu');
-        }
+          window.scrollTo({top:0,behavior:'smooth'});
+        } else if(res && res.error==='deja_inscrit'){
+          resetBtn(btn); showBanner("Tu es déjà préinscrit avec cet email, tout est bon ! On te préviendra dès l'ouverture des préventes.");
+        } else { throw new Error((res&&res.error)||'inconnu'); }
       })
-      .catch(function(){
-        resetBtn(btn);
-        showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie, sinon contacte-nous directement.");
-      });
+      .catch(function(){ resetBtn(btn); showBanner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie, sinon contacte-nous directement."); });
   });
 </script>
 </body>
