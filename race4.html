@@ -51,6 +51,8 @@
   .cta-hero:hover{transform:translateY(-2px);}
   .presale{margin:0;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);}
   .presale b{color:#fff;}
+  .limit{margin:14px 0 0;font-family:'Permanent Marker',cursive;font-size:clamp(38px,12.5vw,64px);line-height:.92;
+    text-transform:uppercase;color:#fff;transform:rotate(-2.5deg);text-shadow:4px 4px 0 rgba(255,255,255,.20);}
 
   hr.sep{border:0;border-top:2px solid var(--hair);margin:40px 0;}
 
@@ -143,6 +145,10 @@
     .stamp{animation:wob 3.4s ease-in-out infinite;}
     @keyframes wob{0%,100%{transform:rotate(-4deg);}50%{transform:rotate(-1.5deg);}}
 
+    /* « places limitées » : pulsation pour attirer l'œil */
+    .limit{animation:limitpulse 2.6s ease-in-out infinite;}
+    @keyframes limitpulse{0%,100%{transform:rotate(-2.5deg) scale(1);}50%{transform:rotate(-2.5deg) scale(1.05);}}
+
     /* trait griffonné qui se dessine */
     .scribble path{stroke-dasharray:330;stroke-dashoffset:330;animation:draw 1s ease .95s forwards;}
     @keyframes draw{to{stroke-dashoffset:0;}}
@@ -188,7 +194,8 @@
     </svg>
     <p class="meta anim" style="animation-delay:.46s">4 octobre 2026<span class="slash">/</span>CrossFit Hygie<span class="slash">/</span>4e édition</p>
     <a class="cta-hero anim" style="animation-delay:.58s" href="#form">Je veux l'accès prévente <span class="a">→</span></a>
-    <p class="presale anim" style="animation-delay:.68s">Préventes dès le <b>23 juillet 2026</b> · <b>40 places</b> en équipe</p>
+    <p class="presale anim" style="animation-delay:.68s">Préventes dès le <b>23 juillet 2026</b></p>
+    <p class="limit">Places limitées</p>
   </div>
 
   <hr class="sep">
@@ -263,7 +270,7 @@
   <div id="formZone">
     <section class="reveal">
       <div class="sec"><span class="num">04</span><span class="lbl">Accès prévente</span></div>
-      <p class="intro">Les préventes ouvrent le <strong>23 juillet 2026</strong>, avec seulement <strong>40 places en équipe de 2</strong>. Laisse tes coordonnées pour y <strong>accéder en avant-première</strong> : on te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
+      <p class="intro">Les préventes ouvrent le <strong>23 juillet 2026</strong>, et les <strong>places sont limitées</strong> (équipes de 2). Laisse tes coordonnées pour y <strong>accéder en avant-première</strong> : on te préviendra dès l'ouverture, et tu réserveras ta place avant tout le monde.</p>
 
       <form id="regform" novalidate>
         <div class="grid2 field">
