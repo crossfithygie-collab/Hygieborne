@@ -18,7 +18,7 @@
 <nav class="nav">
   <ul>
     <li><a href="race4.html" class="active">Accueil</a></li>
-    <li><a href="race4-inscription.html">Inscription</a></li>
+    <li><a href="#" class="js-insc">Inscription</a></li>
     <li><a href="race4-leaderboard.html">Leaderboard</a></li>
   </ul>
 </nav>
@@ -34,7 +34,7 @@
       <path d="M4 11 C 60 3, 110 15, 160 8 S 250 3, 296 9"/>
     </svg>
     <p class="meta anim" style="animation-delay:.46s">4 octobre 2026<span class="slash">/</span>CrossFit Hygie<span class="slash">/</span>4e édition</p>
-    <div class="cta-wrap anim" style="animation-delay:.58s"><a class="cta" href="race4-inscription.html">Je m'inscris <span class="arrow">→</span></a></div>
+    <div class="cta-wrap anim" style="animation-delay:.58s"><a class="cta js-insc" href="#">Je m'inscris <span class="arrow">→</span></a></div>
     <p class="presale anim" style="animation-delay:.68s">Inscriptions dès le <b>23 juillet 2026</b></p>
     <p class="limit">Places limitées</p>
   </div>
@@ -110,12 +110,30 @@
   <section class="reveal" style="text-align:center">
     <div class="sec"><span class="num">04</span><span class="lbl">Rejoins la Race</span></div>
     <p class="intro">Les inscriptions ouvrent le <strong>23 juillet 2026</strong>, en équipe de 2, et les <strong>places sont limitées</strong>. Choisis ta division et réserve ta place.</p>
-    <div class="cta-wrap"><a class="cta" href="race4-inscription.html">Je m'inscris <span class="arrow">→</span></a></div>
+    <div class="cta-wrap"><a class="cta js-insc" href="#">Je m'inscris <span class="arrow">→</span></a></div>
   </section>
 
   <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
 </div>
 
 <script src="race4.js?v=2"></script>
+<script>
+  // Inscription & leaderboard = scoring.fit. Colle le lien de l'événement ici quand il est prêt.
+  var SCORING_URL = "";   // ex : https://scoring.fit/...  (page d'inscription Hygie Race 4)
+  (function(){
+    function toast(m){
+      var t=document.createElement('div');
+      t.textContent=m;
+      t.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#fff;color:#1800AD;font-family:Archivo,sans-serif;font-weight:800;font-size:14px;padding:14px 20px;border-radius:12px;box-shadow:0 12px 34px rgba(0,0,0,.35);z-index:99;max-width:88%;text-align:center;line-height:1.4';
+      document.body.appendChild(t);
+      setTimeout(function(){ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(function(){ t.remove(); },400); },3200);
+    }
+    var links=document.querySelectorAll('.js-insc');
+    for(var i=0;i<links.length;i++){ (function(a){
+      if(SCORING_URL.indexOf('http')===0){ a.href=SCORING_URL; a.target='_blank'; a.rel='noopener'; }
+      else { a.href='#'; a.addEventListener('click',function(e){ e.preventDefault(); toast("Les inscriptions ouvrent très bientôt sur scoring.fit. Reviens vite !"); }); }
+    })(links[i]); }
+  })();
+</script>
 </body>
 </html>
