@@ -1352,6 +1352,10 @@ function goTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
 
+  // Retour à l'accueil : on resynchronise membres + crédits en arrière-plan,
+  // pour qu'un nouveau membre ou un crédit modifié apparaisse sans recharger l'app.
+  if (screenId === 'screen-search') { loadMembers(); }
+
   // La barre de validation ne s'affiche que sur l'écran shop
   const bar = document.getElementById('checkout-bar');
   if (screenId !== 'screen-shop') {
@@ -2286,7 +2290,7 @@ loadMembers();
 flushPending();   // renvoie les écritures restées en attente (échec précédent)
 
 // Rafraîchit les données depuis le Sheet toutes les 30 min (pas Hiboutik, juste le Sheet)
-setInterval(loadMembers, 30 * 60 * 1000);
+setInterval(loadMembers, 60 * 1000);
 // Réessaie d'écouler la file d'attente des écritures toutes les 5 min
 setInterval(flushPending, 5 * 60 * 1000);
 
