@@ -47,6 +47,12 @@
   .slot a:hover{background:#17925f;transform:translateY(-1px);}
   @media(max-width:440px){.slot{flex-direction:column;align-items:stretch;text-align:center;}.slot a{text-align:center;}}
 
+  .slot .reste{display:inline-block;margin-top:4px;font-size:12px;font-weight:900;letter-spacing:.3px;color:var(--green);}
+  .slot .reste.chaud{color:#E2571F;}
+  .slot.complet{opacity:.55;border-style:dashed;}
+  .slot.complet:hover{border-color:var(--line);}
+  .slot.complet .reste{color:#8A909A;}
+  .slot.complet a{background:#C9CDD3;box-shadow:none;pointer-events:none;cursor:default;}
   .note{margin:18px 2px 0;font-size:12px;color:#9AA0A8;line-height:1.6;text-align:center;}
   .foot{background:var(--ink);color:#8A909A;text-align:center;padding:22px;font-size:12px;line-height:1.6;}
   .foot a{color:#4FD39A;text-decoration:none;font-weight:700;}
@@ -67,17 +73,17 @@
 
       <div class="sec"><span class="num">→</span><span class="lbl">Choisis ton créneau</span></div>
 
-      <div class="slot">
+      <div class="slot" data-debut="10:00">
         <div class="info"><div class="time">10h00 – 11h00</div><div class="cap">14 places · tarif libre</div></div>
         <a href="https://www.helloasso.com/associations/l-urgentiste-nomade/evenements/str-x-crossfit-hygie-27-09-2026-10h-11h" target="_blank" rel="noopener">Je m'inscris →</a>
       </div>
 
-      <div class="slot">
+      <div class="slot" data-debut="11:15">
         <div class="info"><div class="time">11h15 – 12h15</div><div class="cap">14 places · tarif libre</div></div>
         <a href="https://www.helloasso.com/associations/l-urgentiste-nomade/evenements/str-x-crossfit-hygie-27-09-2026-11h15-12h15" target="_blank" rel="noopener">Je m'inscris →</a>
       </div>
 
-      <div class="slot">
+      <div class="slot" data-debut="12:30">
         <div class="info"><div class="time">12h30 – 13h30</div><div class="cap">14 places · tarif libre</div></div>
         <a href="https://www.helloasso.com/associations/l-urgentiste-nomade/evenements/str-x-crossfit-hygie-27-09-2026-12h30-13h30" target="_blank" rel="noopener">Je m'inscris →</a>
       </div>
@@ -88,5 +94,43 @@
     <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
   </div>
 </div>
+
+<script>
+/* Places restantes en direct. La source est le socle (domaine « billetterie »),
+   servi par hygie-places : HelloAsso refuse d'être lu par un navigateur tiers.
+   Si le robinet ne répond pas, la page garde son texte d'origine. */
+(function () {
+  var SOURCE = "https://hygiebot.tail7ef5c3.ts.net/places.json";
+
+  function peindre(creneaux) {
+    creneaux.forEach(function (c) {
+      var slot = document.querySelector('.slot[data-debut="' + c.debut + '"]');
+      if (!slot || !c.lisible || c.restantes === null) return;
+      var cap = slot.querySelector(".cap"), lien = slot.querySelector("a");
+      var n = c.restantes;
+      var texte = n === 0 ? "Complet" : (n === 1 ? "Plus qu'1 place" : "Il reste " + n + " places");
+      cap.innerHTML = '14 places · tarif libre<br><span class="reste' + (n > 0 && n <= 4 ? " chaud" : "") + '">' + texte + "</span>";
+      if (n === 0) {
+        slot.classList.add("complet");
+        lien.textContent = "Complet";
+        lien.removeAttribute("href");
+      }
+    });
+  }
+
+  function rafraichir() {
+    fetch(SOURCE, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d && d.ok && d.creneaux) peindre(d.creneaux); })
+      .catch(function () { /* on garde l'affichage d'origine */ });
+  }
+
+  rafraichir();
+  setInterval(rafraichir, 120000);
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) rafraichir();
+  });
+})();
+</script>
 </body>
 </html>
