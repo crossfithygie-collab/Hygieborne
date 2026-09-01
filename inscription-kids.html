@@ -78,9 +78,6 @@
         </div>
         <div class="field"><input type="email" id="email" placeholder="Ton email adhérent (facultatif)" autocomplete="email"></div>
         <button type="submit" class="btn" id="checkBtn">Voir mon tarif <span class="arrow">→</span></button>
-        <div style="text-align:center;margin:14px 0 0;">
-          <span id="notMember" style="font-size:13px;color:#9AA0A8;text-decoration:underline;cursor:pointer;">Je ne suis pas adhérent, tarif extérieur (150 €)</span>
-        </div>
       </form>
 
       <div id="result" class="hide"></div>
@@ -98,14 +95,6 @@
 
   var form = document.getElementById('tarifForm');
   var resultEl = document.getElementById('result');
-
-  // Accès direct au tarif extérieur (sans être adhérent).
-  document.getElementById('notMember').addEventListener('click', function(){
-    var prenom = document.getElementById('prenom').value.trim();
-    var nom = document.getElementById('nom').value.trim();
-    if(!prenom || !nom){ document.getElementById('prenom').focus(); return; }
-    showResult(false);
-  });
 
   function showResult(isMember){
     var link = isMember ? LINK_ADHERENT : LINK_EXTERIEUR;
