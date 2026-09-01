@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inscription Kids · Rentrée 2026 · CrossFit Hygie</title>
 <meta property="og:title" content="Inscription Kids · Rentrée 2026 · CrossFit Hygie">
-<meta property="og:description" content="Le cours Kids (6-12 ans), tous les mercredis de 14h30 à 15h30 avec Baptiste. Carnet de 10 séances : 150 €.">
+<meta property="og:description" content="Le cours Kids (6-12 ans), tous les mercredis de 14h30 à 15h30 avec Baptiste. Carnet de 10 séances : 120 € adhérent, 150 € extérieur.">
 <meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
 <style>
-  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#E6E7E9;--bg:#F1F1EF;}
+  :root{--red:#E22118;--green:#1FA971;--ink:#0A0B0C;--muted:#5B626C;--line:#E6E7E9;--bg:#F1F1EF;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
   .wrap{max-width:600px;margin:0 auto;padding:22px 12px 56px;}
@@ -30,14 +30,25 @@
   .sec .num{font-style:italic;font-weight:900;font-size:15px;color:var(--red);}
   .sec .lbl{font-weight:900;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;}
   .sec::after{content:'';flex:1;height:1.5px;background:var(--line);transform:translateY(-3px);}
-  .price{border:1.5px solid var(--line);border-radius:16px;padding:22px 22px;background:#FAFAF8;text-align:center;margin:4px 0 22px;}
-  .price .k{font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
-  .price .v{font-weight:900;font-style:italic;font-size:42px;letter-spacing:-1px;margin:4px 0 2px;}
-  .price .v span{color:var(--red);}
-  .price .d{font-size:13px;color:var(--muted);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:440px){.grid2{grid-template-columns:1fr;}}
+  input[type=text],input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:14px 15px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:#fff;}
+  input::placeholder{font-weight:500;color:#9AA0A8;}
+  input:focus{outline:none;border-color:var(--ink);}
+  .field{margin:0 0 10px;}
   .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;background:var(--red);color:#fff;text-decoration:none;border-radius:999px;padding:19px 24px;font-family:'Archivo';font-weight:900;font-style:italic;font-size:16px;text-transform:uppercase;letter-spacing:1px;cursor:pointer;box-shadow:0 10px 30px rgba(226,33,24,.35);}
+  .btn:disabled{opacity:.5;box-shadow:none;cursor:default;}
   .btn .arrow{font-style:normal;font-weight:800;}
-  .note{margin:14px 2px 0;font-size:12px;color:#9AA0A8;line-height:1.6;text-align:center;}
+  .hide{display:none;}
+  .result{border:1.5px solid var(--line);border-radius:16px;padding:22px;margin:16px 0 0;text-align:center;background:#FAFAF8;}
+  .result.member{border-color:var(--green);}
+  .result .badge{display:inline-block;font-weight:900;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:999px;color:#fff;background:var(--muted);}
+  .result.member .badge{background:var(--green);}
+  .result .v{font-weight:900;font-style:italic;font-size:44px;letter-spacing:-1px;margin:10px 0 2px;}
+  .result .v span{color:var(--red);}
+  .result .d{font-size:13px;color:var(--muted);margin-bottom:16px;}
+  .result .back{display:block;margin:12px 0 0;font-size:12.5px;color:#9AA0A8;text-decoration:underline;cursor:pointer;}
+  .note{margin:16px 2px 0;font-size:12px;color:#9AA0A8;line-height:1.6;text-align:center;}
   .foot{background:var(--ink);color:#8A909A;text-align:center;padding:22px;font-size:12px;line-height:1.6;}
   .foot a{color:#EE5249;text-decoration:none;font-weight:700;}
 </style>
@@ -46,7 +57,6 @@
 <div class="wrap">
   <div class="card">
     <div class="brand"><img src="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png?v=2" alt="CrossFit Hygie"></div>
-
     <div class="photo"><img src="https://crossfithygie-collab.github.io/Hygieborne/kids-cours.jpg?v=1" alt="Cours Kids CrossFit Hygie"></div>
 
     <div class="hero">
@@ -57,24 +67,70 @@
 
     <div class="body">
       <p class="lead">Le cours <strong>Kids</strong> revient à la rentrée ! Chaque <strong>mercredi de 14h30 à 15h30</strong>, Baptiste initie tes enfants (<strong>6 à 12 ans</strong>) au sport dans un cadre ludique et bienveillant : motricité, coordination, jeux, confiance en soi et esprit d'équipe.</p>
-      <p class="lead">Aucun prérequis, juste l'envie de bouger et de s'amuser.</p>
+      <p class="lead">Le carnet, c'est <strong>10 séances</strong>. Le tarif dépend de ta situation : <strong>120 €</strong> si tu es adhérent (abo ou carnet actif), <strong>150 €</strong> pour les extérieurs.</p>
 
-      <div class="sec"><span class="num">→</span><span class="lbl">Le carnet Kids · 10 séances</span></div>
-      <div class="price">
-        <div class="k">Tarif adhérent · abo ou carnet actif</div>
-        <div class="v">120<span>€</span></div>
-        <div class="d">soit 12 € la séance · réservé aux membres actifs</div>
-      </div>
-      <a class="btn" href="https://buy.stripe.com/7sY8wR8cCdCzbCp92Idby03" target="_blank" rel="noopener">Tarif adhérent · réserver (120 €) <span class="arrow">→</span></a>
+      <div class="sec"><span class="num">→</span><span class="lbl">Vérifie ton tarif</span></div>
+      <form id="tarifForm" novalidate>
+        <p class="lead" style="margin-bottom:12px;">Renseigne ton nom et l'email de ton compte Resawod, on te calcule ton tarif automatiquement.</p>
+        <div class="grid2 field">
+          <input type="text" id="prenom" placeholder="Ton prénom" autocomplete="given-name" required>
+          <input type="text" id="nom" placeholder="Ton nom" autocomplete="family-name" required>
+        </div>
+        <div class="field"><input type="email" id="email" placeholder="Ton email (compte Resawod)" autocomplete="email"></div>
+        <button type="submit" class="btn" id="checkBtn">Voir mon tarif <span class="arrow">→</span></button>
+      </form>
 
-      <div style="text-align:center;margin:20px 0 10px;font-weight:800;font-size:12px;letter-spacing:2px;color:#9AA0A8;text-transform:uppercase;">Pas encore adhérent ?</div>
-      <a href="https://buy.stripe.com/6oU00lgJ8gOL35T5Qwdby02" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:2px solid var(--ink);background:#fff;color:var(--ink);text-decoration:none;border-radius:999px;padding:15px 24px;font-family:'Archivo';font-weight:900;font-style:italic;font-size:14px;text-transform:uppercase;letter-spacing:.5px;">Tarif extérieur · réserver (150 €) →</a>
+      <div id="result" class="hide"></div>
 
-      <p class="note">Le <strong style="color:var(--ink);">tarif adhérent (120 €)</strong> est réservé aux membres avec un abonnement ou un carnet actif : on le vérifie à la box, merci de jouer le jeu 🙏 Paiement sécurisé par Stripe (nom du parent, prénom et âge de l'enfant demandés au paiement).<br>Une question ? Contacte-nous à la box.</p>
+      <p class="note">Le <strong style="color:var(--ink);">tarif adhérent (120 €)</strong> est réservé aux membres avec un abonnement ou un carnet actif. Paiement sécurisé par Stripe : nom du parent, prénom et âge de l'enfant demandés au paiement.<br>Une question ? Contacte-nous à la box.</p>
     </div>
 
     <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr">crossfit-hygie.fr</a></div>
   </div>
 </div>
+
+<script>
+  // Vérification adhérent via l'Apps Script (liste des membres actifs, partagée avec le combat).
+  var CHECK_URL = "https://script.google.com/macros/s/AKfycbwnq9Tke8JHqb3xjh7e1za9Te8E7r4bsvnaQMEwc5rCp2ydu12K78zo_IuCl2_Pe17Pcg/exec";
+  var LINK_ADHERENT = "https://buy.stripe.com/7sY8wR8cCdCzbCp92Idby03"; // 120 €
+  var LINK_EXTERIEUR = "https://buy.stripe.com/6oU00lgJ8gOL35T5Qwdby02"; // 150 €
+
+  var form = document.getElementById('tarifForm');
+  var resultEl = document.getElementById('result');
+
+  function showResult(isMember){
+    var link = isMember ? LINK_ADHERENT : LINK_EXTERIEUR;
+    var price = isMember ? '120' : '150';
+    resultEl.className = 'result' + (isMember ? ' member' : '');
+    resultEl.innerHTML =
+      '<div class="badge">' + (isMember ? 'Tarif adhérent' : 'Tarif extérieur') + '</div>' +
+      '<div class="v">' + price + '<span>&nbsp;€</span></div>' +
+      '<div class="d">Carnet 10 séances' + (isMember ? ' · réservé aux membres actifs' : '') + '</div>' +
+      '<a class="btn" href="' + link + '" target="_blank" rel="noopener">Réserver le carnet Kids <span class="arrow">&rarr;</span></a>' +
+      '<span class="back" id="backLink">Modifier mes infos</span>';
+    resultEl.classList.remove('hide');
+    form.classList.add('hide');
+    document.getElementById('backLink').addEventListener('click', function(){
+      resultEl.classList.add('hide'); form.classList.remove('hide');
+    });
+    resultEl.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var prenom = document.getElementById('prenom').value.trim();
+    var nom = document.getElementById('nom').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if(!prenom || !nom){ document.getElementById('prenom').focus(); return; }
+    var btn = document.getElementById('checkBtn');
+    btn.disabled = true; btn.textContent = 'Vérification…';
+    var qs = new URLSearchParams({action:'check', prenom:prenom, nom:nom, email:email});
+    fetch(CHECK_URL + '?' + qs.toString())
+      .then(function(r){ return r.json(); })
+      .then(function(res){ showResult(!!(res && res.member)); })
+      .catch(function(){ showResult(false); })   // en cas d'erreur : tarif extérieur (jamais bloquant)
+      .finally(function(){ btn.disabled = false; btn.innerHTML = 'Voir mon tarif <span class="arrow">→</span>'; });
+  });
+</script>
 </body>
 </html>
