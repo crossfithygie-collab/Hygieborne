@@ -67,7 +67,7 @@
 
     <div class="body">
       <p class="lead">Le cours <strong>Kids</strong> revient à la rentrée ! Chaque <strong>mercredi de 14h30 à 15h30</strong>, Baptiste initie tes enfants (<strong>6 à 12 ans</strong>) au sport dans un cadre ludique et bienveillant : motricité, coordination, jeux, confiance en soi et esprit d'équipe.</p>
-      <p class="lead">Le carnet, c'est <strong>10 séances</strong> à utiliser sur le créneau du mercredi, soit un cycle complet pour bien progresser. Vérifie ton tarif juste en dessous.</p>
+      <p class="lead">Le carnet, c'est <strong>10 séances</strong> à utiliser sur le créneau du mercredi, soit un cycle complet pour bien progresser. <strong>Prix de lancement en septembre</strong> pour les adhérents. Vérifie ton tarif juste en dessous.</p>
 
       <div class="sec"><span class="num">→</span><span class="lbl">Vérifie ton tarif</span></div>
       <form id="tarifForm" novalidate>
@@ -103,7 +103,7 @@
     resultEl.innerHTML =
       '<div class="badge">' + (isMember ? 'Tarif adhérent' : 'Tarif extérieur') + '</div>' +
       '<div class="v">' + price + '<span>&nbsp;€</span></div>' +
-      '<div class="d">Carnet 10 séances' + (isMember ? ' · réservé aux membres actifs' : '') + '</div>' +
+      '<div class="d">Carnet 10 séances' + (isMember ? ' · prix de lancement septembre' : '') + '</div>' +
       '<a class="btn" href="' + link + '" target="_blank" rel="noopener">Réserver le carnet Kids <span class="arrow">&rarr;</span></a>' +
       '<span class="back" id="backLink">Modifier mes infos</span>';
     resultEl.classList.remove('hide');
