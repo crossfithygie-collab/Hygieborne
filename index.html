@@ -1393,7 +1393,7 @@ function renderMembers(query) {
     list.innerHTML = `
       <div class="no-result">
         <p class="no-result-title">Ton nom n'apparaît pas&nbsp;?</p>
-        <p class="no-result-text">C'est soit que ton <strong>RIB ne nous a pas encore été communiqué</strong>, soit que tu n'as <strong>pas de crédit disponible</strong>.</p>
+        <p class="no-result-text">C'est sûrement que ton <strong>RIB ne nous a pas encore été communiqué</strong>.</p>
         <p class="no-result-text">Rapproche-toi de <strong>Jérémy</strong> pour t'inscrire. 💪</p>
       </div>`;
     return;
@@ -1491,7 +1491,8 @@ function showMemberCredit() {
   if (fresh) currentMember = fresh;
   let credit = (currentMember.credit || '0').toString().replace(/[^0-9.,-]/g, '').replace('.', ',');
   if (credit === '') credit = '0';
-  el.textContent = 'Crédit disponible : ' + credit + ' €';
+  // Solde négatif autorisé (14/09/2026) : on affiche « Solde », pas « Crédit disponible »
+  el.textContent = 'Solde : ' + credit + ' €';
 }
 
 function validatePin() {
