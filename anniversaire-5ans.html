@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hygie fête ses 5 ans · CrossFit Hygie</title>
+<meta property="og:title" content="Hygie fête ses 5 ans · vendredi 25 septembre">
+<meta property="og:description" content="WOD anniversaire de 19h à 20h30 puis auberge espagnole, Hygie offre la pizza. Inscriptions jusqu'au mercredi 23 septembre.">
+<meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/anniversaire-5ans.jpg?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#E6E7E9;--bg:#F1F1EF;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:600px;margin:0 auto;padding:22px 12px 56px;}
+  .card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 28px 70px rgba(10,11,12,.14);}
+
+  .hero{background:var(--ink);color:#fff;padding:34px 30px 28px;border-top:4px solid var(--red);}
+  .kicker{margin:0 0 14px;font-weight:800;font-size:11px;letter-spacing:5px;color:var(--red);text-transform:uppercase;}
+  h1{margin:0;font-weight:900;font-style:italic;font-size:clamp(44px,12vw,64px);line-height:.92;text-transform:uppercase;letter-spacing:-2px;}
+  h1 .accent{color:var(--red);display:block;}
+  .meta{margin:22px 0 0;font-weight:800;font-size:clamp(11px,3.2vw,14px);letter-spacing:.6px;text-transform:uppercase;line-height:1.7;}
+  .meta .slash{color:var(--red);margin:0 .5em;font-style:italic;font-weight:900;}
+  .deadline{display:inline-block;margin:16px 0 0;background:var(--red);color:#fff;font-weight:900;font-style:italic;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:8px 16px;border-radius:999px;}
+
+  .body{padding:30px 30px 36px;}
+  .intro{margin:0 0 8px;font-size:15px;line-height:1.6;color:var(--muted);}
+  .intro strong{color:var(--ink);}
+  .prog{list-style:none;margin:18px 0 6px;padding:0;border-left:4px solid var(--red);background:#FAFAF8;border-radius:12px;}
+  .prog li{padding:13px 18px;font-size:14.5px;line-height:1.5;border-bottom:1px solid var(--line);}
+  .prog li:last-child{border-bottom:0;}
+  .prog b{display:inline-block;min-width:92px;font-weight:900;font-style:italic;color:var(--red);}
+
+  .sec{display:flex;align-items:baseline;gap:10px;margin:30px 0 14px;}
+  .sec .num{font-style:italic;font-weight:900;font-size:15px;color:var(--red);}
+  .sec .lbl{font-weight:900;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;}
+  .sec::after{content:'';flex:1;height:1.5px;background:var(--line);transform:translateY(-3px);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:440px){.grid2{grid-template-columns:1fr;}}
+  input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:14px 15px;font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:#fff;}
+  input::placeholder{font-weight:500;color:#9AA0A8;}
+  input:focus{outline:none;border-color:var(--ink);}
+
+  .choix{display:grid;gap:10px;}
+  .opt{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;cursor:pointer;transition:border-color .12s,background .12s;}
+  .opt input{width:20px;height:20px;flex:none;margin:2px 0 0;accent-color:var(--red);cursor:pointer;}
+  .opt .t{font-weight:900;font-size:15px;}
+  .opt .d{display:block;margin-top:3px;font-size:13px;color:var(--muted);line-height:1.5;}
+  .opt:has(input:checked){border-color:var(--red);background:#FFF6F5;}
+  .choix.err .opt{border-color:var(--red);}
+
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:24px;border:0;background:var(--red);color:#fff;border-radius:999px;padding:19px 24px;font-family:'Archivo';font-weight:900;font-style:italic;font-size:16px;text-transform:uppercase;letter-spacing:1px;cursor:pointer;box-shadow:0 10px 30px rgba(226,33,24,.35);}
+  .btn:disabled{opacity:.5;box-shadow:none;cursor:default;}
+  .note{margin:14px 2px 0;font-size:12px;color:#9AA0A8;line-height:1.6;text-align:center;}
+
+  .banner{display:none;border-left:4px solid var(--red);background:#FDEBEA;color:#A5150E;border-radius:10px;padding:14px 16px;font-size:13.5px;font-weight:700;line-height:1.5;margin:18px 0 0;}
+  .banner.show{display:block;}
+  .hide{display:none;}
+
+  .thanks h2{margin:0 0 12px;font-weight:900;font-style:italic;font-size:clamp(34px,9vw,46px);text-transform:uppercase;line-height:.95;}
+  .thanks h2 .accent{color:var(--red);}
+  .recap{border-left:4px solid var(--red);background:#FAFAF8;border-radius:12px;padding:18px 20px;margin:18px 0 22px;font-size:14.5px;line-height:1.8;}
+  .recap .big{font-weight:900;font-style:italic;font-size:17px;text-transform:uppercase;}
+  .cal{display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:13px 22px;}
+
+  .foot{background:var(--ink);color:#8A909A;text-align:center;padding:22px;font-size:12px;line-height:1.6;}
+  .foot a{color:#EE5249;text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="hero">
+      <p class="kicker">CrossFit Hygie fête ses</p>
+      <h1>5 ans <span class="accent">ensemble</span></h1>
+      <p class="meta">Vendredi 25 septembre<span class="slash">/</span>dès 19h<span class="slash">/</span>à la box</p>
+      <p class="deadline" id="deadline">Inscriptions jusqu'au mercredi 23 septembre</p>
+    </div>
+
+    <div class="body">
+      <div id="formZone">
+        <p class="intro">Pour souffler notre 5e bougie, on se retrouve pour un <strong>WOD anniversaire</strong>, puis on prolonge la soirée autour d'une <strong>auberge espagnole</strong> : chacun apporte un petit quelque chose à partager, et <strong>Hygie offre la pizza</strong> 🍕</p>
+        <ul class="prog">
+          <li><b>19h00</b> WOD anniversaire, ouvert à tous les niveaux</li>
+          <li><b>20h30</b> Auberge espagnole, pizzas offertes par Hygie</li>
+        </ul>
+
+        <form id="form" novalidate>
+          <div class="sec"><span class="num">01</span><span class="lbl">Toi</span></div>
+          <div class="grid2">
+            <input type="text" id="prenom" placeholder="Prénom" autocomplete="given-name" required>
+            <input type="text" id="nom" placeholder="Nom" autocomplete="family-name" required>
+          </div>
+
+          <div class="sec"><span class="num">02</span><span class="lbl">Ta participation</span></div>
+          <div class="choix" id="choix">
+            <label class="opt"><input type="radio" name="choix" value="wod">
+              <span><span class="t">WOD + auberge espagnole</span><span class="d">Je fais le WOD à 19h et je reste pour la soirée.</span></span></label>
+            <label class="opt"><input type="radio" name="choix" value="auberge">
+              <span><span class="t">Auberge espagnole seulement</span><span class="d">Je ne fais pas le WOD, je vous rejoins pour la soirée.</span></span></label>
+          </div>
+
+          <div class="banner" id="banner"></div>
+          <button type="submit" class="btn" id="submit">Je m'inscris →</button>
+          <p class="note">Une inscription par personne : chacun s'inscrit avec son nom.<br>Pense à ce que tu apporteras à partager (salé, sucré ou boisson).</p>
+        </form>
+      </div>
+
+      <div id="thanks" class="thanks hide">
+        <h2>C'est <span class="accent">noté !</span></h2>
+        <p class="intro">On a hâte de fêter ces 5 ans avec toi. N'oublie pas ton petit plat ou ta boisson à partager, les pizzas sont pour nous.</p>
+        <div class="recap" id="recap"></div>
+        <a class="cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Hygie%20f%C3%AAte%20ses%205%20ans&dates=20260925T170000Z/20260925T210000Z&details=WOD%20anniversaire%20%C3%A0%2019h%20puis%20auberge%20espagnole%20(Hygie%20offre%20la%20pizza).%20Apporte%20un%20petit%20quelque%20chose%20%C3%A0%20partager%20!&location=CrossFit%20Hygie%2C%20257%20rue%20de%20l%27industrie%2C%2059113%20Seclin" target="_blank" rel="noopener">Ajouter à mon agenda</a>
+      </div>
+    </div>
+
+    <div class="foot">CrossFit Hygie · 257 rue de l'industrie, 59113 Seclin<br><a href="https://crossfit-hygie.fr" target="_blank" rel="noopener">crossfit-hygie.fr</a></div>
+  </div>
+</div>
+
+<script>
+  // Apps Script dédié « Hygie Anniversaire 5 ans » (voir Borne/anniversaire_apps_script.gs).
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbyisjUymJDVtZEH4OYJH1LV1ku12RX516tz8RJ39pUsXod4KhAHxKaPq5hMS5xILlsM/exec";
+  var CLOTURE = new Date('2026-09-24T00:00:00+02:00');   // J-2 : même règle que le script
+
+  function banner(msg){ var b = document.getElementById('banner'); b.textContent = msg; b.classList.add('show'); }
+  function fermer(){
+    document.getElementById('submit').disabled = true;
+    document.getElementById('deadline').textContent = 'Inscriptions closes';
+    banner("Les inscriptions sont closes. Pour toute question, parle-en à un coach à la box.");
+  }
+  if (new Date() >= CLOTURE) fermer();
+
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('banner').classList.remove('show');
+    if (new Date() >= CLOTURE) { fermer(); return; }
+    var prenom = document.getElementById('prenom'), nom = document.getElementById('nom');
+    [prenom, nom].forEach(function(el){ el.style.borderColor = ''; });
+    document.getElementById('choix').classList.remove('err');
+    if (!prenom.value.trim()) { prenom.style.borderColor = 'var(--red)'; prenom.focus(); banner("Indique ton prénom."); return; }
+    if (!nom.value.trim()) { nom.style.borderColor = 'var(--red)'; nom.focus(); banner("Indique ton nom."); return; }
+    var c = document.querySelector('input[name=choix]:checked');
+    if (!c) { document.getElementById('choix').classList.add('err'); banner("Dis-nous si tu fais le WOD ou si tu viens seulement pour l'auberge espagnole."); return; }
+    if (SHEET_URL.indexOf('http') !== 0) { banner("Les inscriptions ouvrent très bientôt. Reviens dans un petit moment !"); return; }
+
+    var btn = document.getElementById('submit');
+    btn.disabled = true; btn.textContent = 'Envoi…';
+    var qs = new URLSearchParams({ action: 'register', prenom: prenom.value.trim(), nom: nom.value.trim(), choix: c.value });
+    fetch(SHEET_URL + '?' + qs.toString())
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (res && res.ok) {
+          document.getElementById('recap').innerHTML =
+            '<span class="big">' + esc(prenom.value.trim()) + ' ' + esc(nom.value.trim()) + '</span><br>' +
+            (c.value === 'wod' ? 'WOD à 19h + auberge espagnole' : 'Auberge espagnole') +
+            '<br>Vendredi 25 septembre · CrossFit Hygie, Seclin';
+          document.getElementById('formZone').classList.add('hide');
+          document.getElementById('thanks').classList.remove('hide');
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        } else if (res && res.error === 'deja_inscrit') {
+          reset(btn); banner("Tu es déjà inscrit à ce nom, tout est bon ! Pour changer ta participation, parle-en à un coach.");
+        } else if (res && res.error === 'ferme') {
+          fermer();
+        } else {
+          throw new Error((res && res.error) || 'inconnu');
+        }
+      })
+      .catch(function(){ reset(btn); banner("Oups, l'envoi a échoué. Vérifie ta connexion et réessaie."); });
+  });
+
+  function reset(btn){ btn.disabled = false; btn.textContent = "Je m'inscris →"; }
+  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+</script>
+</body>
+</html>
