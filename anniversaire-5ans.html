@@ -97,6 +97,8 @@
           <div class="choix" id="choix">
             <label class="opt"><input type="radio" name="choix" value="wod">
               <span><span class="t">WOD + auberge espagnole</span><span class="d">Je fais le WOD à 19h et je reste pour la soirée.</span></span></label>
+            <label class="opt"><input type="radio" name="choix" value="wod_seul">
+              <span><span class="t">WOD seulement</span><span class="d">Je fais le WOD à 19h mais je ne reste pas pour la soirée.</span></span></label>
             <label class="opt"><input type="radio" name="choix" value="auberge">
               <span><span class="t">Auberge espagnole seulement</span><span class="d">Je ne fais pas le WOD, je vous rejoins pour la soirée.</span></span></label>
           </div>
@@ -142,7 +144,7 @@
     if (!prenom.value.trim()) { prenom.style.borderColor = 'var(--red)'; prenom.focus(); banner("Indique ton prénom."); return; }
     if (!nom.value.trim()) { nom.style.borderColor = 'var(--red)'; nom.focus(); banner("Indique ton nom."); return; }
     var c = document.querySelector('input[name=choix]:checked');
-    if (!c) { document.getElementById('choix').classList.add('err'); banner("Dis-nous si tu fais le WOD ou si tu viens seulement pour l'auberge espagnole."); return; }
+    if (!c) { document.getElementById('choix').classList.add('err'); banner("Dis-nous si tu viens au WOD, à l'auberge espagnole ou aux deux."); return; }
     if (SHEET_URL.indexOf('http') !== 0) { banner("Les inscriptions ouvrent très bientôt. Reviens dans un petit moment !"); return; }
 
     var btn = document.getElementById('submit');
@@ -154,7 +156,7 @@
         if (res && res.ok) {
           document.getElementById('recap').innerHTML =
             '<span class="big">' + esc(prenom.value.trim()) + ' ' + esc(nom.value.trim()) + '</span><br>' +
-            (c.value === 'wod' ? 'WOD à 19h + auberge espagnole' : 'Auberge espagnole') +
+            ({wod: 'WOD à 19h + auberge espagnole', wod_seul: 'WOD à 19h', auberge: 'Auberge espagnole à 20h30'}[c.value]) +
             '<br>Vendredi 25 septembre · CrossFit Hygie, Seclin';
           document.getElementById('formZone').classList.add('hide');
           document.getElementById('thanks').classList.remove('hide');
