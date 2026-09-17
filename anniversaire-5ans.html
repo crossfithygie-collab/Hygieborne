@@ -161,6 +161,10 @@
           window.scrollTo({top: 0, behavior: 'smooth'});
         } else if (res && res.error === 'deja_inscrit') {
           reset(btn); banner("Tu es déjà inscrit à ce nom, tout est bon ! Pour changer ta participation, parle-en à un coach.");
+        } else if (res && res.error === 'non_abonne') {
+          reset(btn); banner("L'inscription est réservée aux abonnés Hygie, et on ne te retrouve pas dans la liste. Vérifie que tu as mis ton prénom et ton nom comme sur ton compte Resawod, sinon parle-en à un coach.");
+        } else if (res && res.error === 'liste_indisponible') {
+          reset(btn); banner("Les inscriptions ouvrent dans un instant, réessaie un peu plus tard !");
         } else if (res && res.error === 'ferme') {
           fermer();
         } else {
