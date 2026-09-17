@@ -45,8 +45,9 @@
     <div class="kpis">
       <div class="kpi main"><div class="n" id="kTotal">0</div><div class="l">Présents</div></div>
       <div class="kpi"><div class="n" id="kWod">0</div><div class="l">Au WOD</div></div>
-      <div class="kpi"><div class="n" id="kAub">0</div><div class="l">Auberge seule</div></div>
+      <div class="kpi"><div class="n" id="kAub">0</div><div class="l">Auberge (pizzas)</div></div>
     </div>
+    <p class="etat" id="detail" style="color:#5B626C;font-weight:400"></p>
     <p class="etat" id="etat"></p>
     <ul id="liste"></ul>
   </div>
@@ -70,16 +71,20 @@
         document.getElementById('login').classList.add('hide');
         document.getElementById('err').classList.add('hide');
         document.getElementById('zone').classList.remove('hide');
-        document.getElementById('kTotal').textContent = res.total;
-        document.getElementById('kWod').textContent = res.wod;
-        document.getElementById('kAub').textContent = res.auberge;
+        var t = res.totaux;
+        document.getElementById('kTotal').textContent = t.total;
+        document.getElementById('kWod').textContent = t.wod;
+        document.getElementById('kAub').textContent = t.auberge;
+        document.getElementById('detail').textContent = 'WOD + auberge : ' + t.wod_auberge +
+          ' · WOD seulement : ' + t.wod_seul + ' · Auberge seulement : ' + t.auberge_seul;
         document.getElementById('etat').textContent = res.ferme ? 'Inscriptions closes' : 'Inscriptions ouvertes';
         var ul = document.getElementById('liste'); ul.innerHTML = '';
         res.rows.sort(function(a, b){ return (a.nom + a.prenom).localeCompare(b.nom + b.prenom); });
         res.rows.forEach(function(r){
           var li = document.createElement('li');
           li.innerHTML = '<span class="nom">' + esc(r.prenom + ' ' + r.nom) + '</span>' +
-            '<span class="tag' + (r.wod ? ' wod' : '') + '">' + (r.wod ? 'WOD' : 'Auberge') + '</span>' +
+            '<span class="tag' + (r.choix !== 'auberge' ? ' wod' : '') + '">' +
+            ({wod: 'WOD + auberge', wod_seul: 'WOD', auberge: 'Auberge'}[r.choix] || '?') + '</span>' +
             '<button class="x" title="Supprimer">✕</button>';
           li.querySelector('.x').onclick = function(){
             if (!confirm('Supprimer ' + r.prenom + ' ' + r.nom + ' ?')) return;
