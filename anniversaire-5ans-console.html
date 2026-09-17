@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Console · Anniversaire 5 ans</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;0,900;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#E6E7E9;--bg:#F1F1EF;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 12px 50px;}
+  h1{margin:0 0 4px;font-weight:900;font-style:italic;text-transform:uppercase;font-size:26px;}
+  .sub{margin:0 0 18px;color:var(--muted);font-size:13px;}
+  .code{display:flex;gap:8px;}
+  input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px;font:inherit;font-size:15px;}
+  button{border:0;background:var(--red);color:#fff;border-radius:12px;padding:0 18px;font:inherit;font-weight:900;cursor:pointer;}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0;}
+  .kpi{background:#fff;border-radius:14px;padding:16px 12px;text-align:center;box-shadow:0 6px 20px rgba(10,11,12,.06);}
+  .kpi .n{font-weight:900;font-style:italic;font-size:34px;line-height:1;}
+  .kpi .l{margin-top:6px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+  .kpi.main .n{color:var(--red);}
+  .etat{font-size:13px;font-weight:700;margin:0 0 12px;}
+  ul{list-style:none;margin:0;padding:0;background:#fff;border-radius:14px;overflow:hidden;}
+  li{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14.5px;}
+  li:last-child{border-bottom:0;}
+  li .nom{flex:1;font-weight:700;}
+  .tag{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;padding:4px 9px;border-radius:999px;background:#EEE;color:var(--muted);}
+  .tag.wod{background:var(--red);color:#fff;}
+  .x{background:none;color:#9AA0A8;font-size:18px;padding:0 4px;}
+  .err{color:var(--red);font-weight:700;font-size:13px;margin-top:10px;}
+  .hide{display:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Anniversaire 5 ans</h1>
+  <p class="sub">Vendredi 25 septembre · inscriptions jusqu'au mercredi 23 septembre</p>
+
+  <form class="code" id="login"><input type="password" id="code" placeholder="Code d'accès"><button>OK</button></form>
+  <p class="err hide" id="err"></p>
+
+  <div id="zone" class="hide">
+    <div class="kpis">
+      <div class="kpi main"><div class="n" id="kTotal">0</div><div class="l">Présents</div></div>
+      <div class="kpi"><div class="n" id="kWod">0</div><div class="l">Au WOD</div></div>
+      <div class="kpi"><div class="n" id="kAub">0</div><div class="l">Auberge seule</div></div>
+    </div>
+    <p class="etat" id="etat"></p>
+    <ul id="liste"></ul>
+  </div>
+</div>
+
+<script>
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbyisjUymJDVtZEH4OYJH1LV1ku12RX516tz8RJ39pUsXod4KhAHxKaPq5hMS5xILlsM/exec";
+  var code = '';
+  try { code = localStorage.getItem('anniv5-code') || ''; } catch (e) {}
+
+  function err(m){ var e = document.getElementById('err'); e.textContent = m; e.classList.remove('hide'); }
+  function esc(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  function charger(){
+    if (SHEET_URL.indexOf('http') !== 0) { err("Le script Google n'est pas encore déployé."); return; }
+    fetch(SHEET_URL + '?' + new URLSearchParams({action: 'list', code: code}))
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res.ok) { err(res.error === 'code_invalide' ? 'Code incorrect.' : 'Erreur : ' + res.error); return; }
+        try { localStorage.setItem('anniv5-code', code); } catch (e) {}
+        document.getElementById('login').classList.add('hide');
+        document.getElementById('err').classList.add('hide');
+        document.getElementById('zone').classList.remove('hide');
+        document.getElementById('kTotal').textContent = res.total;
+        document.getElementById('kWod').textContent = res.wod;
+        document.getElementById('kAub').textContent = res.auberge;
+        document.getElementById('etat').textContent = res.ferme ? 'Inscriptions closes' : 'Inscriptions ouvertes';
+        var ul = document.getElementById('liste'); ul.innerHTML = '';
+        res.rows.sort(function(a, b){ return (a.nom + a.prenom).localeCompare(b.nom + b.prenom); });
+        res.rows.forEach(function(r){
+          var li = document.createElement('li');
+          li.innerHTML = '<span class="nom">' + esc(r.prenom + ' ' + r.nom) + '</span>' +
+            '<span class="tag' + (r.wod ? ' wod' : '') + '">' + (r.wod ? 'WOD' : 'Auberge') + '</span>' +
+            '<button class="x" title="Supprimer">✕</button>';
+          li.querySelector('.x').onclick = function(){
+            if (!confirm('Supprimer ' + r.prenom + ' ' + r.nom + ' ?')) return;
+            fetch(SHEET_URL + '?' + new URLSearchParams({action: 'delete', code: code, row: r.row}))
+              .then(function(x){ return x.json(); }).then(charger);
+          };
+          ul.appendChild(li);
+        });
+      })
+      .catch(function(){ err('Connexion impossible, réessaie.'); });
+  }
+
+  document.getElementById('login').addEventListener('submit', function(e){
+    e.preventDefault(); code = document.getElementById('code').value.trim(); charger();
+  });
+  if (code) charger();
+</script>
+</body>
+</html>
