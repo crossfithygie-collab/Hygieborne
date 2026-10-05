@@ -6,7 +6,7 @@
 <style>
 /* Le mur : béton plein écran 16:9, une affiche collée par offre, QR code sur papier scotché.
    Unités vw uniquement (les navigateurs des clés TV ne gèrent pas les unités de conteneur). */
-:root{--beton:#3A3A3C;--papier:#EFEADF;--noir:#121212;--rouge:#E3221B;--jaune:#FFD400;--gaffer:#8C8C88}
+:root{--beton:#3A3A3C;--papier:#F4F4F2;--noir:#0A0B0C;--rouge:#E22118;--gris:#5B626C;--blanc:#FFFFFF;--gaffer:#8C8C88}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 .tv{position:relative;width:100vw;height:56.25vw;max-height:100vh;overflow:hidden;background:var(--beton);
@@ -26,13 +26,16 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   background-image:radial-gradient(rgba(0,0,0,.55) .6px,transparent .9px);background-size:4px 4px}
 .xerox.noir{background:var(--noir);color:var(--papier)}
 .xerox.noir:after{mix-blend-mode:screen;background-image:radial-gradient(rgba(255,255,255,.35) .6px,transparent .9px);opacity:.25}
-.xerox.jaune,.xerox.jaunebande{background:var(--jaune);color:var(--noir)}
+.xerox.jaunebande{background:var(--rouge);color:var(--blanc)}
 .xerox.rouge{background:var(--rouge);color:var(--papier)}
 
 .affiche{left:4vw;top:5vw;width:55vw;padding:2.6vw 3.2vw 3.2vw}
-.kick{font:400 1.55vw 'Special Elite','Courier New',monospace;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2vw}
+.kick{font:800 1.25vw 'Archivo',sans-serif;letter-spacing:.24em;text-transform:uppercase;margin-bottom:1.3vw;display:flex;align-items:center;gap:1vw}
+.kick:before{content:"";width:3vw;height:.35vw;background:var(--rouge);flex:none}
+.rouge .kick:before{background:var(--noir)}
+.kick{opacity:.92}
 .titre{font-weight:900;font-stretch:62%;text-transform:uppercase;line-height:.84;letter-spacing:-.01em}
-.papier .acc,.jaune .acc{color:var(--rouge)} .noir .acc{color:var(--jaune)} .rouge .acc{color:var(--noir)}
+.papier .acc{color:var(--rouge)} .noir .acc{color:var(--rouge)} .rouge .acc{color:var(--noir)}
 
 .scotch{position:absolute;z-index:5;height:3vw;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.08)),var(--gaffer);opacity:.92;
   clip-path:polygon(0 8%,4% 0,9% 10%,14% 0,100% 0,97% 14%,100% 30%,96% 48%,100% 66%,97% 84%,100% 100%,6% 100%,0 88%,4% 70%,0 52%,3% 34%)}
@@ -40,7 +43,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   box-shadow:0 .5vw 1.2vw rgba(0,0,0,.45),inset 0 0 0 .5vw rgba(255,255,255,.18)}
 .sticker b{font-weight:900;font-stretch:62%;font-size:6.6vw;line-height:.9}
 .sticker span{font:400 1.3vw 'Special Elite',monospace;letter-spacing:.18em;text-transform:uppercase}
-.sticker.rouge{background:var(--rouge);color:#fff} .sticker.jaune{background:var(--jaune);color:var(--noir)} .sticker.noir{background:var(--noir);color:var(--papier)}
+.sticker.rouge{background:var(--rouge);color:#fff} .sticker.blanc{background:var(--blanc);color:var(--rouge)} .sticker.noir{background:var(--noir);color:var(--papier)}
 .bande{left:6vw;bottom:4.2vw;padding:1.1vw 2.4vw;z-index:4}
 .bande span{font-weight:900;font-stretch:62%;text-transform:uppercase;font-size:3.9vw;line-height:1;white-space:nowrap}
 .dymo{position:absolute;z-index:6;left:9vw;bottom:12.6vw;background:#141414;color:#F5F5F5;font:400 1.9vw/1 'Special Elite','Courier New',monospace;letter-spacing:.16em;text-transform:uppercase;
@@ -56,15 +59,19 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 .qr img,.qr canvas{width:100%!important;height:100%!important;display:block}
 .qrs .qrcase:nth-child(2) ~ .qrcase, .qrs .qrcase + .qrcase .qr{}
 .qrs:has(.qrcase + .qrcase) .qr{width:11vw;height:11vw}
-.bench{list-style:none;padding:0;display:flex;flex-direction:column;gap:.35vw;font:400 1.75vw/1.2 'Special Elite','Courier New',monospace}
+.bench{list-style:none;padding:0;display:flex;flex-direction:column;gap:.3vw;font:400 1.55vw/1.2 'Special Elite','Courier New',monospace}
 .bench b{display:inline-block;width:7.6vw;color:var(--rouge);font-weight:400}
 
 .lbl{font-weight:900;font-stretch:75%;text-transform:uppercase;font-size:1.6vw;text-align:center}
+.marque{position:absolute;z-index:9;right:21vw;bottom:1.4vw;width:13.5vw;padding:.9vw 1vw .7vw;background:var(--blanc);transform:rotate(3deg);
+  box-shadow:0 .5vw 1.4vw rgba(0,0,0,.5)}
+.marque img{display:block;width:100%;height:auto}
+.marque:before{content:"";position:absolute;left:4vw;top:-1.2vw;width:6vw;height:2.2vw;background:var(--gaffer);opacity:.9;transform:rotate(-5deg)}
 .toile{position:absolute;z-index:8;width:15vw;height:15vw;pointer-events:none}
 .toile.tg{left:-2.4vw;top:-2.4vw;width:11vw;height:11vw}
 .toile.td{right:0;bottom:0;transform:rotate(180deg)}
 .citrouille{position:absolute;z-index:7;left:44vw;bottom:2.4vw;width:13vw;height:auto;filter:drop-shadow(0 .6vw 1vw rgba(0,0,0,.5));transform:rotate(-6deg)}
-.compte{position:absolute;z-index:7;right:7vw;bottom:2.4vw;font:400 4.4vw/1 'Permanent Marker',cursive;color:var(--jaune);text-shadow:0 .2vw .4vw rgba(0,0,0,.5)}
+.compte{position:absolute;z-index:7;right:37vw;bottom:2.2vw;font:400 4.4vw/1 'Permanent Marker',cursive;color:var(--blanc);text-shadow:0 .2vw .4vw rgba(0,0,0,.5)}
 
 @media (prefers-reduced-motion:no-preference){
   .aff.on [data-o]{animation:colle .45s cubic-bezier(.2,1.3,.4,1) both;animation-delay:calc(var(--o) * .14s)}
@@ -79,10 +86,11 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="vieux dechire" style="right:-3vw;top:-4vw;width:30vw;height:22vw;transform:rotate(-6deg)"></div>
   <div class="vieux dechire" style="right:12vw;bottom:-6vw;width:26vw;height:20vw;transform:rotate(3deg)"></div>
   <div class="bombe">HYGIE·SECLIN</div>
+  <div class="marque dechire"><img src="hygie-logo.png" alt="CrossFit Hygie"></div>
   
 <section class="aff" data-k="Nouveau cycle" data-fin="2026-11-29">
   <div class="p xerox papier dechire affiche" data-o style="--o:0;--r:rotate(-2.5deg)">
-    <p class="kick">// Nouveau cycle Mayhem · dès lundi 5</p>
+    <p class="kick">Nouveau cycle Mayhem · dès lundi 5</p>
     <h2 class="titre" style="font-size:9.4vw">Clean &amp; jerk<br><span class="acc">+ deadlift</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-8deg);left:22vw;top:3.6vw;width:12vw"></div>
@@ -97,11 +105,11 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 </section>
 <section class="aff" data-k="Challenge" data-fin="2026-10-28">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(2deg)">
-    <p class="kick">// Le challenge d&#x27;octobre · 4 semaines</p>
+    <p class="kick">Le challenge d&#x27;octobre · 4 semaines</p>
     <h2 class="titre" style="font-size:10.6vw">Le chemin<br><span class="acc">vers Chad</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(6deg);left:22vw;top:3.6vw;width:12vw"></div>
-  <div class="sticker jaune" data-o style="--o:2;--r:rotate(-6deg)">
+  <div class="sticker blanc" data-o style="--o:2;--r:rotate(-6deg)">
     <b>7</b><span>benchmarks</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.0deg)"><span>Objectif : Chad</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(2.0deg)">Scores sur Strivee</div>
@@ -110,24 +118,24 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   
   
 </section>
-<section class="aff" data-k="Parent / Enfant" data-fin="2026-10-18">
-  <div class="p xerox jaune dechire affiche" data-o style="--o:0;--r:rotate(-1.5deg)">
-    <p class="kick">// Gratuit · réservé aux adhérents et leurs enfants</p>
+<section class="aff" data-k="Parent / Enfant" data-fin="2026-10-17">
+  <div class="p xerox rouge dechire affiche" data-o style="--o:0;--r:rotate(-1.5deg)">
+    <p class="kick">Gratuit · réservé aux adhérents et leurs enfants</p>
     <h2 class="titre" style="font-size:9.6vw">WOD<br><span class="acc">parent</span><br><span class="acc">/ enfant</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-4deg);left:22vw;top:3.6vw;width:12vw"></div>
-  <div class="sticker noir" data-o style="--o:2;--r:rotate(4deg)">
+  <div class="sticker blanc" data-o style="--o:2;--r:rotate(4deg)">
     <b>0€</b><span>gratuit</span></div>
-  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(1.5deg)"><span>Dim. 18.10 · 14h30-16h</span></div>
+  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(1.5deg)"><span>Sam. 17.10 · 14h30-16h</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(-1.5deg)">30 places, enfants compris</div>
   <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(2.1deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://hygiebot.tail7ef5c3.ts.net/hub/inscription/wod-famille-2026-10"></div><p class="lbl">Inscris ton enfant</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(6deg);right:10vw;top:21.2vw;width:8vw"></div>
-  <p class="main compte" data-compte="2026-10-18" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  <p class="main compte" data-compte="2026-10-17" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
   
 </section>
 <section class="aff" data-k="Halloween" data-fin="2026-10-30">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(2.5deg)">
-    <p class="kick">// Déguisement obligatoire</p>
+    <p class="kick">Déguisement obligatoire</p>
     <h2 class="titre" style="font-size:9.2vw">WOD<br><span class="acc">Halloween</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(8deg);left:22vw;top:3.6vw;width:12vw"></div>
@@ -142,7 +150,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 </section>
 <section class="aff" data-k="Workshop" data-fin="2026-11-07">
   <div class="p xerox papier dechire affiche" data-o style="--o:0;--r:rotate(-2deg)">
-    <p class="kick">// Workshop gymnastique · avec Baptiste</p>
+    <p class="kick">Workshop gymnastique · avec Baptiste</p>
     <h2 class="titre" style="font-size:10.2vw">Toes<br>to bar<br><span class="acc">+ pull-up</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-6deg);left:22vw;top:3.6vw;width:12vw"></div>
@@ -156,12 +164,12 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   
 </section>
 <section class="aff" data-k="Compétition" data-fin="2026-11-29">
-  <div class="p xerox rouge dechire affiche" data-o style="--o:0;--r:rotate(1.5deg)">
-    <p class="kick">// Nos WOD, nos juges, notre ambiance</p>
+  <div class="p xerox papier dechire affiche" data-o style="--o:0;--r:rotate(1.5deg)">
+    <p class="kick">Nos WOD, nos juges, notre ambiance</p>
     <h2 class="titre" style="font-size:12vw">Compète<br><span class="acc">interne</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(4deg);left:22vw;top:3.6vw;width:12vw"></div>
-  <div class="sticker jaune" data-o style="--o:2;--r:rotate(-4deg)">
+  <div class="sticker blanc" data-o style="--o:2;--r:rotate(-4deg)">
     <b>29.11</b><span>la date</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-1.5deg)"><span>Dimanche 29 novembre</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(1.5deg)">C&#x27;est vous qui choisissez</div>
@@ -172,11 +180,11 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 </section>
 <section class="aff" data-k="Black Friday" data-fin="2026-11-27">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(-3deg)">
-    <p class="kick">// 24 h seulement · l&#x27;abonnement annuel</p>
+    <p class="kick">24 h seulement · l&#x27;abonnement annuel</p>
     <h2 class="titre" style="font-size:13vw">Black<br><span class="acc">Friday</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-9deg);left:22vw;top:3.6vw;width:12vw"></div>
-  <div class="sticker jaune" data-o style="--o:2;--r:rotate(9deg)">
+  <div class="sticker blanc" data-o style="--o:2;--r:rotate(9deg)">
     <b>27.11</b><span>vendredi</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(3.0deg)"><span>Prix dévoilé le 27 au matin</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(-3.0deg)">Liste d&#x27;attente</div>
@@ -186,8 +194,8 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   
 </section>
 <section class="aff" data-k="Kids" data-fin="">
-  <div class="p xerox jaune dechire affiche" data-o style="--o:0;--r:rotate(2deg)">
-    <p class="kick">// CrossFit Kids · 6 à 12 ans · avec Baptiste</p>
+  <div class="p xerox rouge dechire affiche" data-o style="--o:0;--r:rotate(2deg)">
+    <p class="kick">CrossFit Kids · 6 à 12 ans · avec Baptiste</p>
     <h2 class="titre" style="font-size:10.4vw">Mercredi,<br><span class="acc">ils bougent</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(6deg);left:22vw;top:3.6vw;width:12vw"></div>
@@ -202,7 +210,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 </section>
 <section class="aff" data-k="Bon cadeau" data-fin="2026-12-25">
   <div class="p xerox papier dechire affiche" data-o style="--o:0;--r:rotate(-1.8deg)">
-    <p class="kick">// Noël approche</p>
+    <p class="kick">Noël approche</p>
     <h2 class="titre" style="font-size:11.6vw">Offre du<br><span class="acc">CrossFit</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-5deg);left:22vw;top:3.6vw;width:12vw"></div>
