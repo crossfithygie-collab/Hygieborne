@@ -1,90 +1,53 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Compétition interne · 29 novembre · CrossFit Hygie</title>
-<meta name="theme-color" content="#0A0B0C">
-<meta property="og:title" content="Compétition interne · dimanche 29 novembre">
-<meta property="og:description" content="Une journée de compétition entre nous, à la maison. Dis-nous le format que tu préfères.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="robots" content="noindex">
+<title>Merci pour ton vote · CrossFit Hygie</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
 <style>
- :root{--encre:#0A0B0C;--doux:#5B626C;--trait:#E6E7EA;--rouge:#E22118;
-   --fond:#F6F7F4;--blanc:#fff}
- *{box-sizing:border-box;margin:0}
- body{background:var(--fond);color:var(--encre);
-   font-family:Archivo,system-ui,-apple-system,sans-serif;line-height:1.5;
-   -webkit-font-smoothing:antialiased;padding:0 16px env(safe-area-inset-bottom)}
- .page{max-width:620px;margin:0 auto;padding:30px 0 64px}
- .haut{border-bottom:3px solid var(--encre);padding-bottom:16px;margin-bottom:26px}
- .marque{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-   color:var(--rouge)}
- h1{font-size:31px;font-weight:900;line-height:1.08;margin:8px 0 10px;letter-spacing:-.02em}
- .quand{font-size:16px;font-weight:800}
- .quand span{display:block;font-weight:400;color:var(--doux);font-size:14.5px;margin-top:3px}
- h2{font-size:17px;font-weight:800;margin:28px 0 10px}
- p{margin:0 0 13px;font-size:15.5px}
- .recu{background:var(--blanc);border:1px solid var(--trait);border-left:4px solid var(--rouge);
-   border-radius:14px;padding:20px;margin:0 0 20px}
- .recu b{display:block;font-size:19px;font-weight:900;margin-bottom:5px}
- .recu span{font-size:14.5px;color:var(--doux)}
- ul{margin:0 0 14px;padding-left:20px}
- li{font-size:15.5px;margin-bottom:6px}
- .pied{margin-top:38px;padding-top:16px;border-top:1px solid var(--trait);
-   font-size:12.5px;color:var(--doux);line-height:1.6}
-</style>
-</head>
-<body>
-<div class="page">
-
-  <div class="haut">
-    <div class="marque">CrossFit Hygie · Compétition interne</div>
-    <h1>On remet ça, entre nous.</h1>
-    <div class="quand">Dimanche 29 novembre 2026
-      <span>257 rue de l'Industrie, Seclin</span></div>
-  </div>
-
-  <div class="recu" id="recu" hidden><b id="choix"></b>
-    <span>C'est noté, merci. Ton vote compte pour choisir le format de la journée.</span></div>
-
-  <p>Une journée de compétition à la maison : nos WOD, nos juges, notre ambiance,
-  et personne à impressionner. Du débutant qui n'a jamais fait de compétition à
-  celui qui enchaîne les circuits, chacun y trouve sa place.</p>
-
-  <h2>Ce qu'on prépare</h2>
-  <ul>
-    <li>Trois WOD dans la journée, pensés pour que tout le monde finisse.</li>
-    <li>Plusieurs niveaux de charges, comme en cours.</li>
-    <li>Des juges, un classement, et de quoi manger entre deux épreuves.</li>
-  </ul>
-
-  <h2>Et le format ?</h2>
-  <p>C'est vous qui choisissez : individuel, équipe de deux ou équipe de trois,
-  mixte ou non. Le sondage est dans la newsletter d'octobre, un clic suffit.
-  On annonce le format retenu, le programme et les inscriptions début novembre.</p>
-
-  <div class="pied">
-    CrossFit Hygie · 257 rue de l'Industrie, 59113 Seclin<br>
-    Une question ? Écris-nous à crossfit.hygie@gmail.com
-  </div>
-</div>
+:root{--fond:#F4F4F2;--noir:#0A0B0C;--rouge:#E22118;--gris:#5B626C;--beton:#2F2F32;color-scheme:light}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--beton);color:var(--noir)}
+body{font-family:'Archivo',system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;
+ padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));
+ background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1.2px),radial-gradient(rgba(0,0,0,.25) 1px,transparent 1.2px);background-size:7px 7px,11px 11px}
+.p{position:relative;width:100%;max-width:440px;background:#fff;padding:30px 24px 30px;text-align:center;transform:rotate(-.6deg);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.scotch{position:absolute;top:-12px;left:50%;width:110px;height:26px;margin-left:-55px;background:rgba(140,140,136,.85);transform:rotate(-3deg)}
+.logo{display:block;width:140px;height:auto;margin:0 auto 18px}
+.k{font:800 11.5px 'Archivo',sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--gris)}
+h1{font-weight:900;font-stretch:62%;text-transform:uppercase;font-size:50px;line-height:.9;margin:10px 0 14px}
+.choix{display:inline-block;background:var(--rouge);color:#fff;font-weight:900;font-stretch:75%;text-transform:uppercase;font-size:21px;padding:6px 14px;transform:rotate(-1deg)}
+p.t{margin:16px 0 0;font-size:15px;line-height:1.55;color:var(--gris)}
+p.t b{color:var(--noir)}
+</style></head>
+<body><main class="p"><span class="scotch"></span>
+<img class="logo" src="hygie-logo.png" alt="CrossFit Hygie">
+<p class="k">Compétition interne · dimanche 29 novembre</p>
+<h1 id="titre">Merci pour ton vote !</h1>
+<p><span class="choix" id="choix" hidden></span></p>
+<p class="t" id="texte">Le format qui gagne sera celui de la journée. On annonce le résultat, le programme et les inscriptions début novembre.</p>
+</main>
 <script>
-// Le format vote arrive dans l'adresse : c'est ce qui permet de compter les
-// reponses dans Brevo, lien par lien. On le renvoie simplement a la personne.
 (function(){
-  var FORMATS = {
-    individuel: "Individuel",
-    "team2": "Team de 2 (HH ou FF)",
-    "team2mixte": "Team de 2 mixte",
-    "team3": "Team de 3 (HHH ou FFF)",
-    "team3mixte": "Team de 3 mixte"
-  };
-  var f = new URLSearchParams(location.search).get("f");
-  if (!FORMATS[f]) return;
-  document.getElementById("choix").textContent = "Ton choix : " + FORMATS[f];
-  document.getElementById("recu").hidden = false;
+  var FORMATS={individuel:"Individuel",team2:"Team de 2 (HH ou FF)",team2mixte:"Team de 2 mixte",team3:"Team de 3 (HHH ou FFF)",team3mixte:"Team de 3 mixte"};
+  var API="https://hygiebot.tail7ef5c3.ts.net/hub/vote/compet-format-2026-11";
+  var f=new URLSearchParams(location.search).get("f"), c=document.getElementById("choix");
+  function montrer(label,deja){
+    if(label){c.textContent="Ton choix : "+label;c.hidden=false;}
+    if(deja){document.getElementById("titre").textContent="Tu as déjà voté";
+      document.getElementById("texte").innerHTML="<b>Un vote par appareil.</b> Ton premier choix est bien pris en compte. Résultat et programme début novembre.";}
+  }
+  var ap=null,deja=null;
+  try{ap=localStorage.getItem("hygie_appareil");if(!ap){ap=Date.now().toString(36)+Math.random().toString(36).slice(2,12);localStorage.setItem("hygie_appareil",ap);}
+      deja=localStorage.getItem("hygie_vote_compet");}catch(e){}
+  if(deja){montrer(deja,true);return;}
+  if(!FORMATS[f]){montrer(null,false);return;}
+  montrer(FORMATS[f],false);
+  fetch(API,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({choix:FORMATS[f],appareil:ap||""})})
+    .then(function(r){return r.json();})
+    .then(function(j){if(!j.ok)return;var lab=j.choix||FORMATS[f];
+      try{localStorage.setItem("hygie_vote_compet",lab);}catch(e){}
+      if(j.deja) montrer(lab,true);})
+    .catch(function(){});
 })();
 </script>
-</body>
-</html>
+</body></html>
