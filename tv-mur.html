@@ -22,23 +22,23 @@ body{font-family:var(--f-xerox);padding:0 16px}
 .etiq b{color:var(--jaune);font-weight:400}
 
 /* ---------- le mur */
-.tv{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative;container-type:inline-size;background:var(--beton);
+.tv{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative;background:var(--beton);
   box-shadow:0 0 0 1px #2D2D30,0 40px 80px rgba(0,0,0,.6)}
-.tv::before{content:"";position:absolute;inset:0;z-index:0;opacity:.55;mix-blend-mode:multiply;
+.tv::before{content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:0;opacity:.55;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .2  0 0 0 .9 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>")}
-.tv::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+.tv::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 50% 45%,transparent 50%,rgba(0,0,0,.45))}
-.fond{position:absolute;inset:0;z-index:1}
+.fond{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1}
 .vieux{position:absolute;background:#CFC6B2;opacity:.22;filter:grayscale(1)}
-.bombe{position:absolute;left:3cqw;bottom:-3cqw;font:700 21cqw/1 var(--f-pochoir);color:var(--rouge);opacity:.22;letter-spacing:.02em;
-  filter:blur(.12cqw);transform:rotate(-3deg);white-space:nowrap}
+.bombe{position:absolute;left:3vw;bottom:-3vw;font:700 21vw/1 var(--f-pochoir);color:var(--rouge);opacity:.22;letter-spacing:.02em;
+  filter:blur(.12vw);transform:rotate(-3deg);white-space:nowrap}
 
-.aff{position:absolute;inset:0;z-index:2;visibility:hidden}
+.aff{position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;visibility:hidden}
 .aff.on{visibility:visible}
-.p{position:absolute;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),0 .1cqw .2cqw rgba(0,0,0,.4)}
+.p{position:absolute;box-shadow:0 .5vw 1.4vw rgba(0,0,0,.45),0 .1vw .2vw rgba(0,0,0,.4)}
 /* photocopie : trame et grain sur le papier */
 .xerox{background:var(--papier);color:var(--noir)}
-.xerox::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.35;
+.xerox::after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;mix-blend-mode:multiply;opacity:.35;
   background-image:radial-gradient(rgba(0,0,0,.55) .6px,transparent .9px);background-size:4px 4px}
 .xerox.noir{background:var(--noir);color:var(--papier)}
 .xerox.noir::after{mix-blend-mode:screen;background-image:radial-gradient(rgba(255,255,255,.35) .6px,transparent .9px);opacity:.25}
@@ -49,24 +49,24 @@ body{font-family:var(--f-xerox);padding:0 16px}
 .xerox.noir .titre .creux{color:var(--jaune)}
 .xerox.rouge .titre .creux{color:var(--noir)}
 /* gaffer gris, bords dentelés */
-.scotch{position:absolute;z-index:5;height:3cqw;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.08)),var(--gaffer);opacity:.92;
+.scotch{position:absolute;z-index:5;height:3vw;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.08)),var(--gaffer);opacity:.92;
   clip-path:polygon(0 8%,4% 0,9% 10%,14% 0,100% 0,97% 14%,100% 30%,96% 48%,100% 66%,97% 84%,100% 100%,6% 100%,0 88%,4% 70%,0 52%,3% 34%)}
 /* étiquette Dymo */
-.dymo{position:absolute;z-index:6;background:#141414;color:#F5F5F5;font:400 2.3cqw/1 var(--f-dymo);letter-spacing:.18em;text-transform:uppercase;
-  padding:.9cqw 1.6cqw;border-radius:.3cqw;text-shadow:0 .12cqw 0 rgba(255,255,255,.25),0 -.08cqw 0 rgba(0,0,0,.6);box-shadow:0 .4cqw .9cqw rgba(0,0,0,.5)}
+.dymo{position:absolute;z-index:6;background:#141414;color:#F5F5F5;font:400 2.3vw/1 var(--f-dymo);letter-spacing:.18em;text-transform:uppercase;
+  padding:.9vw 1.6vw;border-radius:.3vw;text-shadow:0 .12vw 0 rgba(255,255,255,.25),0 -.08vw 0 rgba(0,0,0,.6);box-shadow:0 .4vw .9vw rgba(0,0,0,.5)}
 .dymo.rouge{background:#B5120D}
 .main{font-family:var(--f-main);color:var(--feutre)}
 .griffe{font-family:var(--f-griffe)}
 .sticker{position:absolute;z-index:6;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  box-shadow:0 .5cqw 1.2cqw rgba(0,0,0,.45),inset 0 0 0 .5cqw rgba(255,255,255,.18)}
+  box-shadow:0 .5vw 1.2vw rgba(0,0,0,.45),inset 0 0 0 .5vw rgba(255,255,255,.18)}
 .fleche{position:absolute;z-index:7;overflow:visible}
 .fleche path{fill:none;stroke:var(--feutre);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
-.agrafe{position:absolute;z-index:7;width:2.4cqw;height:.5cqw;border:.25cqw solid #B8B8B8;border-bottom:0;border-radius:.1cqw}
+.agrafe{position:absolute;z-index:7;width:2.4vw;height:.5vw;border:.25vw solid #B8B8B8;border-bottom:0;border-radius:.1vw}
 
 /* ---------- collage : les papiers se plaquent l'un après l'autre */
 @media (prefers-reduced-motion:no-preference){
   .aff.on [data-o]{animation:colle .45s cubic-bezier(.2,1.3,.4,1) both;animation-delay:calc(var(--o) * .14s)}
-  @keyframes colle{from{transform:var(--r,rotate(0)) scale(1.18) translateY(-2%);filter:drop-shadow(0 3cqw 2cqw rgba(0,0,0,.5))}
+  @keyframes colle{from{transform:var(--r,rotate(0)) scale(1.18) translateY(-2%);filter:drop-shadow(0 3vw 2vw rgba(0,0,0,.5))}
     to{transform:var(--r,rotate(0)) scale(1)}}
 }
 [data-o]{transform:var(--r,rotate(0))}
@@ -86,6 +86,12 @@ body.tvmode{padding:0;overflow:hidden}
 body.tvmode .page{max-width:none;padding:0}
 body.tvmode .page>*:not(.tv){display:none}
 body.tvmode .tv{border-radius:0;width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none}
+
+html,body{margin:0;height:100%;overflow:hidden;background:#151517}
+body{padding:0}
+.page{max-width:none;padding:0;display:block}
+.page>*:not(.tv){display:none}
+.tv{width:100vw;height:56.25vw;max-height:100vh;border-radius:0;box-shadow:none;transform:scale(.95);transform-origin:center center;margin:0 auto}
 </style>
 
 </head><body><div class="page">
@@ -93,83 +99,83 @@ body.tvmode .tv{border-radius:0;width:100vw;height:100vh;aspect-ratio:auto;box-s
 
   <div class="tv" id="tv">
     <div class="fond" aria-hidden="true">
-      <div class="vieux dechire" style="left:-2cqw;top:4cqw;width:24cqw;height:30cqw;transform:rotate(4deg)"></div>
-      <div class="vieux dechire" style="right:-3cqw;top:-4cqw;width:30cqw;height:22cqw;transform:rotate(-6deg)"></div>
-      <div class="vieux dechire" style="right:12cqw;bottom:-6cqw;width:26cqw;height:20cqw;transform:rotate(3deg)"></div>
+      <div class="vieux dechire" style="left:-2vw;top:4vw;width:24vw;height:30vw;transform:rotate(4deg)"></div>
+      <div class="vieux dechire" style="right:-3vw;top:-4vw;width:30vw;height:22vw;transform:rotate(-6deg)"></div>
+      <div class="vieux dechire" style="right:12vw;bottom:-6vw;width:26vw;height:20vw;transform:rotate(3deg)"></div>
       <div class="bombe">HYGIE·SECLIN</div>
     </div>
 
     <!-- 1 · WORKSHOP -->
     <section class="aff" data-k="Workshop" data-s="Sam. 7.11 · 30 €" data-n="Toes to bar + pull-up">
-      <div class="p xerox dechire" data-o style="--o:0;--r:rotate(-2.5deg);left:5cqw;top:6cqw;width:56cqw;padding:3cqw 3.4cqw 3.6cqw">
-        <p style="font:400 1.8cqw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2cqw">// WORKSHOP GYMNASTIQUE</p>
-        <h2 class="titre" style="font-size:10.4cqw">Toes<br>to bar<br><span class="creux">+ pull-up</span></h2>
+      <div class="p xerox dechire" data-o style="--o:0;--r:rotate(-2.5deg);left:5vw;top:6vw;width:56vw;padding:3vw 3.4vw 3.6vw">
+        <p style="font:400 1.8vw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2vw">// WORKSHOP GYMNASTIQUE</p>
+        <h2 class="titre" style="font-size:10.4vw">Toes<br>to bar<br><span class="creux">+ pull-up</span></h2>
       </div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(-9deg);left:24cqw;top:4.4cqw;width:12cqw"></div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(14deg);right:20cqw;top:29.5cqw;width:9cqw"></div>
-      <div class="sticker" data-o style="--o:2;--r:rotate(10deg);right:9cqw;top:7cqw;width:22cqw;height:22cqw;background:var(--rouge);color:#fff">
-        <b style="font:900 9cqw/.85 var(--f-xerox);font-stretch:62%">30€</b><span style="font:400 1.5cqw var(--f-dymo);letter-spacing:.2em">LA SÉANCE</span></div>
-      <div class="p xerox jaune dechire" data-o style="--o:3;--r:rotate(3deg);left:9cqw;bottom:5.5cqw;padding:1.4cqw 2.8cqw">
-        <span class="titre" style="font-size:6.4cqw">Samedi 7.11</span></div>
-      <div class="dymo" data-o style="--o:4;--r:rotate(-4deg);left:40cqw;bottom:5cqw">Inscription à l'accueil</div>
-      <div class="p xerox dechire" data-o style="--o:5;--r:rotate(-5deg);right:5cqw;top:31cqw;width:24cqw;padding:2cqw 2.2cqw;background:#fff">
-        <p class="griffe" style="font-size:1.7cqw;line-height:1.6;color:#1a1a1a">débloque tes premiers reps</p>
-        <p class="main" data-compte="2026-11-07" style="font-size:5cqw;line-height:1;margin-top:.8cqw">J-00</p></div>
-      <svg class="fleche" data-o style="--o:6;right:29cqw;top:30cqw;width:12cqw;height:8cqw" viewBox="0 0 120 80"><path d="M6 10 C 40 0, 80 20, 104 58 M104 58 l-18 -4 M104 58 l2 -18"/></svg>
-      <span class="agrafe" style="left:30cqw;top:7.2cqw;transform:rotate(-3deg)"></span>
+      <div class="scotch" data-o style="--o:1;--r:rotate(-9deg);left:24vw;top:4.4vw;width:12vw"></div>
+      <div class="scotch" data-o style="--o:1;--r:rotate(14deg);right:20vw;top:29.5vw;width:9vw"></div>
+      <div class="sticker" data-o style="--o:2;--r:rotate(10deg);right:9vw;top:7vw;width:22vw;height:22vw;background:var(--rouge);color:#fff">
+        <b style="font:900 9vw/.85 var(--f-xerox);font-stretch:62%">30€</b><span style="font:400 1.5vw var(--f-dymo);letter-spacing:.2em">LA SÉANCE</span></div>
+      <div class="p xerox jaune dechire" data-o style="--o:3;--r:rotate(3deg);left:9vw;bottom:5.5vw;padding:1.4vw 2.8vw">
+        <span class="titre" style="font-size:6.4vw">Samedi 7.11</span></div>
+      <div class="dymo" data-o style="--o:4;--r:rotate(-4deg);left:40vw;bottom:5vw">Inscription à l'accueil</div>
+      <div class="p xerox dechire" data-o style="--o:5;--r:rotate(-5deg);right:5vw;top:31vw;width:24vw;padding:2vw 2.2vw;background:#fff">
+        <p class="griffe" style="font-size:1.7vw;line-height:1.6;color:#1a1a1a">débloque tes premiers reps</p>
+        <p class="main" data-compte="2026-11-07" style="font-size:5vw;line-height:1;margin-top:.8vw">J-00</p></div>
+      <svg class="fleche" data-o style="--o:6;right:29vw;top:30vw;width:12vw;height:8vw" viewBox="0 0 120 80"><path d="M6 10 C 40 0, 80 20, 104 58 M104 58 l-18 -4 M104 58 l2 -18"/></svg>
+      <span class="agrafe" style="left:30vw;top:7.2vw;transform:rotate(-3deg)"></span>
     </section>
 
     <!-- 2 · BLACK FRIDAY -->
     <section class="aff" data-k="Black Friday" data-s="Annuel · ven. 27.11" data-n="Black Friday">
-      <div class="p xerox noir dechire" data-o style="--o:0;--r:rotate(2deg);left:4cqw;top:5cqw;width:62cqw;padding:3cqw 3.4cqw 4cqw">
-        <p style="font:400 1.8cqw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2cqw;color:var(--jaune)">// 24 H SEULEMENT</p>
-        <h2 class="titre" style="font-size:13cqw">Black<br><span class="creux">Friday</span></h2>
-        <p class="titre" style="font-size:4cqw;margin-top:1.4cqw;color:var(--jaune)">L'abonnement annuel</p>
+      <div class="p xerox noir dechire" data-o style="--o:0;--r:rotate(2deg);left:4vw;top:5vw;width:62vw;padding:3vw 3.4vw 4vw">
+        <p style="font:400 1.8vw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2vw;color:var(--jaune)">// 24 H SEULEMENT</p>
+        <h2 class="titre" style="font-size:13vw">Black<br><span class="creux">Friday</span></h2>
+        <p class="titre" style="font-size:4vw;margin-top:1.4vw;color:var(--jaune)">L'abonnement annuel</p>
       </div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(7deg);left:3cqw;top:3.4cqw;width:11cqw"></div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(-11deg);left:56cqw;top:4cqw;width:11cqw"></div>
-      <div class="sticker" data-o style="--o:2;--r:rotate(-8deg);right:8cqw;top:6cqw;width:21cqw;height:21cqw;background:var(--jaune);color:var(--noir)">
-        <span style="font:400 1.5cqw var(--f-dymo);letter-spacing:.2em">VENDREDI</span><b style="font:900 9.4cqw/.85 var(--f-xerox);font-stretch:62%">27.11</b></div>
-      <div class="dymo rouge" data-o style="--o:3;--r:rotate(3deg);left:10cqw;bottom:6cqw">Prix dévoilé le 27 au matin</div>
-      <div class="p xerox dechire" data-o style="--o:4;--r:rotate(4deg);right:7cqw;bottom:6cqw;width:23cqw;padding:2cqw 2.2cqw;background:#fff">
-        <p class="griffe" style="font-size:1.6cqw;line-height:1.6;color:#1a1a1a">demande au coach pour être prévenu</p>
-        <p class="main" data-compte="2026-11-27" style="font-size:5cqw;line-height:1;margin-top:.8cqw">J-00</p></div>
-      <svg class="fleche" data-o style="--o:5;right:28cqw;top:22cqw;width:10cqw;height:12cqw" viewBox="0 0 100 120"><path d="M10 8 C 60 20, 70 60, 60 108 M60 108 l-12 -14 M60 108 l14 -10"/></svg>
+      <div class="scotch" data-o style="--o:1;--r:rotate(7deg);left:3vw;top:3.4vw;width:11vw"></div>
+      <div class="scotch" data-o style="--o:1;--r:rotate(-11deg);left:56vw;top:4vw;width:11vw"></div>
+      <div class="sticker" data-o style="--o:2;--r:rotate(-8deg);right:8vw;top:6vw;width:21vw;height:21vw;background:var(--jaune);color:var(--noir)">
+        <span style="font:400 1.5vw var(--f-dymo);letter-spacing:.2em">VENDREDI</span><b style="font:900 9.4vw/.85 var(--f-xerox);font-stretch:62%">27.11</b></div>
+      <div class="dymo rouge" data-o style="--o:3;--r:rotate(3deg);left:10vw;bottom:6vw">Prix dévoilé le 27 au matin</div>
+      <div class="p xerox dechire" data-o style="--o:4;--r:rotate(4deg);right:7vw;bottom:6vw;width:23vw;padding:2vw 2.2vw;background:#fff">
+        <p class="griffe" style="font-size:1.6vw;line-height:1.6;color:#1a1a1a">demande au coach pour être prévenu</p>
+        <p class="main" data-compte="2026-11-27" style="font-size:5vw;line-height:1;margin-top:.8vw">J-00</p></div>
+      <svg class="fleche" data-o style="--o:5;right:28vw;top:22vw;width:10vw;height:12vw" viewBox="0 0 100 120"><path d="M10 8 C 60 20, 70 60, 60 108 M60 108 l-12 -14 M60 108 l14 -10"/></svg>
     </section>
 
     <!-- 3 · KIDS -->
     <section class="aff" data-k="Kids" data-s="Mer. 14h30 · 6-12 ans" data-n="Mercredi, ils bougent">
-      <div class="p xerox jaune dechire" data-o style="--o:0;--r:rotate(-3deg);left:5cqw;top:6cqw;width:58cqw;padding:3cqw 3.4cqw 3.8cqw">
-        <p style="font:400 1.8cqw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2cqw">// CROSSFIT KIDS · 6-12 ANS</p>
-        <h2 class="titre" style="font-size:11.6cqw">Mercredi,<br><span class="creux">ils bougent</span></h2>
+      <div class="p xerox jaune dechire" data-o style="--o:0;--r:rotate(-3deg);left:5vw;top:6vw;width:58vw;padding:3vw 3.4vw 3.8vw">
+        <p style="font:400 1.8vw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2vw">// CROSSFIT KIDS · 6-12 ANS</p>
+        <h2 class="titre" style="font-size:11.6vw">Mercredi,<br><span class="creux">ils bougent</span></h2>
       </div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(-6deg);left:28cqw;top:4.2cqw;width:12cqw"></div>
-      <div class="sticker" data-o style="--o:2;--r:rotate(8deg);right:8cqw;top:6cqw;width:22cqw;height:22cqw;background:var(--noir);color:var(--papier)">
-        <b style="font:900 8.6cqw/.85 var(--f-xerox);font-stretch:62%">14H30</b><span style="font:400 1.5cqw var(--f-dymo);letter-spacing:.2em">– 15H30</span></div>
-      <div class="p xerox dechire" data-o style="--o:3;--r:rotate(2deg);left:8cqw;bottom:5cqw;padding:1.6cqw 2.6cqw">
-        <span class="titre" style="font-size:3.6cqw">Carnet 10 séances</span>
-        <span class="titre" style="display:block;font-size:5.4cqw;color:var(--rouge)">120 € adh. · 150 €</span></div>
-      <div class="dymo" data-o style="--o:4;--r:rotate(-3deg);left:46cqw;bottom:12cqw">Avec Baptiste</div>
-      <div class="p xerox dechire" data-o style="--o:5;--r:rotate(-4deg);right:6cqw;bottom:6cqw;width:22cqw;padding:2cqw 2.2cqw;background:#fff">
-        <p class="griffe" style="font-size:1.6cqw;line-height:1.6;color:#1a1a1a">jeu, agilité, vraie technique</p></div>
+      <div class="scotch" data-o style="--o:1;--r:rotate(-6deg);left:28vw;top:4.2vw;width:12vw"></div>
+      <div class="sticker" data-o style="--o:2;--r:rotate(8deg);right:8vw;top:6vw;width:22vw;height:22vw;background:var(--noir);color:var(--papier)">
+        <b style="font:900 8.6vw/.85 var(--f-xerox);font-stretch:62%">14H30</b><span style="font:400 1.5vw var(--f-dymo);letter-spacing:.2em">– 15H30</span></div>
+      <div class="p xerox dechire" data-o style="--o:3;--r:rotate(2deg);left:8vw;bottom:5vw;padding:1.6vw 2.6vw">
+        <span class="titre" style="font-size:3.6vw">Carnet 10 séances</span>
+        <span class="titre" style="display:block;font-size:5.4vw;color:var(--rouge)">120 € adh. · 150 €</span></div>
+      <div class="dymo" data-o style="--o:4;--r:rotate(-3deg);left:46vw;bottom:12vw">Avec Baptiste</div>
+      <div class="p xerox dechire" data-o style="--o:5;--r:rotate(-4deg);right:6vw;bottom:6vw;width:22vw;padding:2vw 2.2vw;background:#fff">
+        <p class="griffe" style="font-size:1.6vw;line-height:1.6;color:#1a1a1a">jeu, agilité, vraie technique</p></div>
     </section>
 
     <!-- 4 · BON CADEAU -->
     <section class="aff" data-k="Bon cadeau" data-s="20 € · à l'accueil" data-n="Offre du CrossFit">
-      <div class="p xerox dechire" data-o style="--o:0;--r:rotate(2deg);left:5cqw;top:6cqw;width:56cqw;padding:3cqw 3.4cqw 3.8cqw">
-        <p style="font:400 1.8cqw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2cqw">// NOËL APPROCHE</p>
-        <h2 class="titre" style="font-size:12cqw">Offre<br>du <span style="color:var(--rouge)">CrossFit</span></h2>
+      <div class="p xerox dechire" data-o style="--o:0;--r:rotate(2deg);left:5vw;top:6vw;width:56vw;padding:3vw 3.4vw 3.8vw">
+        <p style="font:400 1.8vw var(--f-dymo);letter-spacing:.2em;margin-bottom:1.2vw">// NOËL APPROCHE</p>
+        <h2 class="titre" style="font-size:12vw">Offre<br>du <span style="color:var(--rouge)">CrossFit</span></h2>
       </div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(8deg);left:6cqw;top:4.6cqw;width:11cqw"></div>
-      <div class="scotch" data-o style="--o:1;--r:rotate(-12deg);left:50cqw;top:40cqw;width:10cqw"></div>
-      <div class="p xerox rouge dechire" data-o style="--o:2;--r:rotate(-7deg);right:8cqw;top:8cqw;width:24cqw;padding:2.4cqw 2.4cqw 2.8cqw;text-align:center">
-        <p style="font:400 1.6cqw var(--f-dymo);letter-spacing:.24em">BON CADEAU</p>
-        <b class="titre" style="display:block;font-size:11cqw">20€</b></div>
-      <div class="dymo" data-o style="--o:3;--r:rotate(-2deg);left:10cqw;bottom:8cqw">À l'accueil</div>
-      <div class="p xerox dechire" data-o style="--o:4;--r:rotate(5deg);right:7cqw;bottom:6cqw;width:24cqw;padding:2cqw 2.2cqw;background:#fff">
-        <p class="griffe" style="font-size:1.6cqw;line-height:1.6;color:#1a1a1a">à glisser sous le sapin</p>
-        <p class="main" data-compte="2026-12-25" style="font-size:5cqw;line-height:1;margin-top:.8cqw">J-00</p></div>
-      <svg class="fleche" data-o style="--o:5;left:36cqw;bottom:6cqw;width:14cqw;height:7cqw" viewBox="0 0 140 70"><path d="M8 50 C 40 70, 90 60, 128 18 M128 18 l-18 2 M128 18 l-2 18"/></svg>
+      <div class="scotch" data-o style="--o:1;--r:rotate(8deg);left:6vw;top:4.6vw;width:11vw"></div>
+      <div class="scotch" data-o style="--o:1;--r:rotate(-12deg);left:50vw;top:40vw;width:10vw"></div>
+      <div class="p xerox rouge dechire" data-o style="--o:2;--r:rotate(-7deg);right:8vw;top:8vw;width:24vw;padding:2.4vw 2.4vw 2.8vw;text-align:center">
+        <p style="font:400 1.6vw var(--f-dymo);letter-spacing:.24em">BON CADEAU</p>
+        <b class="titre" style="display:block;font-size:11vw">20€</b></div>
+      <div class="dymo" data-o style="--o:3;--r:rotate(-2deg);left:10vw;bottom:8vw">À l'accueil</div>
+      <div class="p xerox dechire" data-o style="--o:4;--r:rotate(5deg);right:7vw;bottom:6vw;width:24vw;padding:2vw 2.2vw;background:#fff">
+        <p class="griffe" style="font-size:1.6vw;line-height:1.6;color:#1a1a1a">à glisser sous le sapin</p>
+        <p class="main" data-compte="2026-12-25" style="font-size:5vw;line-height:1;margin-top:.8vw">J-00</p></div>
+      <svg class="fleche" data-o style="--o:5;left:36vw;bottom:6vw;width:14vw;height:7vw" viewBox="0 0 140 70"><path d="M8 50 C 40 70, 90 60, 128 18 M128 18 l-18 2 M128 18 l-2 18"/></svg>
     </section>
   </div>
 
