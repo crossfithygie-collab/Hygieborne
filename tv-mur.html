@@ -60,6 +60,10 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
 .bench b{display:inline-block;width:7.6vw;color:var(--rouge);font-weight:400}
 
 .lbl{font-weight:900;font-stretch:75%;text-transform:uppercase;font-size:1.6vw;text-align:center}
+.toile{position:absolute;z-index:8;width:15vw;height:15vw;pointer-events:none}
+.toile.tg{left:-2.4vw;top:-2.4vw;width:11vw;height:11vw}
+.toile.td{right:0;bottom:0;transform:rotate(180deg)}
+.citrouille{position:absolute;z-index:7;left:44vw;bottom:2.4vw;width:13vw;height:auto;filter:drop-shadow(0 .6vw 1vw rgba(0,0,0,.5));transform:rotate(-6deg)}
 .compte{position:absolute;z-index:7;right:7vw;bottom:2.4vw;font:400 4.4vw/1 'Permanent Marker',cursive;color:var(--jaune);text-shadow:0 .2vw .4vw rgba(0,0,0,.5)}
 
 @media (prefers-reduced-motion:no-preference){
@@ -89,6 +93,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="p papierblanc dechire coin note" data-o style="--o:4;--r:rotate(3.5deg)"><p class="griffe">Séries longues au début, plus courtes et plus lourdes chaque semaine. Note tes charges !</p></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(10deg);right:10vw;top:21.2vw;width:8vw"></div>
   
+  
 </section>
 <section class="aff" data-k="Challenge" data-fin="2026-10-28">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(2deg)">
@@ -98,10 +103,11 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="scotch" data-o style="--o:1;--r:rotate(6deg);left:22vw;top:3.6vw;width:12vw"></div>
   <div class="sticker jaune" data-o style="--o:2;--r:rotate(-6deg)">
     <b>7</b><span>benchmarks</span></div>
-  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.0deg)"><span>Tes scores sur Strivee</span></div>
-  <div class="dymo" data-o style="--o:3;--r:rotate(2.0deg)">Dans les WOD, rien à organiser</div>
-  <div class="p papierblanc dechire coin note" data-o style="--o:4;--r:rotate(-2.8deg)"><ul class="bench"><li><b>Mar. 6</b> Jason</li><li><b>Ven. 9</b> Kelly</li><li><b>Mar. 13</b> Heavy Grace</li><li><b>Sam. 17</b> Big Steve</li><li><b>Ven. 23</b> Jack</li><li><b>Lun. 26</b> Death Race</li><li><b>Mer. 28</b> Helen</li></ul></div>
+  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.0deg)"><span>Objectif : Chad</span></div>
+  <div class="dymo" data-o style="--o:3;--r:rotate(2.0deg)">Scores sur Strivee</div>
+  <div class="p papierblanc dechire coin note" data-o style="--o:4;--r:rotate(-2.8deg)"><ul class="bench"><li><b>Mar. 6</b> Jason</li><li><b>Ven. 9</b> Kelly</li><li><b>Mar. 13</b> Heavy Grace</li><li><b>Sam. 17</b> Big Steve</li><li><b>Ven. 23</b> Jack</li><li><b>Lun. 26</b> Death Race</li><li><b>Mer. 28</b> Helen</li><li><b>Puis</b> CHAD · 1000 box step-ups for time (date à préciser)</li></ul></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(-8deg);right:10vw;top:21.2vw;width:8vw"></div>
+  
   
 </section>
 <section class="aff" data-k="Parent / Enfant" data-fin="2026-10-18">
@@ -113,24 +119,26 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="sticker noir" data-o style="--o:2;--r:rotate(4deg)">
     <b>0€</b><span>gratuit</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(1.5deg)"><span>Dim. 18.10 · 14h30-16h</span></div>
-  <div class="dymo" data-o style="--o:3;--r:rotate(-1.5deg)">Places comptées</div>
-  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(2.1deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://crossfithygie-collab.github.io/Hygieborne/wod-famille.html"></div><p class="lbl">Inscris ton enfant</p></div></div></div>
+  <div class="dymo" data-o style="--o:3;--r:rotate(-1.5deg)">30 places, enfants compris</div>
+  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(2.1deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://hygiebot.tail7ef5c3.ts.net/hub/inscription/wod-famille-2026-10"></div><p class="lbl">Inscris ton enfant</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(6deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-10-18" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  
 </section>
 <section class="aff" data-k="Halloween" data-fin="2026-10-30">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(2.5deg)">
     <p class="kick">// Déguisement obligatoire</p>
-    <h2 class="titre" style="font-size:12.4vw">WOD<br><span class="acc">Halloween</span></h2>
+    <h2 class="titre" style="font-size:9.2vw">WOD<br><span class="acc">Halloween</span></h2>
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(8deg);left:22vw;top:3.6vw;width:12vw"></div>
   <div class="sticker rouge" data-o style="--o:2;--r:rotate(-8deg)">
     <b>30.10</b><span>vendredi</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.5deg)"><span>Ven. 30.10 · 19h-20h</span></div>
-  <div class="dymo" data-o style="--o:3;--r:rotate(2.5deg)">Puis raclette partagée</div>
+  <div class="dymo" data-o style="--o:3;--r:rotate(2.5deg)">Puis auberge raclette</div>
   <div class="p papierblanc dechire coin note" data-o style="--o:4;--r:rotate(-3.5deg)"><p class="griffe">Apporte fromage et charcuterie… et surtout appareils à raclette et rallonges !</p></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(-10deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-10-30" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  <svg viewBox="0 0 200 200" class="toile tg"><g fill="none" stroke="#F4F1EA" stroke-width="1.6" opacity=".75"><path d="M0 0 L200 200 M0 0 L200 90 M0 0 L90 200 M0 0 L200 30 M0 0 L30 200"/><path d="M40 14 Q30 30 14 40 M80 28 Q60 60 28 80 M126 44 Q92 92 44 126 M172 60 Q124 124 60 172"/></g><line x1="150" y1="0" x2="150" y2="96" stroke="#F4F1EA" stroke-width="1.4"/><g transform="translate(150 104)"><ellipse rx="9" ry="11" fill="#121212"/><circle cy="-12" r="6" fill="#121212"/><path d="M-8 -4 L-20 -12 M-8 2 L-21 2 M-8 7 L-19 15 M8 -4 L20 -12 M8 2 L21 2 M8 7 L19 15" stroke="#121212" stroke-width="2.4"/></g></svg><svg viewBox="0 0 200 200" class="toile td"><g fill="none" stroke="#F4F1EA" stroke-width="1.6" opacity=".75"><path d="M0 0 L200 200 M0 0 L200 90 M0 0 L90 200 M0 0 L200 30 M0 0 L30 200"/><path d="M40 14 Q30 30 14 40 M80 28 Q60 60 28 80 M126 44 Q92 92 44 126 M172 60 Q124 124 60 172"/></g><line x1="150" y1="0" x2="150" y2="96" stroke="#F4F1EA" stroke-width="1.4"/><g transform="translate(150 104)"><ellipse rx="9" ry="11" fill="#121212"/><circle cy="-12" r="6" fill="#121212"/><path d="M-8 -4 L-20 -12 M-8 2 L-21 2 M-8 7 L-19 15 M8 -4 L20 -12 M8 2 L21 2 M8 7 L19 15" stroke="#121212" stroke-width="2.4"/></g></svg><svg viewBox="0 0 220 200" class="citrouille"><path d="M104 30 Q100 8 118 2 L124 10 Q112 16 114 32Z" fill="#3E6B2B"/><ellipse cx="110" cy="112" rx="104" ry="84" fill="#E8701A"/><ellipse cx="66" cy="114" rx="44" ry="80" fill="#F38A2C"/><ellipse cx="154" cy="114" rx="44" ry="80" fill="#F38A2C"/><ellipse cx="110" cy="112" rx="38" ry="84" fill="#F99A3C"/><path d="M60 86 L88 70 L86 100Z M160 86 L132 70 L134 100Z" fill="#2A1503"/><path d="M52 128 Q110 182 168 128 L150 136 L140 124 L128 142 L110 126 L94 142 L80 124 L70 136Z" fill="#2A1503"/></svg>
 </section>
 <section class="aff" data-k="Workshop" data-fin="2026-11-07">
   <div class="p xerox papier dechire affiche" data-o style="--o:0;--r:rotate(-2deg)">
@@ -139,12 +147,13 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   </div>
   <div class="scotch" data-o style="--o:1;--r:rotate(-6deg);left:22vw;top:3.6vw;width:12vw"></div>
   <div class="sticker rouge" data-o style="--o:2;--r:rotate(6deg)">
-    <b>30€</b><span>la place</span></div>
-  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(2.0deg)"><span>Sam. 7.11 · 14h-17h</span></div>
-  <div class="dymo" data-o style="--o:3;--r:rotate(-2.0deg)">20 places seulement</div>
+    <b>30€</b></div>
+  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(2.0deg)"><span>Sam. 7.11 · 14h-16h</span></div>
+  <div class="dymo" data-o style="--o:3;--r:rotate(-2.0deg)">24 places seulement</div>
   <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(2.8deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://buy.stripe.com/3cIeVf78y563eOB4Msdby06"></div><p class="lbl">Réserve ta place</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(8deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-11-07" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  
 </section>
 <section class="aff" data-k="Compétition" data-fin="2026-11-29">
   <div class="p xerox rouge dechire affiche" data-o style="--o:0;--r:rotate(1.5deg)">
@@ -156,9 +165,10 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
     <b>29.11</b><span>la date</span></div>
   <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-1.5deg)"><span>Dimanche 29 novembre</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(1.5deg)">C&#x27;est vous qui choisissez</div>
-  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(-2.1deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://hygiebot.tail7ef5c3.ts.net/hub/liste/compet"></div><p class="lbl">Vote pour le format</p></div></div></div>
+  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(-2.1deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://hygiebot.tail7ef5c3.ts.net/hub/inscription/compet-format-2026-11"></div><p class="lbl">Vote pour le format</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(-6deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-11-29" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  
 </section>
 <section class="aff" data-k="Black Friday" data-fin="2026-11-27">
   <div class="p xerox noir dechire affiche" data-o style="--o:0;--r:rotate(-3deg)">
@@ -173,6 +183,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(4.2deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://hygiebot.tail7ef5c3.ts.net/hub/liste/bf"></div><p class="lbl">Reçois l&#x27;offre en 1er</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(12deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-11-27" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  
 </section>
 <section class="aff" data-k="Kids" data-fin="">
   <div class="p xerox jaune dechire affiche" data-o style="--o:0;--r:rotate(2deg)">
@@ -182,10 +193,11 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="scotch" data-o style="--o:1;--r:rotate(6deg);left:22vw;top:3.6vw;width:12vw"></div>
   <div class="sticker noir" data-o style="--o:2;--r:rotate(-6deg)">
     <b>14h30</b><span>– 15h30</span></div>
-  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.0deg)"><span>Carnet 10 séances</span></div>
+  <div class="p xerox jaunebande dechire bande" data-o style="--o:3;--r:rotate(-2.0deg)"><span>Carnet 10 · 120 € adh. / 150 €</span></div>
   <div class="dymo" data-o style="--o:3;--r:rotate(2.0deg)">Jeu · agilité · technique</div>
-  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(-2.8deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://buy.stripe.com/7sY8wR8cCdCzbCp92Idby03"></div><p class="lbl">Adhérent 120 €</p></div><div class="qrcase"><div class="qr" data-qr="https://buy.stripe.com/6oU00lgJ8gOL35T5Qwdby02"></div><p class="lbl">Non-adhérent 150 €</p></div></div></div>
+  <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(-2.8deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://crossfithygie-collab.github.io/Hygieborne/inscription-kids.html"></div><p class="lbl">Inscris ton enfant</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(-8deg);right:10vw;top:21.2vw;width:8vw"></div>
+  
   
 </section>
 <section class="aff" data-k="Bon cadeau" data-fin="2026-12-25">
@@ -201,6 +213,7 @@ html,body{height:100%;margin:0;overflow:hidden;background:#151517}
   <div class="p papierblanc dechire coin" data-o style="--o:4;--r:rotate(2.5deg)"><p class="griffe">scanne-moi&nbsp;↓</p><div class="qrs"><div class="qrcase"><div class="qr" data-qr="https://buy.stripe.com/5kQfZj8cC6a78qdbaQdby07"></div><p class="lbl">Achète ton bon</p></div></div></div>
   <div class="scotch" data-o style="--o:5;--r:rotate(7deg);right:10vw;top:21.2vw;width:8vw"></div>
   <p class="main compte" data-compte="2026-12-25" data-o style="--o:5;--r:rotate(-6deg)">J-00</p>
+  
 </section>
 </div>
 <script>
