@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hygie Entreprises</title>
+<meta name="description" content="Hyrox, remise en forme et entraînement encadré à Seclin : l'avantage sport clé en main pour les salariés, sans gestion pour le CSE.">
+<meta property="og:title" content="Hygie Entreprises · le sport de vos salariés, à Seclin">
+<meta property="og:description" content="Séance découverte offerte, tarif salarié, préparation Hyrox. Rien à gérer pour le CSE.">
+<meta property="og:image" content="img/equipe.jpg">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* Mise en page : bandeau photo à droite, colonnes de texte larges, blocs « chiffre + phrase » façon tableau de box. Couleurs de la marque Hygie. */
+:root{
+  --rouge:#E22118; --rouge-fonce:#B5170F; --encre:#0A0B0C; --gris:#5B626C; --gris-clair:#8A909A;
+  --fond:#F4F4F2; --papier:#FFFFFF; --trait:#E4E5E2; --nuit:#141517;
+  --titre:'Archivo',Helvetica,Arial,sans-serif; --etroit:'Archivo Narrow','Archivo',Arial,sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--encre);font:16px/1.6 var(--titre);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.enveloppe{max-width:1120px;margin:0 auto;padding-inline:20px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+/* barre */
+.barre{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(244,244,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--trait)}
+.barre .enveloppe{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+.marque{display:flex;align-items:center;gap:10px;text-decoration:none}
+.marque img{height:40px;width:auto}
+.marque span{font:700 11px/1 var(--titre);letter-spacing:3px;text-transform:uppercase;color:var(--gris)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--rouge);color:#fff;text-decoration:none;font:800 14px/1 var(--titre);letter-spacing:.4px;text-transform:uppercase;padding:15px 22px;border-radius:10px;border:0;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--rouge-fonce)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--encre);outline-offset:2px}
+.btn.petit{padding:11px 16px;font-size:12px}
+.btn.creux{background:transparent;color:var(--encre);box-shadow:inset 0 0 0 2px var(--encre)}
+.btn.creux:hover{background:var(--encre);color:#fff}
+
+/* ouverture */
+.ouverture{padding-block:48px 56px}
+.ouverture .enveloppe{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.surtitre{font:700 12px/1.3 var(--titre);letter-spacing:3px;text-transform:uppercase;color:var(--rouge);margin:0 0 14px}
+h1{font:900 clamp(36px,5.4vw,62px)/1 var(--titre);letter-spacing:-1.5px;text-transform:uppercase;margin:0 0 20px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--rouge)}
+.chapeau{font-size:19px;line-height:1.55;color:var(--gris);max-width:36em;margin:0 0 28px}
+.chapeau b{color:var(--encre)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.photo-ouv{position:relative}
+.photo-ouv img{width:100%;aspect-ratio:4/5;max-height:560px;object-fit:cover;border-radius:18px}
+.vignette{position:absolute;left:-28px;bottom:28px;background:var(--papier);border-radius:14px;padding:16px 18px;box-shadow:0 18px 40px rgba(10,11,12,.16);max-width:240px}
+.vignette b{display:block;font:900 30px/1 var(--titre);color:var(--rouge)}
+.vignette span{font-size:13px;line-height:1.4;color:var(--gris)}
+
+/* promesses de l'ouverture */
+.promesses{list-style:none;padding:0;margin:0 0 30px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.promesses li{background:var(--papier);border:1px solid var(--trait);border-radius:14px;padding:14px 16px}
+.promesses b{display:block;white-space:nowrap;font:900 28px/1 var(--titre);color:var(--rouge);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.promesses span{display:block;margin-top:6px;font-size:13.5px;line-height:1.35;color:var(--gris)}
+
+/* étapes */
+.etapes-bloc{background:var(--papier);border-block:1px solid var(--trait)}
+.etapes{list-style:none;counter-reset:e;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.etapes li{counter-increment:e;position:relative;padding-top:64px}
+.etapes li::before{content:counter(e);position:absolute;top:0;left:0;width:46px;height:46px;border-radius:50%;background:var(--encre);color:#fff;font:900 22px/46px var(--titre);text-align:center}
+.etapes li:not(:last-child)::after{content:"";position:absolute;top:23px;left:58px;right:-16px;height:2px;background:var(--trait)}
+.etapes b{display:block;font:800 20px/1.25 var(--titre);margin-bottom:8px}
+.etapes span{color:var(--gris);font-size:15.5px}
+
+/* questions */
+.faq-env{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+.faq details{border-bottom:1px solid var(--trait);padding:18px 0}
+.faq details:first-child{border-top:1px solid var(--trait)}
+.faq summary{cursor:pointer;list-style:none;font:800 18px/1.35 var(--titre);display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 26px/1 var(--titre);color:var(--rouge);flex:none;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:12px 0 0;color:var(--gris);max-width:40em}
+
+/* créneau du midi */
+.midi{background:var(--rouge);color:#fff;padding-block:64px}
+.midi .enveloppe{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.midi .surtitre{color:#FFD5D2!important}
+.grosse{font:900 clamp(56px,8vw,104px)/.9 var(--titre);letter-spacing:-3px;font-variant-numeric:tabular-nums}
+.grosse span{opacity:.55;margin:0 .06em}
+.jours{font:800 16px/1 var(--titre);letter-spacing:3px;text-transform:uppercase;margin:16px 0 0}
+.midi h2{color:#fff}
+.midi-texte p{font-size:17px;color:#FFE3E1;margin:0 0 22px;max-width:36em}
+.horaires{border-collapse:collapse;width:100%;max-width:440px;font-size:15px;margin-bottom:18px}
+.horaires caption{text-align:left;font:700 11px/1 var(--titre);letter-spacing:2.5px;text-transform:uppercase;color:#FFD5D2;padding-bottom:10px}
+.horaires th,.horaires td{padding:9px 0;border-top:1px solid rgba(255,255,255,.25);text-align:left;font-weight:500}
+.horaires td{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.lien-planning{color:#fff;font-weight:700;text-underline-offset:3px}
+
+/* chiffres */
+.chiffres{background:var(--encre);color:#fff}
+.chiffres .enveloppe{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.chiffre{padding:28px 20px;border-left:1px solid rgba(255,255,255,.12)}
+.chiffre:first-child{border-left:0}
+.chiffre b{display:block;font:900 38px/1 var(--titre);letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.chiffre span{display:block;margin-top:8px;font-size:14px;line-height:1.4;color:#B9BDC3}
+
+/* sections */
+section.bloc{padding-block:72px}
+h2{font:900 clamp(28px,3.6vw,40px)/1.05 var(--titre);letter-spacing:-.8px;text-transform:uppercase;margin:0 0 14px;text-wrap:balance}
+.intro{font-size:18px;color:var(--gris);max-width:40em;margin:0 0 36px}
+.grille{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.carte{background:var(--papier);border-radius:16px;padding:26px 24px;border:1px solid var(--trait)}
+.carte .etiquette{font:700 11px/1 var(--titre);letter-spacing:2.5px;text-transform:uppercase;color:var(--rouge)}
+.carte h3{font:800 21px/1.2 var(--titre);margin:12px 0 8px}
+.carte p{margin:0;color:var(--gris);font-size:15.5px}
+
+/* hyrox */
+.hyrox{background:var(--papier);border-block:1px solid var(--trait)}
+.hyrox .enveloppe{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
+.hyrox img{border-radius:18px;aspect-ratio:4/5;object-fit:cover;width:100%}
+.badge-hyrox{display:inline-flex;align-items:center;gap:12px;background:var(--encre);border-radius:999px;padding:10px 18px;margin-bottom:18px}
+.badge-hyrox img{height:16px;width:116px;flex:none;max-width:none}
+.badge-hyrox span{font:700 11px/1 var(--titre);letter-spacing:2px;text-transform:uppercase;color:#fff}
+.affil{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:26px 0 0;font:700 11px/1.3 var(--titre);letter-spacing:2px;text-transform:uppercase;color:var(--gris)}
+.affil img{height:13px;width:94px;flex:none;max-width:none}
+.affil i{width:1px;height:14px;background:#C9CBC7}
+.parcours{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+.parcours li{display:flex;gap:10px;align-items:baseline;font-size:15px;border-bottom:1px solid var(--trait);padding-bottom:9px}
+.parcours li b{font:700 13px/1 var(--etroit);color:var(--rouge);min-width:22px;font-variant-numeric:tabular-nums}
+
+/* tarifs salariés */
+.tarifs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tarif{background:var(--papier);border-radius:16px;padding:24px;border:1px solid var(--trait);display:flex;flex-direction:column;gap:6px}
+.tarif.mis{border:2px solid var(--encre)}
+.tarif h3{margin:0;font:800 18px/1.2 var(--titre);text-transform:uppercase;letter-spacing:.3px}
+.tarif .avant{color:var(--gris-clair);text-decoration:line-through;font-size:15px;font-variant-numeric:tabular-nums}
+.tarif .prix{font:900 40px/1 var(--titre);letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.tarif .prix small{font:600 15px/1 var(--titre);color:var(--gris);letter-spacing:0}
+.tarif p{margin:6px 0 0;color:var(--gris);font-size:14.5px}
+.note{font-size:13px;color:var(--gris);margin-top:16px}
+
+/* CSE */
+.cse{background:var(--nuit);color:#fff}
+.cse .intro{color:#B9BDC3}
+.cse .carte{background:#1E2023;border-color:#2C2F33}
+.cse .carte p{color:#B9BDC3}
+.cse .carte .etiquette{color:#FF5A50}
+.coche{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 28px}
+.coche li{position:relative;padding-left:30px;font-size:16px;color:#E6E7E9}
+.coche li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:4px;background:var(--rouge);box-shadow:inset 0 0 0 4px var(--rouge),inset 0 0 0 6px #fff}
+.cse h3.sous{font:800 20px/1.2 var(--titre);text-transform:uppercase;margin:48px 0 18px;letter-spacing:.3px}
+
+/* bande photos */
+.bande{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-block:0 72px}
+section.bloc + .enveloppe .bande{padding-top:0}
+.bande img{aspect-ratio:1/1;object-fit:cover;border-radius:14px;width:100%}
+
+/* formulaire */
+.contact .enveloppe{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+form{background:var(--papier);border:1px solid var(--trait);border-radius:18px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.champ{display:flex;flex-direction:column;gap:6px}
+.champ.large{grid-column:1/-1}
+label{font:700 13px/1.2 var(--titre);color:var(--encre)}
+input,select,textarea{font:16px/1.4 var(--titre);padding:13px 14px;border:1.5px solid #D5D7D3;border-radius:10px;background:#FBFBFA;color:var(--encre);width:100%}
+textarea{resize:vertical;min-height:84px}
+.choix{display:flex;gap:8px;flex-wrap:wrap}
+.choix label{flex:1 1 140px;display:flex;align-items:center;gap:10px;font:600 14.5px/1.3 var(--titre);border:1.5px solid #D5D7D3;border-radius:10px;padding:12px 14px;cursor:pointer;background:#FBFBFA}
+.choix input{width:18px;height:18px;accent-color:var(--rouge);margin:0;padding:0}
+.choix label:has(input:checked){border-color:var(--encre);background:#fff}
+.miel{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+form .btn{grid-column:1/-1;width:100%;padding:17px}
+.discret{grid-column:1/-1;font-size:13px;color:var(--gris);margin:0}
+.erreur{grid-column:1/-1;color:var(--rouge-fonce);font-weight:700;margin:0}
+.merci{background:var(--papier);border:1px solid var(--trait);border-radius:18px;padding:34px 28px}
+.merci h3{font:900 28px/1.1 var(--titre);text-transform:uppercase;margin:0 0 10px}
+.merci p{color:var(--gris);margin:0 0 20px}
+.contact-direct{margin-top:26px;font-size:15px;color:var(--gris)}
+.contact-direct b{color:var(--encre)}
+
+footer{background:var(--encre);color:#B9BDC3;padding-block:32px;font-size:14px}
+footer .enveloppe{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer b{color:#fff;letter-spacing:2px}
+
+@media (max-width:900px){
+  .ouverture .enveloppe,.hyrox .enveloppe,.contact .enveloppe{grid-template-columns:1fr;gap:32px}
+  .photo-ouv{order:-1}
+  .photo-ouv img{aspect-ratio:4/3}
+  .vignette{left:12px;bottom:-22px}
+  .ouverture{padding-top:28px}
+  .chiffres .enveloppe{grid-template-columns:1fr 1fr}
+  .chiffre:nth-child(3){border-left:0}
+  .chiffre{border-top:1px solid rgba(255,255,255,.12)}
+  .grille,.tarifs{grid-template-columns:1fr}
+  .hyrox img{aspect-ratio:4/3}
+  .coche{grid-template-columns:1fr}
+  .midi .enveloppe{grid-template-columns:1fr;gap:24px}
+  .etapes{grid-template-columns:1fr;gap:22px}
+  .etapes li{padding:0 0 0 64px}
+  .etapes li::after{display:none}
+  .faq-env{grid-template-columns:1fr;gap:20px}
+  section.bloc{padding-block:56px}
+}
+@media (max-width:560px){
+  .marque span{display:none}
+  form{grid-template-columns:1fr;padding:20px}
+  .parcours{grid-template-columns:1fr}
+  .bande{grid-template-columns:1fr 1fr}
+  .bande img:nth-child(3){display:none}
+  .chiffre b{font-size:30px}
+  .promesses{grid-template-columns:1fr}
+  .promesses li{display:flex;align-items:baseline;gap:12px}
+  .promesses b{min-width:78px;font-size:24px}
+  .promesses span{margin:0}
+}
+</style>
+</head>
+<body>
+
+<header class="barre">
+  <div class="enveloppe">
+    <a class="marque" href="#haut"><img src="img/logo.png" alt="CrossFit Hygie" width="52" height="40"><span>Entreprises</span></a>
+    <a class="btn petit" href="#contact" id="cta-barre">Être rappelé</a>
+  </div>
+</header>
+
+<main id="haut">
+  <!-- 1. Ce que c'est, en une phrase, et les trois réponses que l'élu cherche -->
+  <section class="ouverture">
+    <div class="enveloppe">
+      <div>
+        <p class="surtitre" id="surtitre">Pour les CSE et les RH · Seclin</p>
+        <h1 id="titre">L'avantage sport que vos salariés <em>vont vraiment utiliser</em>.</h1>
+        <p class="chapeau" id="chapeau">Une salle de sport encadrée par des coachs, à 5 minutes de vos locaux, avec <b>un cours chaque midi de 12h30 à 13h30</b>. Ouverte à tous les niveaux. Vous la proposez à vos salariés, on s'occupe du reste.</p>
+        <ul class="promesses pour-cse">
+          <li><b>0 €</b><span>de budget obligatoire pour le CSE</span></li>
+          <li><b>0</b><span>gestion : pas d'inscriptions ni de factures à suivre</span></li>
+          <li><b>100 %</b><span>des niveaux bienvenus, du débutant au sportif</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="#contact" id="cta1">Être rappelé sous 48 h</a>
+          <a class="btn creux" href="#etapes" id="cta2">Comment ça marche</a>
+        </div>
+        <p class="affil"><span>Box affiliée CrossFit®</span><i></i><img src="img/hyrox-noir.svg" alt="HYROX" width="94" height="13"><span>Training Club officiel</span></p>
+      </div>
+      <div class="photo-ouv">
+        <img src="img/velo.jpg" alt="Une adhérente en plein effort sur un vélo, pendant un cours à la box" width="900" height="1200">
+        <div class="vignette"><b id="vignette-chiffre">Offerte</b><span id="vignette-texte">la première séance pour chaque salarié, puis un tarif préférentiel</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chiffres">
+    <div class="enveloppe">
+      <div class="chiffre"><b>40+</b><span>cours encadrés chaque semaine</span></div>
+      <div class="chiffre"><b>14</b><span>personnes maximum par cours</span></div>
+      <div class="chiffre"><b>700 m²</b><span>à 5 minutes de la zone industrielle</span></div>
+      <div class="chiffre"><b>5 ans</b><span>à Seclin, une communauté de tous âges</span></div>
+    </div>
+  </div>
+
+  <!-- Le créneau du midi : l'argument n°1 pour un salarié -->
+  <section class="midi" id="midi">
+    <div class="enveloppe">
+      <div class="midi-heure">
+        <p class="surtitre" style="color:#FF5A50">La pause déjeuner, autrement</p>
+        <div class="grosse">12h30<span>–</span>13h30</div>
+        <p class="jours">Du lundi au vendredi</p>
+      </div>
+      <div class="midi-texte">
+        <h2>Une heure de sport le midi, et retour au travail à l'heure</h2>
+        <p>Un cours encadré chaque midi en semaine, à 5 minutes de la zone industrielle. On arrive, le coach s'occupe de tout, on repart l'esprit clair pour l'après-midi.</p>
+        <table class="horaires">
+          <caption>Les autres créneaux</caption>
+          <tbody>
+            <tr><th scope="row">En semaine, le matin</th><td>10h – 11h</td></tr>
+            <tr><th scope="row">En semaine, le soir</th><td>de 17h à 21h</td></tr>
+            <tr><th scope="row">Samedi</th><td>9h – 12h15</td></tr>
+            <tr><th scope="row">Dimanche</th><td>10h – 12h15</td></tr>
+          </tbody>
+        </table>
+        <a class="lien-planning" href="https://www.crossfit-hygie.fr/#planning">Voir le planning complet sur crossfit-hygie.fr →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Ce que les salariés reçoivent -->
+  <section class="bloc">
+    <div class="enveloppe">
+      <p class="surtitre" id="offre-surtitre">Ce que vous offrez à vos salariés</p>
+      <h2 id="titre-offre">Trois avantages, aucun à gérer</h2>
+      <p class="intro" id="offre-intro">Chaque salarié en profite directement, sans passer par vous.</p>
+      <div class="grille">
+        <div class="carte"><span class="etiquette">1 · Pour essayer</span><h3>Une séance découverte offerte</h3><p>Une heure en petit groupe, sans engagement et sans matériel. Le coach part du niveau de chacun.</p></div>
+        <div class="carte"><span class="etiquette">2 · Pour continuer</span><h3 id="carte-remise">Un tarif préférentiel</h3><p id="carte-remise-texte">Sur toutes les formules, tant que le salarié fait partie de l'entreprise. <b>Les frais d'inscription sont offerts.</b></p></div>
+        <div class="carte"><span class="etiquette">3 · Pour les équipes</span><h3>Séance d'équipe ou challenge</h3><p>Une séance privée ou un challenge Hyrox entre services, pour un séminaire ou une journée bien-être. Sur devis.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Le déroulé : ce que l'élu doit faire, concrètement -->
+  <section class="bloc etapes-bloc pour-cse" id="etapes">
+    <div class="enveloppe">
+      <p class="surtitre">Comment ça marche</p>
+      <h2>En place en une semaine, en 3 étapes</h2>
+      <ol class="etapes">
+        <li><b>On échange 15 minutes</b><span>Par téléphone ou dans vos locaux. On adapte l'offre à vos équipes et à leurs horaires.</span></li>
+        <li><b>On vous envoie le kit prêt à diffuser</b><span>Une page au nom de votre entreprise, une affiche avec QR code, un visuel pour l'intranet et le mail à transférer.</span></li>
+        <li><b>Vos salariés réservent, vous suivez</b><span>Chacun réserve sa séance offerte en ligne. Vous recevez un bilan anonyme du nombre d'inscrits.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Les garanties qui rassurent -->
+  <section class="bloc cse pour-cse" id="cse">
+    <div class="enveloppe">
+      <p class="surtitre" style="color:#FF5A50">Ce que le CSE n'a pas à faire</p>
+      <h2>Un avantage concret, sans charge de travail</h2>
+      <p class="intro">Vous voulez proposer quelque chose d'utile, pas un dossier de plus.</p>
+      <ul class="coche">
+        <li><span><b>Pas de budget obligatoire.</b> L'avantage est pris en charge par la salle. Le CSE peut ajouter une participation, s'il le souhaite.</span></li>
+        <li><span><b>Pas d'administratif.</b> Pas d'avance de frais, pas d'inscriptions à centraliser : le salarié s'inscrit lui-même.</span></li>
+        <li><span><b>Pas d'engagement.</b> Une convention d'une page, sans exclusivité, que vous pouvez arrêter à tout moment.</span></li>
+        <li><span><b>Pas de données partagées.</b> Les coordonnées des salariés restent entre eux et la salle, ni l'employeur ni le CSE n'y ont accès.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Les arguments pour le bureau du CSE -->
+  <section class="bloc pour-cse">
+    <div class="enveloppe">
+      <p class="surtitre">Pourquoi vos salariés en ont besoin</p>
+      <h2>Ce que vos salariés y gagnent</h2>
+      <div class="grille">
+        <div class="carte"><span class="etiquette">Santé</span><h3>Moins de mal de dos, plus d'énergie</h3><p>Renforcement, mobilité et cardio, encadrés par des coachs diplômés : de quoi prévenir les douleurs liées au poste, assis ou physique.</p></div>
+        <div class="carte"><span class="etiquette">Équilibre</span><h3>Une vraie coupure le midi</h3><p>Une heure sans penser au travail, de 12h30 à 13h30, pour revenir l'après-midi plus concentré.</p></div>
+        <div class="carte"><span class="etiquette">Cohésion</span><h3>Des liens entre services</h3><p>Des collègues qui s'entraînent ensemble ou montent une équipe Hyrox : le sport crée du lien que le bureau ne crée pas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Le crochet : Hyrox -->
+  <section class="bloc hyrox">
+    <div class="enveloppe">
+      <img src="img/rameur.jpg" alt="Une adhérente encouragée au rameur pendant une épreuve" width="900" height="1200" loading="lazy">
+      <div>
+        <div class="badge-hyrox"><img src="img/hyrox-blanc.svg" alt="HYROX" width="116" height="16"><span>Training Club officiel</span></div>
+        <p class="surtitre">Une idée pour fédérer</p>
+        <h2>Hyrox : un objectif d'équipe, accessible à tous</h2>
+        <p class="intro" style="margin-bottom:0">Hyrox, c'est la course fitness qui remplit les salles partout en France : <b>8 × 1 km de course, chacun suivi d'un atelier</b>, en solo, en duo ou en relais à quatre. Un objectif idéal pour une équipe de collègues. Hygie est <b>HYROX Training Club officiel</b> : on s'y prépare chez nous, avec nos coachs.</p>
+        <ul class="parcours">
+          <li><b>01</b>SkiErg</li><li><b>02</b>Poussée de traîneau</li>
+          <li><b>03</b>Tirage de traîneau</li><li><b>04</b>Burpees sauts longs</li>
+          <li><b>05</b>Rameur</li><li><b>06</b>Farmer's carry</li>
+          <li><b>07</b>Fentes avec sac de sable</li><li><b>08</b>Wall balls</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloc pour-sal" id="tarifs" hidden>
+    <div class="enveloppe">
+      <p class="surtitre">Tes tarifs</p>
+      <h2>Ce que tu paies avec ton entreprise</h2>
+      <p class="intro">Les frais d'inscription (50 €) sont offerts. Engagement minimum de 4 mois, puis résiliable chaque mois.</p>
+      <div class="tarifs">
+        <div class="tarif"><h3>Access</h3><span class="avant" data-base="75"></span><span class="prix" data-prix="75"></span><p>2 cours coachés + 1 accès libre par semaine</p></div>
+        <div class="tarif mis"><h3>New Goal</h3><span class="avant" data-base="90"></span><span class="prix" data-prix="90"></span><p>3 cours coachés + 1 accès libre par semaine</p></div>
+        <div class="tarif"><h3>Unlimited</h3><span class="avant" data-base="100"></span><span class="prix" data-prix="100"></span><p>6 cours coachés + 4 accès libres par semaine</p></div>
+      </div>
+      <p class="note">Accès 7 j/7 aux heures d'ouverture, application de suivi et programme à faire chez soi inclus dans toutes les formules.</p>
+    </div>
+  </section>
+
+  <!-- 7. Les objections -->
+  <section class="bloc pour-cse" id="questions">
+    <div class="enveloppe faq-env">
+      <div>
+        <p class="surtitre">Vos questions</p>
+        <h2>Ce qu'on nous demande le plus</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>Nos salariés ne sont pas sportifs. C'est pour eux ?</summary><p>Oui, c'est même pour eux qu'on l'a pensé. Chaque exercice a une version plus simple, et le coach adapte la séance au niveau de chacun. On accueille des débutants à chaque cours.</p></details>
+        <details><summary>Combien ça coûte au CSE ?</summary><p>Rien. La séance découverte et le tarif préférentiel sont pris en charge par la salle. Si vous le souhaitez, le CSE peut ajouter une participation sur l'abonnement : on s'adapte à votre fonctionnement.</p></details>
+        <details><summary>Le CrossFit, ce n'est pas dangereux ?</summary><p>Les cours sont limités à 14 personnes et toujours encadrés par un coach diplômé. On apprend chaque mouvement avant de le charger, et l'intensité se règle selon chacun. On vient pour progresser, pas pour se faire mal.</p></details>
+        <details><summary>Nos équipes ont des horaires décalés.</summary><p>Plus de 40 cours par semaine : chaque midi de 12h30 à 13h30, le matin à 10h, le soir de 17h à 21h, et le week-end. Chacun trouve un créneau compatible avec son planning. Le planning complet est sur crossfit-hygie.fr.</p></details>
+        <details><summary>Et si personne ne s'inscrit ?</summary><p>Vous n'avez rien perdu : il n'y a ni budget engagé ni engagement de durée. On vous aide à relancer avec le kit de communication, et on peut organiser une séance de découverte collective pour lancer le mouvement.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="enveloppe">
+    <div class="bande">
+      <img src="img/equipe.jpg" alt="Un groupe d'adhérents devant la box" loading="lazy" width="900" height="1344">
+      <img src="img/course.jpg" alt="Adhérents pendant une course autour de la box" loading="lazy" width="900" height="1344">
+      <img src="img/sourires.jpg" alt="Deux adhérentes après une séance" loading="lazy" width="900" height="1344">
+    </div>
+  </div>
+
+  <!-- 8. L'action -->
+  <section class="bloc contact" id="contact" style="padding-top:0">
+    <div class="enveloppe">
+      <div>
+        <p class="surtitre" id="form-surtitre">Prochaine étape</p>
+        <h2 id="form-titre">Parlons-en 15 minutes</h2>
+        <p class="intro" id="form-intro">Laissez vos coordonnées : on vous rappelle sous 48 heures pour vous présenter l'offre, et votre kit est prêt dans la semaine.</p>
+        <p class="contact-direct">Vous préférez nous écrire ?<br><b>contact@crossfit-hygie.fr</b><br>257 rue de l'Industrie, 59113 Seclin</p>
+      </div>
+      <div id="zone-form">
+        <form id="form" novalidate>
+          <div class="champ large" id="champ-qui">
+            <span style="font:700 13px/1.2 var(--titre)">Vous êtes</span>
+            <div class="choix">
+              <label for="qui-rh"><input type="radio" id="qui-rh" name="qui" value="rh" checked> Élu CSE ou RH</label>
+              <label for="qui-sal"><input type="radio" id="qui-sal" name="qui" value="salarie"> Salarié</label>
+            </div>
+          </div>
+          <div class="champ"><label for="prenom">Prénom</label><input id="prenom" name="prenom" required autocomplete="given-name"></div>
+          <div class="champ"><label for="nom">Nom</label><input id="nom" name="nom" required autocomplete="family-name"></div>
+          <div class="champ"><label for="mail">Adresse mail</label><input id="mail" name="mail" type="email" required autocomplete="email"></div>
+          <div class="champ"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel"></div>
+          <div class="champ large" id="champ-entreprise"><label for="entreprise">Entreprise</label><input id="entreprise" name="entreprise" autocomplete="organization"></div>
+          <div class="champ large" id="champ-envie" hidden>
+            <label for="envie">Ce qui t'intéresse</label>
+            <select id="envie" name="envie">
+              <option value="essai">Ma séance découverte offerte</option>
+              <option value="hyrox">Me préparer pour un Hyrox</option>
+              <option value="infos">Des infos sur les tarifs</option>
+            </select>
+          </div>
+          <div class="champ large"><label for="message">Un mot (facultatif)</label><textarea id="message" name="message" rows="3"></textarea></div>
+          <div class="miel" aria-hidden="true"><label for="site">Site</label><input id="site" name="site" tabindex="-1" autocomplete="off"></div>
+          <p class="erreur" id="erreur" hidden></p>
+          <button class="btn" type="submit" id="envoyer">Être rappelé</button>
+          <p class="discret">Vos coordonnées servent uniquement à vous recontacter. Elles ne sont transmises à personne.</p>
+        </form>
+        <div class="merci" id="merci" hidden>
+          <h3>C'est noté</h3>
+          <p id="merci-texte">On vous rappelle sous 48 heures.</p>
+          <a class="btn" id="merci-btn" href="https://calendly.com/crossfit-hygie/seance-d-essai" hidden>Choisir mon créneau</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="enveloppe">
+    <span><b>CROSSFIT HYGIE</b> · 257 rue de l'Industrie, 59113 Seclin</span>
+    <span><a href="https://www.crossfit-hygie.fr">crossfit-hygie.fr</a> · <a href="https://instagram.com/crossfit_hygie">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var API = "https://hygiebot.tail7ef5c3.ts.net/cse/api";
+  var CALENDLY = "https://calendly.com/crossfit-hygie/seance-d-essai";
+  var code = (new URLSearchParams(location.search).get("e") || "").trim().toLowerCase().replace(/[^a-z0-9-]/g,"");
+  var $ = function(id){ return document.getElementById(id); };
+  var mode = "cse", ent = null;
+
+  function euros(x){ return x.toFixed(2).replace(".",",").replace(",00","") + " €"; }
+
+  // Version salariés : la page prend le nom de l'entreprise et affiche les tarifs remisés.
+  function modeSalarie(e){
+    mode = "salarie"; ent = e;
+    var r = e.remise || 15;
+    document.title = "Hygie × " + e.nom;
+    $("surtitre").textContent = "Offre réservée · " + e.nom;
+    $("titre").innerHTML = "Ton sport, <em>à 5 minutes</em> du travail.";
+    $("chapeau").innerHTML = "En tant que salarié de <b></b>, tu profites de <b>−" + r + " % sur l'abonnement</b>, des frais d'inscription offerts et d'une <b>séance découverte gratuite</b>. Hyrox, remise en forme, renforcement : tous niveaux, toujours avec un coach.";
+    $("chapeau").querySelector("b").textContent = e.nom;
+    $("cta1").textContent = "Je réserve ma séance offerte";
+    $("cta2").textContent = "Voir mes tarifs"; $("cta2").href = "#tarifs";
+    $("vignette-chiffre").textContent = "−" + r + " %";
+    $("vignette-texte").textContent = "sur ton abonnement, frais d'inscription offerts";
+    $("titre-offre").textContent = "Ce à quoi tu as droit";
+    $("carte-remise").textContent = "−" + r + " % sur l'abonnement";
+    $("carte-remise-texte").innerHTML = "Sur toutes les formules, tant que tu fais partie de l'entreprise. <b>Les 50 € de frais d'inscription sont offerts.</b>";
+    document.querySelectorAll("[data-prix]").forEach(function(el){
+      var b = +el.dataset.prix; el.innerHTML = euros(b*(1-r/100)) + "<small> /mois</small>";
+    });
+    document.querySelectorAll("[data-base]").forEach(function(el){ el.textContent = euros(+el.dataset.base) + " /mois"; });
+    document.querySelectorAll(".pour-cse").forEach(function(el){ el.hidden = true; });
+    document.querySelectorAll(".pour-sal").forEach(function(el){ el.hidden = false; });
+    $("offre-surtitre").textContent = "Réservé aux salariés de " + e.nom;
+    $("offre-intro").textContent = "Pas besoin d'être sportif : chaque séance est adaptée à ton niveau par le coach.";
+    $("cta-barre").textContent = "Séance offerte";
+    $("form-surtitre").textContent = "Séance découverte";
+    $("form-titre").textContent = "Réserve ta séance offerte";
+    $("form-intro").textContent = "Laisse tes coordonnées, puis choisis ton créneau. C'est gratuit et sans engagement : viens en tenue de sport, on s'occupe du reste.";
+    $("champ-qui").hidden = true; $("champ-entreprise").hidden = true; $("champ-envie").hidden = false;
+    $("envoyer").textContent = "Je réserve ma séance";
+  }
+
+  if (code) {
+    fetch(API + "/e/" + encodeURIComponent(code)).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ if (d && d.ok) modeSalarie(d); }).catch(function(){});
+  } else {
+    fetch(API + "/vue").catch(function(){});
+  }
+
+  // Le salarié qui arrive sur la page générique choisit « Salarié » : on adapte le formulaire.
+  document.querySelectorAll('input[name="qui"]').forEach(function(r){
+    r.addEventListener("change", function(){
+      var sal = $("qui-sal").checked;
+      $("champ-envie").hidden = !sal;
+      $("envoyer").textContent = sal ? "Je réserve ma séance" : "Être recontacté";
+    });
+  });
+
+  $("form").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var f = ev.target, err = $("erreur");
+    var d = {
+      code: code || "", prenom: f.prenom.value.trim(), nom: f.nom.value.trim(),
+      mail: f.mail.value.trim(), tel: f.tel.value.trim(), message: f.message.value.trim(),
+      site: f.site.value, entreprise: ent ? ent.nom : f.entreprise.value.trim()
+    };
+    var salarie = mode === "salarie" || $("qui-sal").checked;
+    d.role = salarie ? "salarie" : "rh";
+    d.envie = salarie ? f.envie.value : "partenariat";
+    if (!d.prenom || !d.mail || !/.+@.+\..+/.test(d.mail)) {
+      err.textContent = "Indique au moins ton prénom et une adresse mail valide."; err.hidden = false; return;
+    }
+    if (!salarie && !d.entreprise) {
+      err.textContent = "Indiquez le nom de votre entreprise."; err.hidden = false; return;
+    }
+    err.hidden = true;
+    var b = $("envoyer"); b.disabled = true; b.textContent = "Envoi…";
+    fetch(API + "/demande", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(d)})
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(){
+        f.hidden = true; $("merci").hidden = false;
+        if (salarie) {
+          $("merci-texte").textContent = "Dernière étape, trente secondes : choisis le créneau de ta séance découverte. Si aucun ne te convient, on te rappelle sous 48 heures.";
+          $("merci-btn").hidden = false;
+        } else {
+          $("merci-texte").textContent = "Merci " + d.prenom + ". On vous rappelle sous 48 heures pour vous présenter l'offre et ouvrir la page de votre entreprise.";
+        }
+      })
+      .catch(function(){
+        b.disabled = false; b.textContent = salarie ? "Je réserve ma séance" : "Être recontacté";
+        err.textContent = "L'envoi n'a pas abouti. Réessaie dans un instant, ou écris-nous à contact@crossfit-hygie.fr.";
+        err.hidden = false;
+      });
+  });
+})();
+</script>
+</body>
+</html>
