@@ -250,6 +250,72 @@ html.js .apparait.vu:nth-child(5){transition-delay:.32s}
 header.haut{transition:box-shadow .3s ease}
 header.haut.file{box-shadow:0 6px 24px rgba(14,13,18,.07)}
 
+/* ── fenêtre de réservation ────────────────────────────────────────── */
+.voile{position:fixed;inset:0;z-index:100;background:rgba(14,13,18,.72);
+  backdrop-filter:blur(3px);display:flex;align-items:flex-start;
+  justify-content:center;padding:4vh 16px;overflow-y:auto}
+.voile[hidden]{display:none}
+.boite{background:var(--papier);border-radius:18px;width:100%;max-width:720px;
+  box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden;position:relative}
+.boite .tete-b{padding:26px 28px 18px;border-bottom:1px solid var(--trait)}
+.boite .tete-b p.sur{margin-bottom:8px}
+.boite h2{font-size:27px;margin-bottom:8px}
+.boite .tete-b p{font-size:15.5px;color:var(--gris);margin:0;max-width:52ch}
+.boite .dedans{padding:22px 28px 28px}
+.fermer{position:absolute;top:16px;right:16px;width:38px;height:38px;
+  border-radius:50%;border:1px solid var(--trait);background:var(--carte);
+  font-size:19px;line-height:1;cursor:pointer;color:var(--gris)}
+.fermer:hover{color:var(--encre);border-color:var(--gris)}
+
+.jour-res{margin-bottom:16px}
+.jour-res h4{font-size:11.5px;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.creneaux{display:flex;flex-wrap:wrap;gap:8px}
+.creneau{font-family:inherit;font-size:14.5px;font-weight:800;
+  border:1.5px solid var(--trait);background:var(--carte);color:var(--encre);
+  border-radius:10px;padding:10px 14px;cursor:pointer;line-height:1.25;
+  text-align:left;transition:border-color .2s,background .2s}
+.creneau small{display:block;font-size:12px;font-weight:600;color:var(--gris);
+  margin-top:2px}
+.creneau:hover{border-color:var(--rouge)}
+.creneau[aria-pressed=true]{border-color:var(--rouge);background:var(--rouge);
+  color:#fff}
+.creneau[aria-pressed=true] small{color:rgba(255,255,255,.8)}
+.creneau[disabled]{opacity:.42;cursor:not-allowed;text-decoration:line-through}
+.creneau[disabled]:hover{border-color:var(--trait)}
+
+.form-res{margin-top:4px}
+.duo-ch{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.duo-ch{grid-template-columns:1fr}}
+.champ{margin-bottom:12px}
+.champ label{display:block;font-size:12px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gris);margin-bottom:5px}
+.champ input,.champ textarea{width:100%;font-family:inherit;font-size:16px;
+  padding:11px 13px;border:1.5px solid var(--trait);border-radius:10px;
+  background:var(--carte);color:var(--encre)}
+.champ input:focus,.champ textarea:focus{outline:none;border-color:var(--rouge)}
+.champ textarea{min-height:74px;resize:vertical}
+.accord{display:flex;gap:10px;align-items:flex-start;font-size:14px;
+  color:var(--gris);margin:4px 0 16px}
+.accord input{margin-top:3px;flex:none;width:18px;height:18px;accent-color:var(--rouge)}
+.erreur{background:var(--rouge);color:#fff;border-radius:10px;padding:11px 14px;
+  font-size:14.5px;font-weight:700;margin-bottom:14px}
+.etat{text-align:center;padding:28px 10px}
+.etat .rond{width:46px;height:46px;border-radius:50%;margin:0 auto 16px;
+  border:3px solid var(--trait);border-top-color:var(--rouge);
+  animation:tourne .9s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.etat .rond{animation-duration:3s}}
+.etat h3{font-size:22px;margin-bottom:8px}
+.etat p{color:var(--gris);margin-inline:auto;max-width:44ch}
+.etat .coche{width:52px;height:52px;border-radius:50%;background:var(--rouge);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:27px;font-weight:900;margin:0 auto 16px}
+/* les pastilles du planning deviennent cliquables */
+button.pastille{font-family:inherit;border:none;width:100%;cursor:pointer;
+  text-align:center}
+button.pastille:hover{filter:brightness(.93)}
+
 /* pied */
 footer{background:var(--encre);color:var(--papier);padding:48px 0 32px;margin-top:0}
 footer a{color:rgba(255,255,255,.72);text-decoration:none}
