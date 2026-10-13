@@ -1,0 +1,138 @@
+
+:root{
+  --encre:#0E0D12; --papier:#FBFAF7; --carte:#FFFFFF; --gris:#5C5967;
+  --trait:#E4E0D8; --rouge:#E22118; --rouge-sombre:#B51A13; --or:#C8922A;
+  --rayon:14px; --ombre:0 1px 2px rgba(14,13,18,.05), 0 12px 32px rgba(14,13,18,.08);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--papier);color:var(--encre);
+  font-family:Archivo,"Helvetica Neue",Arial,sans-serif;font-size:17px;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}  /* height:auto : sans lui, l'attribut height="650" impose sa hauteur et les cartes font 943 px */
+a{color:inherit}
+.contenu{max-width:1080px;margin:0 auto;padding-inline:20px}
+
+/* en-tête */
+header.haut{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--trait)}
+.barre{display:flex;align-items:center;gap:22px;padding:12px 0}
+.barre .logo{height:42px;width:auto;flex:none}
+nav.menu{display:flex;gap:20px;margin-left:auto;flex-wrap:wrap}
+nav.menu a{font-size:14.5px;font-weight:700;text-decoration:none;color:var(--gris)}
+nav.menu a:hover,nav.menu a[aria-current=page]{color:var(--encre)}
+.cta{display:inline-block;background:var(--rouge);color:#fff;text-decoration:none;
+  font-weight:800;font-size:14.5px;padding:11px 18px;border-radius:99px;
+  letter-spacing:.01em;white-space:nowrap}
+.cta:hover{background:var(--rouge-sombre)}
+.cta.grand{font-size:17px;padding:16px 30px}
+.cta.blanc{background:#fff;color:var(--encre)}
+@media(max-width:880px){nav.menu{display:none}}
+
+/* héros */
+.heros{padding:56px 0 48px;display:grid;grid-template-columns:1.1fr .9fr;
+  gap:44px;align-items:center}
+.heros .visuel{border-radius:var(--rayon);overflow:hidden;box-shadow:var(--ombre);
+  aspect-ratio:4/3}
+.heros .visuel img{width:100%;height:100%;object-fit:cover}
+h1{font-size:clamp(34px,5.4vw,56px);font-weight:900;line-height:1.02;
+  letter-spacing:-.025em;margin-bottom:18px;text-wrap:balance}
+.chapo{font-size:19px;color:var(--gris);margin-bottom:26px;max-width:52ch}
+.sur{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--rouge);margin-bottom:12px}
+.boutons{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.rassure{font-size:14px;color:var(--gris);margin-top:14px}
+@media(max-width:880px){.heros{grid-template-columns:1fr;gap:28px;padding:34px 0 34px}}
+
+/* bandeau de preuve */
+.preuves{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:var(--trait);border-block:1px solid var(--trait)}
+.preuves div{background:var(--papier);padding:20px;text-align:center}
+.preuves b{display:block;font-size:28px;font-weight:900;letter-spacing:-.02em}
+.preuves span{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--gris);margin-top:5px}
+
+/* sections */
+section{padding:56px 0}
+section.gris{background:#fff;border-block:1px solid var(--trait)}
+h2{font-size:clamp(26px,3.6vw,38px);font-weight:900;letter-spacing:-.02em;
+  line-height:1.1;margin-bottom:14px;text-wrap:balance}
+h3{font-size:21px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+.intro{font-size:18px;color:var(--gris);max-width:62ch;margin-bottom:32px}
+p{margin-bottom:14px;max-width:68ch}
+.grille{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.carte{background:var(--carte);border:1px solid var(--trait);
+  border-radius:var(--rayon);padding:22px;box-shadow:var(--ombre)}
+section.gris .carte{background:var(--papier)}
+.carte p:last-child{margin-bottom:0}
+
+/* tarifs */
+.tarif{display:flex;flex-direction:column}
+.tarif.phare{border-color:var(--rouge);border-width:2px}
+.tarif .badge{display:inline-block;align-self:flex-start;background:var(--rouge);
+  color:#fff;font-size:11px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-bottom:12px}
+.tarif .prix{font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.tarif .par{font-size:14px;color:var(--gris);margin-bottom:16px}
+.tarif ul{list-style:none;padding:0;margin:0 0 18px;flex:1}
+.tarif li{position:relative;padding-left:24px;margin-bottom:9px;font-size:15.5px}
+.tarif li::before{content:"";position:absolute;left:4px;top:9px;width:8px;height:8px;
+  border-radius:2px;background:var(--rouge)}
+.tarif .note{font-size:13.5px;color:var(--gris);margin-bottom:16px}
+
+/* équipe */
+.coach img{border-radius:12px;aspect-ratio:4/5;object-fit:cover;width:100%;
+  margin-bottom:14px}
+.coach .role{font-size:12px;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--rouge);margin-bottom:4px}
+.coach blockquote{font-size:15px;color:var(--gris);margin:0}
+.coach .sans{aspect-ratio:4/5;border-radius:12px;background:var(--encre);
+  color:var(--papier);display:flex;align-items:center;justify-content:center;
+  font-size:52px;font-weight:900;margin-bottom:14px}
+
+/* cours */
+.cours{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--trait)}
+.cours:last-child{border-bottom:none}
+.cours b{flex:none;width:118px;font-size:16px;font-weight:800}
+.cours span{color:var(--gris);font-size:15.5px}
+@media(max-width:620px){.cours{flex-direction:column;gap:4px}.cours b{width:auto}}
+
+/* questions */
+details{background:var(--carte);border:1px solid var(--trait);
+  border-radius:12px;padding:16px 20px;margin-bottom:10px}
+section.gris details{background:var(--papier)}
+details summary{font-weight:800;font-size:16.5px;cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";float:right;color:var(--rouge);font-weight:900}
+details[open] summary::after{content:"–"}
+details p{margin:12px 0 0;color:var(--gris)}
+
+/* appel final */
+.final{background:var(--encre);color:var(--papier);border-radius:var(--rayon);
+  padding:44px;text-align:center}
+.final h2{color:var(--papier)}
+.final p{color:rgba(255,255,255,.76);margin-inline:auto}
+
+/* communes */
+.communes{display:flex;flex-wrap:wrap;gap:9px}
+.communes a{background:var(--carte);border:1px solid var(--trait);
+  border-radius:99px;padding:8px 15px;font-size:14.5px;font-weight:700;
+  text-decoration:none}
+.communes a:hover{border-color:var(--rouge);color:var(--rouge)}
+
+/* pied */
+footer{background:var(--encre);color:var(--papier);padding:48px 0 32px;margin-top:0}
+footer a{color:rgba(255,255,255,.72);text-decoration:none}
+footer a:hover{color:#fff}
+.pieds{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:28px;margin-bottom:28px}
+.pieds h4{font-size:11.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px}
+.pieds li{list-style:none;margin-bottom:8px;font-size:15px}
+.pieds ul{padding:0;margin:0}
+.bas{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;
+  font-size:13px;color:rgba(255,255,255,.5);display:flex;gap:18px;
+  flex-wrap:wrap;justify-content:space-between}
