@@ -257,7 +257,8 @@ header.haut.file{box-shadow:0 6px 24px rgba(14,13,18,.07)}
 .voile[hidden]{display:none}
 .boite{background:var(--papier);border-radius:18px;width:100%;max-width:720px;
   box-shadow:0 30px 80px rgba(0,0,0,.4);overflow:hidden;position:relative}
-.boite .tete-b{padding:26px 28px 18px;border-bottom:1px solid var(--trait)}
+.boite .tete-b{padding:26px 28px 18px;border-bottom:1px solid var(--trait);
+  padding-right:66px}
 .boite .tete-b p.sur{margin-bottom:8px}
 .boite h2{font-size:27px;margin-bottom:8px}
 .boite .tete-b p{font-size:15.5px;color:var(--gris);margin:0;max-width:52ch}
