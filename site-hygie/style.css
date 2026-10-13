@@ -156,6 +156,70 @@ details p{margin:12px 0 0;color:var(--gris)}
   text-decoration:none}
 .communes a:hover{border-color:var(--rouge);color:var(--rouge)}
 
+/* ── mouvement ─────────────────────────────────────────────────────────
+   Rien n'est caché par défaut : c'est le script qui pose .js sur <html>, et
+   seulement là les blocs arrivent en fondé. Sans script, ou si la personne a
+   demandé moins d'animations, la page s'affiche entière, tout de suite. */
+html.js .apparait{opacity:0;transform:translateY(22px)}
+html.js .apparait.vu{opacity:1;transform:none;
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+html.js .apparait.vu:nth-child(2){transition-delay:.08s}
+html.js .apparait.vu:nth-child(3){transition-delay:.16s}
+html.js .apparait.vu:nth-child(4){transition-delay:.24s}
+html.js .apparait.vu:nth-child(5){transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){
+  html.js .apparait{opacity:1;transform:none;transition:none}
+}
+
+/* photo pleine largeur entre deux sections */
+.pleine{position:relative;height:clamp(300px,46vh,460px);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center}
+.pleine img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.06);transition:transform 1.4s cubic-bezier(.22,.61,.36,1)}
+.pleine.vu img{transform:scale(1)}
+.pleine::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,13,18,.62),rgba(14,13,18,.42))}
+.pleine .mot{position:relative;z-index:1;color:#fff;padding-inline:24px}
+.pleine .mot p{font-size:clamp(24px,3.6vw,40px);font-weight:900;
+  letter-spacing:-.02em;line-height:1.14;max-width:18ch;margin:0 auto;
+  text-wrap:balance}
+.pleine .mot small{display:block;font-size:12px;font-weight:800;
+  letter-spacing:.2em;text-transform:uppercase;color:#FF8077;margin-bottom:14px}
+
+/* bandeau défilant des disciplines */
+.ruban{background:var(--encre);color:var(--papier);overflow:hidden;
+  padding:14px 0;white-space:nowrap}
+.ruban div{display:inline-block;animation:glisse 34s linear infinite}
+.ruban span{font-size:15px;font-weight:900;letter-spacing:.14em;
+  text-transform:uppercase;padding:0 26px}
+.ruban i{color:var(--rouge);font-style:normal}
+@keyframes glisse{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ruban div{animation:none}}
+
+/* bande de photos */
+.bande{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.bande a,.bande div{position:relative;overflow:hidden;border-radius:10px;
+  aspect-ratio:3/4}
+.bande img{width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.bande img:hover{transform:scale(1.07)}
+@media(max-width:760px){.bande{grid-template-columns:repeat(2,1fr)}
+  .bande>*:nth-child(5){display:none}}
+
+/* la photo du héros respire */
+.heros .visuel img{transition:transform 1.2s cubic-bezier(.22,.61,.36,1)}
+.heros .visuel:hover img{transform:scale(1.04)}
+/* les cartes réagissent */
+.carte{transition:transform .35s ease,box-shadow .35s ease}
+.carte:hover{transform:translateY(-3px);
+  box-shadow:0 2px 4px rgba(14,13,18,.05),0 18px 44px rgba(14,13,18,.11)}
+.coach img{transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.coach:hover img{transform:scale(1.04)}
+.coach{overflow:hidden}
+/* l'en-tête se resserre quand on descend */
+header.haut{transition:box-shadow .3s ease}
+header.haut.file{box-shadow:0 6px 24px rgba(14,13,18,.07)}
+
 /* pied */
 footer{background:var(--encre);color:var(--papier);padding:48px 0 32px;margin-top:0}
 footer a{color:rgba(255,255,255,.72);text-decoration:none}
