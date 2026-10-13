@@ -93,6 +93,39 @@ section.gris .carte{background:var(--papier)}
   color:var(--papier);display:flex;align-items:center;justify-content:center;
   font-size:52px;font-weight:900;margin-bottom:14px}
 
+/* planning */
+.tableau{width:100%;border-collapse:collapse;font-size:14px;
+  background:var(--carte);border:1px solid var(--trait);border-radius:var(--rayon);
+  overflow:hidden}
+section.gris .tableau{background:var(--papier)}
+.tableau th{background:var(--encre);color:var(--papier);font-size:11px;
+  font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:12px 8px;
+  text-align:center}
+.tableau th:first-child{text-align:left;width:62px}
+.tableau td{border-top:1px solid var(--trait);padding:7px 6px;text-align:center;
+  vertical-align:top}
+.tableau td.h{font-weight:900;font-size:14.5px;text-align:left;
+  font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--gris);
+  padding-left:12px}
+.tableau tr:nth-child(even) td{background:rgba(0,0,0,.015)}
+.pastille{display:block;font-size:12.5px;font-weight:800;border-radius:7px;
+  padding:5px 4px;margin-bottom:3px;white-space:nowrap}
+.pastille:last-child{margin-bottom:0}
+.p-wod{background:#FDE7E5;color:#A3160F}
+.p-team{background:#FBE3CB;color:#8A4B06}
+.p-hyrox{background:#0E0D12;color:#fff}
+.p-gym{background:#E3ECFB;color:#1B4A91}
+.p-halt{background:#E9E4F7;color:#4B2F8F}
+.p-renfo{background:#E2F2E8;color:#14633F}
+.p-mob{background:#E7F3F6;color:#145C6B}
+.p-skill{background:#FBF3D4;color:#7A5C05}
+.p-kids{background:#FCE4F0;color:#93115A}
+.p-twc{background:#EAE8E3;color:#4A463F}
+.legende{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.legende span{font-size:12.5px;font-weight:800;border-radius:7px;padding:5px 11px}
+.defile{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:760px){.tableau{font-size:13px;min-width:680px}}
+
 /* cours */
 .cours{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--trait)}
 .cours:last-child{border-bottom:none}
