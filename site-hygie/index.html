@@ -73,11 +73,18 @@
   <div><b>75 €</b><span>par mois</span></div>
 </div>
 
+<div class="ruban" aria-hidden="true"><div><span>WOD</span><i>◆</i><span>Hyrox</span><i>◆</i><span>Gym</span><i>◆</i><span>Haltéro</span><i>◆</i><span>Renfo</span><i>◆</i><span>Mobilité</span><i>◆</i><span>Free Access</span><i>◆</i><span>WOD Team</span><i>◆</i><span>Kids</span><i>◆</i><span>WOD</span><i>◆</i><span>Hyrox</span><i>◆</i><span>Gym</span><i>◆</i><span>Haltéro</span><i>◆</i><span>Renfo</span><i>◆</i><span>Mobilité</span><i>◆</i><span>Free Access</span><i>◆</i><span>WOD Team</span><i>◆</i><span>Kids</span><i>◆</i></div></div>
+
+<div class="pleine">
+  <img src="/img/course.jpg" alt="Un cours de CrossFit chez Hygie à Seclin" loading="lazy" width="1600" height="900">
+  <div class="mot"><small>Tous les jours, de 9h à 21h</small><p>Ici, personne ne commence au même endroit. Tout le monde avance.</p></div>
+</div>
+
 <section class="contenu">
-  <h2>Trois façons de s'entraîner chez Hygie</h2>
-  <p class="intro">Le même abonnement donne accès à tout. La plupart des
-  adhérents mélangent les trois au fil de la semaine.</p>
-  <div class="grille g3">
+  <h2 class="apparait">Trois façons de s'entraîner chez Hygie</h2>
+  <p class="intro apparait">Le même abonnement donne accès à tout. La plupart
+  des adhérents mélangent les trois au fil de la semaine.</p>
+  <div class="grille g3 apparait">
     <div class="carte"><h3>Le CrossFit</h3>
       <p>Le cours coaché d'une heure : échauffement, technique, puis le WOD du
       jour. Chaque mouvement s'adapte à ton niveau, et le coach règle les
@@ -104,7 +111,7 @@
   <p class="intro">Tout est compris : les cours coachés, l'accès libre,
   l'application de suivi et les événements de la box. Frais d'inscription de
   50 €, engagement de quatre mois puis au mois.</p>
-  <div class="grille g3">
+  <div class="grille g3 apparait">
   <div class="carte tarif">
     
     <h3>Access</h3>
@@ -132,10 +139,22 @@
 </div></section>
 
 <section class="contenu">
-  <h2>Ta première séance, concrètement</h2>
-  <p class="intro">C'est la question qui freine le plus : ce qui se passe quand
-  on pousse la porte sans rien connaître.</p>
-  <div class="grille g4">
+  <h2 class="apparait">La salle</h2>
+  <p class="intro apparait">Six cents mètres carrés dans la zone industrielle,
+  tout le matériel, et un parking gratuit devant la porte.</p>
+  <div class="apparait"><div class="bande"><div><img src="/img/course.jpg" alt="Un WOD en cours chez CrossFit Hygie" loading="lazy" width="520" height="693"></div><div><img src="/img/rameur.jpg" alt="Travail sur rameur pendant un cours Hyrox" loading="lazy" width="520" height="693"></div><div><img src="/img/equipe.jpg" alt="Le groupe devant la salle après un cours" loading="lazy" width="520" height="693"></div><div><img src="/img/velo.jpg" alt="Assault bike pendant un entraînement" loading="lazy" width="520" height="693"></div><div><img src="/img/sourires.jpg" alt="Deux adhérentes après leur séance" loading="lazy" width="520" height="693"></div></div></div>
+</section>
+
+<div class="pleine">
+  <img src="/img/sourires.jpg" alt="Deux adhérentes après une séance chez Hygie" loading="lazy" width="1600" height="900">
+  <div class="mot"><small>La vraie raison qu&#x27;on a de rester</small><p>On vient pour la séance. On revient pour les gens.</p></div>
+</div>
+
+<section class="contenu">
+  <h2 class="apparait">Ta première séance, concrètement</h2>
+  <p class="intro apparait">C'est la question qui freine le plus : ce qui se
+  passe quand on pousse la porte sans rien connaître.</p>
+  <div class="grille g4 apparait">
     <div class="carte"><h3>1 · Tu réserves</h3><p>En ligne, en une minute, sur
       le créneau qui t'arrange. C'est offert et sans suite obligatoire.</p></div>
     <div class="carte"><h3>2 · Tu arrives</h3><p>Dix minutes avant. Le coach
@@ -193,5 +212,40 @@
 <div class="bas"><span>© 2026 CrossFit Hygie · Box affiliée CrossFit ·
   Hyrox Training Club officiel</span>
   <span>257 rue de l'Industrie, 59113 Seclin</span></div></div></footer>
+<script>
+// Le mouvement n'est posé que si le script tourne : sans lui, la page est
+// entière et lisible, ce qui est la seule chose qui compte vraiment.
+document.documentElement.classList.add('js');
+(function(){
+  var doux = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cibles = document.querySelectorAll('.apparait, .pleine');
+  if (doux || !('IntersectionObserver' in window)){
+    cibles.forEach(function(x){ x.classList.add('vu'); });
+    return;
+  }
+  var oeil = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('vu'); oeil.unobserve(e.target); }
+    });
+  }, {rootMargin: '0px 0px -12% 0px', threshold: .08});
+  cibles.forEach(function(x){ oeil.observe(x); });
+  // Les blocs déjà visibles au chargement ne doivent pas attendre un défilement.
+  requestAnimationFrame(function(){
+    cibles.forEach(function(x){
+      if (x.getBoundingClientRect().top < window.innerHeight * .9) x.classList.add('vu');
+    });
+  });
+})();
+(function(){
+  var h = document.querySelector('header.haut');
+  if (!h) return;
+  var dernier = 0;
+  addEventListener('scroll', function(){
+    var y = scrollY;
+    if ((y > 40) !== (dernier > 40)) h.classList.toggle('file', y > 40);
+    dernier = y;
+  }, {passive: true});
+})();
+</script>
 </body>
 </html>
