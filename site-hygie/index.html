@@ -277,5 +277,288 @@ document.documentElement.classList.add('js');
   }, {passive: true});
 })();
 </script>
+
+<div class="voile" id="voile" hidden role="dialog" aria-modal="true"
+     aria-labelledby="titre-res">
+  <div class="boite">
+    <button class="fermer" id="fermer-res" aria-label="Fermer">&times;</button>
+    <div class="tete-b">
+      <p class="sur">Séance d'essai offerte</p>
+      <h2 id="titre-res">Choisis ton créneau</h2>
+      <p id="sous-res">Tous les créneaux ci-dessous sont ouverts aux
+      débutants. Un coach t'accueille dix minutes avant.</p>
+    </div>
+    <div class="dedans" id="corps-res"></div>
+  </div>
+</div><script>
+// ── la réservation d'une séance d'essai ────────────────────────────────────
+// Le service du Pi fait l'inscription dans Resawod en tâche de fond : la page
+// envoie la demande, puis interroge l'état jusqu'à la confirmation. On ne dit
+// jamais « c'est réservé » avant que ça le soit vraiment.
+(function(){
+  var API = "https://hygiebot.tail7ef5c3.ts.net/essais";
+  var voile = document.getElementById('voile');
+  if (!voile) return;
+  var corps = document.getElementById('corps-res');
+  var sous = document.getElementById('sous-res');
+  var titre = document.getElementById('titre-res');
+  var creneaux = null, choisi = null, ecriture = null;
+
+  var JOURS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+  var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août',
+              'septembre','octobre','novembre','décembre'];
+  function jourDit(iso){
+    var d = new Date(iso + 'T12:00:00'), auj = new Date();
+    auj.setHours(12,0,0,0);
+    var e = Math.round((d - auj) / 86400000);
+    if (e === 0) return "Aujourd'hui";
+    if (e === 1) return 'Demain';
+    return JOURS[d.getDay()] + ' ' + d.getDate() + ' ' + MOIS[d.getMonth()];
+  }
+  function ech(x){ return String(x == null ? '' : x)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;'); }
+  function hm(h){ return String(h || '').replace(':','h'); }
+
+  // Le mot de secours, partout pareil : on ne laisse jamais quelqu'un sans
+  // porte de sortie quand la machine ne répond pas.
+  var SECOURS = '<p>Écris-nous sur WhatsApp au 07 56 82 51 54 : on te cale ta '
+    + 'séance à la main en deux minutes, et c\'est toujours offert.</p>'
+    + '<p style="margin-top:18px"><a class="cta grand" '
+    + 'href="https://wa.me/33756825154">Écrire sur WhatsApp</a></p>';
+
+  function ouvrir(){
+    voile.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (!creneaux) charger(); else etapeCreneaux();
+  }
+  function fermer(){
+    voile.hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.getElementById('fermer-res').onclick = fermer;
+  voile.onclick = function(e){ if (e.target === voile) fermer(); };
+  addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !voile.hidden) fermer();
+  });
+  // tout ce qui porte data-reserver ouvre la fenêtre
+  document.querySelectorAll('[data-reserver]').forEach(function(b){
+    b.addEventListener('click', function(e){ e.preventDefault(); ouvrir(); });
+  });
+
+  function attendre(mot, detail){
+    corps.innerHTML = '<div class="etat"><div class="rond"></div>'
+      + '<h3>' + ech(mot) + '</h3><p>' + ech(detail || '') + '</p></div>';
+  }
+  function ennui(titreCourt, texte){
+    corps.innerHTML = '<div class="etat"><h3>' + ech(titreCourt) + '</h3>'
+      + '<p>' + ech(texte) + '</p>' + SECOURS + '</div>';
+  }
+  // Le créneau s'est rempli entre-temps : on renvoie vers la liste, à jour.
+  function plusDePlace(texte){
+    creneaux = null;
+    corps.innerHTML = '<div class="etat"><h3>Ce créneau vient de se remplir</h3>'
+      + '<p>' + ech(texte || 'Choisis-en un autre, il en reste.') + '</p>'
+      + '<p style="margin-top:18px"><button class="cta grand" '
+      + 'id="refaire">Voir les créneaux</button></p></div>';
+    document.getElementById('refaire').onclick = charger;
+  }
+  // Tant que le service tourne en mode test, on le dit en clair : personne ne
+  // doit croire qu'il a une place alors que rien n'est écrit dans Resawod.
+  function motTest(){
+    return ecriture === false
+      ? '<div class="erreur">Réservation en rodage : ta demande arrive bien '
+        + 'chez nous, mais un coach la confirme à la main pour l\'instant.</div>'
+      : '';
+  }
+
+  function charger(){
+    attendre('Un instant', 'On regarde les créneaux disponibles.');
+    var auj = new Date(), fin = new Date(Date.now() + 20 * 86400000);
+    function iso(d){
+      return new Date(d.getTime() - d.getTimezoneOffset() * 60000)
+        .toISOString().slice(0,10);
+    }
+    fetch(API + '/')
+      .then(function(r){ return r.json(); })
+      .then(function(d){ ecriture = !!d.ecriture; })
+      .catch(function(){})
+      .then(function(){
+        return fetch(API + '/creneaux?type=essai&du=' + iso(auj) + '&au=' + iso(fin));
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (!d.ok) throw new Error(d.message || 'indisponible');
+        creneaux = d.creneaux || [];
+        etapeCreneaux();
+      })
+      .catch(function(){
+        ennui("Les créneaux ne s'affichent pas",
+              "Le planning en ligne ne répond pas pour le moment.");
+      });
+  }
+
+  function etapeCreneaux(){
+    titre.textContent = 'Choisis ton créneau';
+    sous.textContent = "Tous les créneaux ci-dessous sont ouverts aux "
+      + "débutants. Un coach t'accueille dix minutes avant.";
+    if (!creneaux.length){
+      ennui("Aucun créneau pour l'instant",
+            "Le planning des prochains jours est complet.");
+      return;
+    }
+    var parJour = {}, ordre = [];
+    creneaux.forEach(function(c){
+      if (!parJour[c.date]) { parJour[c.date] = []; ordre.push(c.date); }
+      parJour[c.date].push(c);
+    });
+    corps.innerHTML = motTest() + ordre.map(function(j){
+      return '<div class="jour-res"><h4>' + ech(jourDit(j)) + '</h4>'
+        + '<div class="creneaux">' + parJour[j].map(function(c){
+            return '<button class="creneau" data-id="' + ech(c.id) + '"'
+              + (c.complet ? ' disabled' : '') + ' aria-pressed="false">'
+              + ech(hm(c.heure)) + '<small>'
+              + ech(c.complet ? 'complet' : c.cours) + '</small></button>';
+          }).join('') + '</div></div>';
+    }).join('');
+    corps.querySelectorAll('.creneau:not([disabled])').forEach(function(b){
+      b.onclick = function(){
+        choisi = creneaux.filter(function(c){
+          return String(c.id) === b.dataset.id; })[0];
+        etapeFormulaire();
+      };
+    });
+  }
+
+  function etapeFormulaire(erreur){
+    titre.textContent = 'Tes coordonnées';
+    sous.textContent = jourDit(choisi.date) + ' à ' + hm(choisi.heure)
+      + ', ' + choisi.cours + '.';
+    corps.innerHTML =
+      (erreur ? '<div class="erreur">' + ech(erreur) + '</div>' : motTest())
+      + '<form class="form-res" id="form-res" novalidate>'
+      + '<div class="duo-ch">'
+      +   '<div class="champ"><label for="r-prenom">Prénom</label>'
+      +     '<input id="r-prenom" name="prenom" autocomplete="given-name" required></div>'
+      +   '<div class="champ"><label for="r-nom">Nom</label>'
+      +     '<input id="r-nom" name="nom" autocomplete="family-name" required></div>'
+      + '</div><div class="duo-ch">'
+      +   '<div class="champ"><label for="r-tel">Téléphone</label>'
+      +     '<input id="r-tel" name="tel" type="tel" autocomplete="tel" required></div>'
+      +   '<div class="champ"><label for="r-mail">E-mail</label>'
+      +     '<input id="r-mail" name="email" type="email" autocomplete="email" required></div>'
+      + '</div>'
+      + '<div class="champ"><label for="r-adr">Adresse postale</label>'
+      +   '<input id="r-adr" name="adresse" autocomplete="street-address" required></div>'
+      + '<div class="champ"><label for="r-msg">Un mot, si tu veux '
+      +   '(blessure, appréhension, question)</label>'
+      +   '<textarea id="r-msg" name="message"></textarea></div>'
+      // Le piège à robots : invisible, toujours vide, le service refuse la
+      // demande s'il est rempli. Pas de captcha à faire passer au visiteur.
+      + '<input type="text" name="site_web" id="r-piege" value="" tabindex="-1"'
+      +   ' autocomplete="off" aria-hidden="true"'
+      +   ' style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'
+      + '<label class="accord"><input type="checkbox" id="r-ok" required>'
+      +   '<span>J\'accepte d\'être recontacté par CrossFit Hygie au sujet de '
+      +   'cette séance. Tes coordonnées ne sont utilisées que pour ça.</span></label>'
+      + '<div style="display:flex;gap:10px;flex-wrap:wrap">'
+      +   '<button type="submit" class="cta grand">Réserver ma séance</button>'
+      +   '<button type="button" class="cta grand blanc" id="retour-res" '
+      +     'style="border:1px solid var(--trait)">Changer de créneau</button>'
+      + '</div></form>';
+    document.getElementById('retour-res').onclick = etapeCreneaux;
+    document.getElementById('form-res').onsubmit = function(e){
+      e.preventDefault();
+      envoyer(this);
+    };
+  }
+
+  function envoyer(f){
+    var d = {
+      id: choisi.id, date: choisi.date,
+      prenom: f.prenom.value.trim(), nom: f.nom.value.trim(),
+      tel: f.tel.value.trim(), email: f.email.value.trim(),
+      adresse: f.adresse.value.trim(), message: f.message.value.trim(),
+      consentement: document.getElementById('r-ok').checked,
+      site_web: f.site_web.value
+    };
+    if (!d.prenom || !d.nom || !d.tel || !d.email || !d.adresse){
+      return etapeFormulaire('Il manque un champ : prénom, nom, téléphone, '
+        + 'e-mail et adresse sont nécessaires.');
+    }
+    if (!d.consentement){
+      return etapeFormulaire('Il faut cocher la case pour qu\'on puisse te '
+        + 'recontacter.');
+    }
+    titre.textContent = 'On réserve ta place';
+    sous.textContent = '';
+    attendre('On t\'inscrit au cours',
+      'Ça prend une trentaine de secondes, ne ferme pas cette fenêtre.');
+    fetch(API + '/reserver', {method: 'POST',
+      headers: {'Content-Type': 'application/json'}, body: JSON.stringify(d)})
+      .then(function(r){ return r.json().then(function(j){
+        return {code: r.status, corps: j || {}}; },
+        function(){ return {code: r.status, corps: {}}; }); })
+      .then(function(r){
+        var c = r.corps, mot = c.message || '';
+        // Le service rédige lui-même ses refus : on les affiche tels quels.
+        if (r.code === 409 || c.raison === 'complet') return plusDePlace(mot);
+        if (r.code === 429) return ennui('Trop de demandes d\'un coup',
+          mot || 'Réessaie dans quelques minutes.');
+        if (r.code === 400 || r.code === 404) return etapeFormulaire(
+          mot || 'Ce créneau n\'est plus valable, choisis-en un autre.');
+        if (r.code === 503) return ennui('Le planning ne répond pas',
+          mot || 'On ne peut pas vérifier les places pour le moment.');
+        if (!c.ok || !c.id) throw new Error(mot || 'indisponible');
+        suivre(c.id);
+      })
+      .catch(function(){
+        ennui("On n'a pas pu finir",
+              "La réservation en ligne n'a pas répondu.");
+      });
+  }
+
+  function suivre(id){
+    var tours = 0;
+    (function demander(){
+      tours++;
+      fetch(API + '/statut/' + encodeURIComponent(id))
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (d.test) ecriture = false;
+          var st = d.statut;
+          if (st === 'confirme') return fini(true, d);
+          if (st === 'complet') return plusDePlace(d.message);
+          if (st === 'echec' || tours > 40) return fini(false, d);
+          setTimeout(demander, 3000);
+        })
+        .catch(function(){
+          if (tours > 40) fini(false, {}); else setTimeout(demander, 3000);
+        });
+    })();
+  }
+
+  function fini(confirme, d){
+    // En mode test rien n'est écrit dans Resawod : même confirmé par le
+    // service, on ne promet pas une place, on promet un rappel.
+    var vraie = confirme && ecriture !== false;
+    titre.textContent = vraie ? 'C\'est réservé' : 'On a bien ta demande';
+    sous.textContent = '';
+    corps.innerHTML = '<div class="etat"><div class="coche">✓</div>'
+      + '<h3>' + ech(vraie
+          ? jourDit(choisi.date) + ' à ' + hm(choisi.heure)
+          : 'Un coach te confirme très vite') + '</h3>'
+      + '<p>' + ech(vraie
+          ? "Tu reçois un mail de confirmation. Viens dix minutes avant, en "
+            + "tenue de sport, avec une bouteille d'eau. On s'occupe du reste."
+          : (jourDit(choisi.date) + ' à ' + hm(choisi.heure)
+            + ". Ta demande est bien arrivée : un coach te rappelle pour "
+            + "confirmer ta place."))
+      + '</p><p style="margin-top:18px"><button class="cta grand" '
+      + 'id="ok-res">Parfait</button></p></div>';
+    document.getElementById('ok-res').onclick = fermer;
+  }
+})();
+</script>
 </body>
 </html>
