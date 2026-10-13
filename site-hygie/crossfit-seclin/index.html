@@ -142,5 +142,40 @@
 <div class="bas"><span>© 2026 CrossFit Hygie · Box affiliée CrossFit ·
   Hyrox Training Club officiel</span>
   <span>257 rue de l'Industrie, 59113 Seclin</span></div></div></footer>
+<script>
+// Le mouvement n'est posé que si le script tourne : sans lui, la page est
+// entière et lisible, ce qui est la seule chose qui compte vraiment.
+document.documentElement.classList.add('js');
+(function(){
+  var doux = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cibles = document.querySelectorAll('.apparait, .pleine');
+  if (doux || !('IntersectionObserver' in window)){
+    cibles.forEach(function(x){ x.classList.add('vu'); });
+    return;
+  }
+  var oeil = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('vu'); oeil.unobserve(e.target); }
+    });
+  }, {rootMargin: '0px 0px -12% 0px', threshold: .08});
+  cibles.forEach(function(x){ oeil.observe(x); });
+  // Les blocs déjà visibles au chargement ne doivent pas attendre un défilement.
+  requestAnimationFrame(function(){
+    cibles.forEach(function(x){
+      if (x.getBoundingClientRect().top < window.innerHeight * .9) x.classList.add('vu');
+    });
+  });
+})();
+(function(){
+  var h = document.querySelector('header.haut');
+  if (!h) return;
+  var dernier = 0;
+  addEventListener('scroll', function(){
+    var y = scrollY;
+    if ((y > 40) !== (dernier > 40)) h.classList.toggle('file', y > 40);
+    dernier = y;
+  }, {passive: true});
+})();
+</script>
 </body>
 </html>
