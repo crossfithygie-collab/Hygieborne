@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//CrossFit Hygie//In The Box//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:hygie-in-the-box-2026@crossfit-hygie.fr
+DTSTAMP:20261021T000000Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:Hygie In The Box · compète interne
+DESCRIPTION:Compète interne en binôme mixte : 4 WOD sur la journée\, chaque équipe juge un heat. Inscriptions à partir du 4 novembre.
+LOCATION:CrossFit Hygie\, 257 rue de l'industrie\, 59113 Seclin
+END:VEVENT
+END:VCALENDAR
