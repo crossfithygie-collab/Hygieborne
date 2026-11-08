@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ta séance d'essai · CrossFit Hygie</title>
+<meta name="description" content="Ce qui se passe vraiment quand tu réserves ta séance d'essai à CrossFit Hygie, étape par étape, du premier message au suivi mensuel.">
+<meta property="og:title" content="Ta séance d'essai · CrossFit Hygie">
+<meta property="og:description" content="Un message dans la minute, une visite, un point après la séance, tes objectifs écrits, tes mesures, puis un suivi tous les mois. Voilà ce qui t'attend.">
+<meta property="og:image" content="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#E22118;--ink:#0A0B0C;--muted:#5B626C;--line:#E6E7E9;--bg:#F1F1EF;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:'Archivo',Helvetica,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:600px;margin:0 auto;padding:22px 12px 56px;}
+  .card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 28px 70px rgba(10,11,12,.14);}
+
+  .brand{padding:24px 32px 18px;text-align:center;}
+  .brand img{height:74px;width:auto;max-width:60%;display:block;margin:0 auto;}
+
+  .hero{background:var(--ink);color:#fff;padding:34px 30px 30px;border-top:4px solid var(--red);}
+  .kicker{margin:0 0 14px;font-weight:800;font-size:11px;letter-spacing:4px;color:var(--red);text-transform:uppercase;}
+  h1{margin:0;font-weight:900;font-style:italic;font-size:clamp(32px,8.5vw,48px);line-height:.95;text-transform:uppercase;letter-spacing:-1.5px;}
+  h1 .accent{color:var(--red);display:block;}
+  .hero p{margin:20px 0 0;font-size:14.5px;line-height:1.65;color:#B9BEC6;}
+  .hero p strong{color:#fff;font-weight:800;}
+
+  .body{padding:30px 30px 10px;}
+  .sec{display:flex;align-items:baseline;gap:10px;margin:4px 0 20px;}
+  .sec .num{font-style:italic;font-weight:900;font-size:15px;color:var(--red);}
+  .sec .lbl{font-weight:900;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;}
+  .sec::after{content:'';flex:1;height:1.5px;background:var(--line);transform:translateY(-3px);}
+
+  .etape{display:flex;gap:16px;padding:0 0 22px;position:relative;}
+  .etape:not(:last-child)::before{content:'';position:absolute;left:17px;top:38px;bottom:0;width:2px;background:var(--line);}
+  .etape .pastille{flex:none;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-style:italic;font-size:15px;position:relative;z-index:1;}
+  .etape .txt{flex:1;min-width:0;padding-top:3px;}
+  .etape .quand{font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+  .etape h3{margin:0 0 6px;font-weight:900;font-size:17px;letter-spacing:-.3px;line-height:1.25;}
+  .etape p{margin:0;font-size:14.5px;line-height:1.6;color:var(--muted);}
+  .etape p strong{color:var(--ink);font-weight:700;}
+
+  .peurs{background:#F7F7F5;border-radius:16px;padding:22px 22px 6px;margin:6px 0 4px;}
+  .peur{margin:0 0 18px;}
+  .peur .q{margin:0 0 5px;font-weight:900;font-size:15px;font-style:italic;letter-spacing:-.2px;}
+  .peur .a{margin:0;font-size:14.5px;line-height:1.6;color:var(--muted);}
+
+  .cta{padding:4px 30px 34px;text-align:center;}
+  .cta a{display:block;background:var(--red);color:#fff;text-decoration:none;border-radius:999px;padding:17px 22px;font-weight:900;font-style:italic;font-size:16px;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 10px 28px rgba(226,33,24,.32);transition:.12s;}
+  .cta a:hover{background:#c41c14;transform:translateY(-1px);}
+  .cta .sous{margin:16px 2px 0;font-size:12.5px;color:#8A909A;line-height:1.6;}
+
+  .foot{background:var(--ink);color:#8A909A;text-align:center;padding:22px;font-size:12px;line-height:1.6;}
+  .foot a{color:#FF6B61;text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="brand">
+      <img src="https://crossfithygie-collab.github.io/Hygieborne/hygie-logo.png?v=2" alt="CrossFit Hygie">
+    </div>
+
+    <div class="hero">
+      <p class="kicker">Séance d'essai offerte</p>
+      <h1>Ce qui t'attend<span class="accent">après ton clic</span></h1>
+      <p>Dans la plupart des salles, on te donne un créneau et on te laisse trouver la porte. Ici, c'est autre chose, et je préfère te le dire avant plutôt que de te faire la surprise. <strong>Voilà exactement ce qui se passe à partir du moment où tu réserves.</strong></p>
+    </div>
+
+    <div class="body">
+      <div class="sec"><span class="num">→</span><span class="lbl">Étape par étape</span></div>
+
+      <div class="etape">
+        <div class="pastille">1</div>
+        <div class="txt">
+          <div class="quand">Dans la minute</div>
+          <h3>Je t'écris</h3>
+          <p>Pas un mail automatique. Une vraie question, la seule qui compte : <strong>pourquoi maintenant ?</strong> Ce que tu me réponds, c'est ce sur quoi on va travailler.</p>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="pastille">2</div>
+        <div class="txt">
+          <div class="quand">Le jour J</div>
+          <h3>Je t'accueille et je te fais visiter</h3>
+          <p>Je suis là. Tu ne cherches pas le vestiaire, tu ne te demandes pas où te mettre. On fait le tour ensemble, tranquillement, avant que ça commence.</p>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="pastille">3</div>
+        <div class="txt">
+          <div class="quand">Pendant la séance</div>
+          <h3>Tu fais le vrai cours, avec le vrai groupe</h3>
+          <p>Pas une séance de démonstration dans un coin. Le coach mène le cours et <strong>adapte chaque mouvement à ton niveau</strong>. Tu repars en sachant à quoi ressemble vraiment une semaine ici.</p>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="pastille">4</div>
+        <div class="txt">
+          <div class="quand">Juste après</div>
+          <h3>On fait le point, tous les deux</h3>
+          <p>Ce que tu as ressenti, ce qui t'a surpris, ce qui t'a fait peur. Sans discours de vente. Si ce n'est pas pour toi, je préfère que tu me le dises.</p>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="pastille">5</div>
+        <div class="txt">
+          <div class="quand">Le lendemain</div>
+          <h3>Tu écris tes objectifs</h3>
+          <p>Tu reçois un lien pour poser noir sur blanc ce que tu viens chercher. <strong>Je te réponds personnellement</strong> : quels cours privilégier dans ton cas, et on prend quelques mesures pour que dans trois mois tu voies ce qui a bougé.</p>
+        </div>
+      </div>
+
+      <div class="etape">
+        <div class="pastille">6</div>
+        <div class="txt">
+          <div class="quand">Et ensuite, tous les mois</div>
+          <h3>Je ne te lâche pas dans la nature</h3>
+          <p>Tu reçois du contenu adapté à toi pour ta première séance en accès libre, puis <strong>un point tous les mois</strong> pendant les quatre premiers mois. Et on continue après si tu le souhaites.</p>
+        </div>
+      </div>
+
+      <div class="sec"><span class="num">→</span><span class="lbl">Ce qu'on me dit avant de venir</span></div>
+
+      <div class="peurs">
+        <div class="peur">
+          <p class="q">&laquo;&#8239;Je ne suis pas assez en forme pour commencer.&#8239;&raquo;</p>
+          <p class="a">C'est la phrase que j'entends le plus souvent, et c'est exactement l'inverse. On ne vient pas ici parce qu'on est en forme, on vient pour le devenir. Chaque mouvement se règle à ton niveau, et tout le monde dans la salle a commencé par une première séance.</p>
+        </div>
+        <div class="peur">
+          <p class="q">&laquo;&#8239;Le CrossFit, ça blesse.&#8239;&raquo;</p>
+          <p class="a">Ce qui blesse, c'est de forcer sans être encadré. Ici il y a un coach devant toi à chaque cours, qui te corrige et qui baisse les charges quand il faut. Si tu reviens d'une blessure ou d'une opération, dis-le moi dès le premier message : on adapte, en lien avec ton kiné s'il le faut.</p>
+        </div>
+        <div class="peur">
+          <p class="q">&laquo;&#8239;Je vais payer et ne pas y aller.&#8239;&raquo;</p>
+          <p class="a">C'est précisément pour ça que ce suivi existe. Un point tous les mois, c'est quelqu'un qui regarde où tu en es et qui te relance si tu décroches. Nos abonnements sont engagés quatre mois, et ces quatre mois sont la durée pendant laquelle je t'accompagne, mois par mois.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <a href="https://calendly.com/crossfit-hygie/seance-d-essai" target="_blank" rel="noopener">Je réserve ma séance d'essai →</a>
+      <p class="sous">C'est offert, et ça ne t'engage à rien. Tu choisis ton créneau, et je t'écris dans la foulée.</p>
+    </div>
+
+    <div class="foot">
+      CrossFit Hygie · 257 rue de l'Industrie, 59113 Seclin<br>
+      <a href="https://www.instagram.com/crossfithygie/" target="_blank" rel="noopener">@crossfithygie</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
