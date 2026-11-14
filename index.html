@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="borne-version" content="20261114-093321">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Hygie — Borne Consommation</title>
   <!-- Mode webapp plein écran (écran d'accueil iPad / iPhone) -->
@@ -2470,6 +2471,31 @@ setInterval(loadMembers, 60 * 1000);
 // Réessaie d'écouler la file d'attente des écritures toutes les 5 min
 setInterval(flushPending, 5 * 60 * 1000);
 
+
+// Mise a jour automatique de la borne (14/11/2026) : la page reste ouverte en permanence et ne se
+// rechargeait jamais seule. Toutes les 3 min, on regarde si une nouvelle version est publiee ; si oui,
+// on recharge, mais seulement quand personne ne s'en sert (accueil, pas de recherche, pas de fenetre).
+(function(){
+  var ici = (document.querySelector('meta[name="borne-version"]') || {}).content;
+  if (!ici) return;
+  var aRecharger = false, dernierGeste = Date.now();
+  ['pointerdown','keydown','input'].forEach(function(t){ document.addEventListener(t, function(){ dernierGeste = Date.now(); }, true); });
+  function libre(){
+    var accueil = document.getElementById('screen-search');
+    var pop = document.querySelector('.pr-pop.ouvert');
+    return accueil && accueil.classList.contains('active') && !accueil.classList.contains('searching') && !pop
+      && Date.now() - dernierGeste > 60000;
+  }
+  function verifier(){
+    fetch(location.pathname + '?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.text(); }).then(function(t){
+      var m = t.match(/name="borne-version" content="([^"]+)"/);
+      if (m && m[1] !== ici) aRecharger = true;
+      if (aRecharger && libre()) location.reload();
+    }).catch(function(){});
+  }
+  setInterval(verifier, 3 * 60 * 1000);
+  setInterval(function(){ if (aRecharger && libre()) location.reload(); }, 20000);
+})();
 </script>
 </body>
 </html>
