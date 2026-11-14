@@ -160,10 +160,14 @@
   .pr-pop { position: fixed; inset: 0; z-index: 9000; background: rgba(10,11,12,.72); display: none; align-items: center; justify-content: center; padding: 3vh 3vw; }
   .pr-pop.ouvert { display: flex; animation: prFondu .25s ease; }
   @keyframes prFondu { from { opacity: 0; } }
-  .pr-pop .pr-boite { position: relative; width: min(720px, 100%); height: 100%; max-height: 1100px; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.5); animation: prMonte .35s cubic-bezier(.22,.8,.2,1); }
+  .pr-pop .pr-boite { position: relative; width: min(760px, 100%); height: 100%; max-height: 1180px; background: #fff; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,.5); animation: prMonte .35s cubic-bezier(.22,.8,.2,1); display: flex; flex-direction: column; }
   @keyframes prMonte { from { transform: translateY(30px); opacity: 0; } }
-  .pr-pop iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .pr-pop .pr-fermer { position: absolute; top: 12px; right: 12px; z-index: 2; border: 0; border-radius: 999px; background: #111; color: #fff; font: 600 16px 'DM Sans', sans-serif; padding: 12px 18px; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+  .pr-pop .pr-barre { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 20px; background: #111; color: #fff; }
+  .pr-pop .pr-titre { font: 600 15px 'DM Sans', sans-serif; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pr-pop .pr-fermer { flex: none; border: 0; border-radius: 999px; background: #fff; color: #111; font: 700 16px 'DM Sans', sans-serif; padding: 11px 20px; }
+  .pr-pop .pr-cadre { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #fff; }
+  .pr-pop iframe { position: absolute; top: 0; left: 0; border: 0; display: block; transform-origin: 0 0; }
   .promos .pr-slide > * { cursor: pointer; }
   .promo-itb2 { position: relative; overflow: hidden; color: #fff; text-align: left; padding: 16px 18px 18px; border-radius: 4px;
     font-family: 'Archivo', system-ui, sans-serif; box-shadow: 0 14px 30px rgba(0,0,0,.35);
@@ -2408,23 +2412,34 @@ renderHeroBanner();
 
   // fenetre d'inscription
   var pop = document.createElement('div'); pop.className = 'pr-pop';
-  pop.innerHTML = '<div class="pr-boite"><button class="pr-fermer" type="button">✕ Fermer</button><iframe title="Inscription" allow="payment"></iframe></div>';
+  pop.innerHTML = '<div class="pr-boite"><div class="pr-barre"><span class="pr-titre"></span><button class="pr-fermer" type="button">✕ Fermer</button></div>'
+    + '<div class="pr-cadre"><iframe title="Inscription" allow="payment"></iframe></div></div>';
   document.body.appendChild(pop);
-  var cadre = pop.querySelector('iframe'), veille = null;
+  var cadre = pop.querySelector('iframe'), zone = pop.querySelector('.pr-cadre'), veille = null;
+  // La page s'affiche au format telephone (LARGEUR px), puis on l'agrandit pour remplir la fenetre :
+  // texte lisible sur la tablette, et rien ne deborde.
+  var LARGEUR = 430;
+  function ajuster(){
+    var w = zone.clientWidth, h = zone.clientHeight; if (!w) return;
+    var k = Math.max(1, Math.min(1.9, w / LARGEUR, h / 640));   // en paysage, la hauteur limite le zoom : on voit assez de page
+    cadre.style.width = (w / k) + 'px'; cadre.style.height = (h / k) + 'px'; cadre.style.transform = 'scale(' + k + ')';
+  }
+  window.addEventListener('resize', ajuster);
   function fermer(){ pop.classList.remove('ouvert'); cadre.src = 'about:blank'; clearTimeout(veille); relancer(); }
-  function ouvrir(url){ if (!url) return; clearInterval(minuteur); cadre.src = url; pop.classList.add('ouvert');
+  function ouvrir(url, titre){ if (!url) return; clearInterval(minuteur); pop.querySelector('.pr-titre').textContent = titre || ''; cadre.src = url; pop.classList.add('ouvert'); ajuster();
     clearTimeout(veille); veille = setTimeout(fermer, 4 * 60 * 1000); }   // borne partagee : on referme seul au bout de 4 min
   pop.querySelector('.pr-fermer').addEventListener('click', fermer);
-  cta.addEventListener('click', function(){ ouvrir(cartes[i % n].getAttribute('data-url')); });
+  cta.addEventListener('click', function(){ var c = cartes[i % n]; ouvrir(c.getAttribute('data-url'), titreDe(c)); });
   pop.addEventListener('click', function(e){ if (e.target === pop) fermer(); });
   cadre.addEventListener('load', function(){ clearTimeout(veille); if (pop.classList.contains('ouvert')) veille = setTimeout(fermer, 4 * 60 * 1000); });
 
   // doigt : glisser ou appuyer
-  var x0 = null, y0 = 0, dx = 0, largeur = 1, cible = null;
+  var x0 = null, y0 = 0, dx = 0, largeur = 1, cible = null, cibleTitre = '';
+  function titreDe(c){ return { 'promo-sweat': 'Précommande · sweat HYGIE' }[c.id] || (c.classList.contains('promo-bf') ? 'Liste Black Friday' : 'Hygie In The Box · inscription'); }
   z.addEventListener('pointerdown', function(e){
     if (i >= n) { i = 0; poser(false); }
     x0 = e.clientX; y0 = e.clientY; dx = 0; largeur = z.clientWidth || 1; clearInterval(minuteur);
-    var c = e.target.closest('[data-url]'); cible = c ? c.getAttribute('data-url') : null;
+    var c = e.target.closest('[data-url]'); cible = c ? c.getAttribute('data-url') : null; cibleTitre = c ? titreDe(c) : '';
   });
   z.addEventListener('pointermove', function(e){
     if (x0 === null || n < 2) return;
@@ -2437,7 +2452,7 @@ renderHeroBanner();
     if (x0 === null) return;
     var bouge = Math.abs(dx) > 10 || (e && Math.abs(e.clientY - y0) > 10);
     x0 = null;
-    if (!bouge) { poser(false); ouvrir(cible); return; }
+    if (!bouge) { poser(false); ouvrir(cible, cibleTitre); return; }
     if (dx < -largeur * 0.18) aller(i + 1);
     else if (dx > largeur * 0.18) aller(i - 1);
     else aller(i);
