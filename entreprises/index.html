@@ -437,7 +437,7 @@ footer b{color:#fff;letter-spacing:2px}
         <div class="merci" id="merci" hidden>
           <h3>C'est noté</h3>
           <p id="merci-texte">On vous rappelle sous 48 heures.</p>
-          <a class="btn" id="merci-btn" href="https://calendly.com/crossfit-hygie/seance-d-essai" hidden>Choisir mon créneau</a>
+          <a class="btn" id="merci-btn" href="https://www.crossfit-hygie.fr/essai?src=entreprises" hidden>Choisir mon créneau</a>
         </div>
       </div>
     </div>
@@ -454,7 +454,7 @@ footer b{color:#fff;letter-spacing:2px}
 <script>
 (function(){
   var API = "https://hygiebot.tail7ef5c3.ts.net/cse/api";
-  var CALENDLY = "https://calendly.com/crossfit-hygie/seance-d-essai";
+  var CALENDLY = "https://www.crossfit-hygie.fr/essai?src=entreprises";
   var code = (new URLSearchParams(location.search).get("e") || "").trim().toLowerCase().replace(/[^a-z0-9-]/g,"");
   var $ = function(id){ return document.getElementById(id); };
   var mode = "cse", ent = null;
