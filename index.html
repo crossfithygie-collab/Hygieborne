@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="borne-version" content="20261123-164847">
+<meta name="borne-version" content="20261123-165016">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Hygie — Borne Consommation</title>
   <!-- Mode webapp plein écran (écran d'accueil iPad / iPhone) -->
@@ -1622,8 +1622,17 @@ function formatSolde(x) {
   return (Math.round(x * 100) / 100).toFixed(2).replace('.', ',').replace(',00', '');
 }
 
+const soldesEnCours = {};   // nom normalisé -> { t, promesse } : une seule demande à la fois
 function chargerSolde(nom) {
   const cle = normalize(nom);
+  const ec = soldesEnCours[cle];
+  if (ec && Date.now() - ec.t < 5000) return ec.promesse;
+  const promesse = demanderSolde(nom, cle);
+  soldesEnCours[cle] = { t: Date.now(), promesse: promesse };
+  return promesse;
+}
+
+function demanderSolde(nom, cle) {
   const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
   const minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 4000);
   return fetch(SOLDE_URL + encodeURIComponent(nom), { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
