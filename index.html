@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="borne-version" content="20261123-164003">
+<meta name="borne-version" content="20261123-164847">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Hygie — Borne Consommation</title>
   <!-- Mode webapp plein écran (écran d'accueil iPad / iPhone) -->
@@ -1529,6 +1529,7 @@ function selectMember(member) {
   document.getElementById('pin-error').textContent = '';
   // Texte d'aide visible seulement en 1ʳᵉ connexion (PIN encore par défaut 1234)
   document.getElementById('pin-hint').style.display = (member.pin === '1234') ? '' : 'none';
+  chargerSolde(member.name);   // 23/11/2026 : solde demandé au Pi pendant la saisie du PIN
   goTo('screen-pin');
 }
 
@@ -1602,6 +1603,53 @@ function showMemberCredit() {
   if (credit === '') credit = '0';
   // Solde négatif autorisé (14/09/2026) : on affiche « Solde », pas « Crédit disponible »
   el.textContent = 'Solde : ' + credit + ' €';
+  // 23/11/2026 : vrai solde Hiboutik (la caisse) servi par le Pi, dès qu’il arrive
+  const nom = currentMember.name;
+  const connu = soldeAffichable(nom);
+  if (connu !== null) el.textContent = 'Solde : ' + formatSolde(connu) + ' €';
+  chargerSolde(nom).then(function () {
+    const s = soldeAffichable(nom);
+    if (s !== null && currentMember && currentMember.name === nom) el.textContent = 'Solde : ' + formatSolde(s) + ' €';
+  });
+}
+
+// ── Solde réel (Hiboutik) — lecture seule, échec silencieux (23/11/2026) ──
+const SOLDE_URL = 'https://boutique.crossfit-hygie.fr/borne/solde?nom=';
+const soldesPi = {};        // nom normalisé -> { solde, lu, attente }
+let achatsBorne = [];       // achats validés sur cette borne : { nom, t, date, heure, total }
+
+function formatSolde(x) {
+  return (Math.round(x * 100) / 100).toFixed(2).replace('.', ',').replace(',00', '');
+}
+
+function chargerSolde(nom) {
+  const cle = normalize(nom);
+  const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  const minuteur = setTimeout(function () { if (ctrl) ctrl.abort(); }, 4000);
+  return fetch(SOLDE_URL + encodeURIComponent(nom), { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && d.ok && typeof d.solde === 'number') soldesPi[cle] = { solde: d.solde, lu: d.lu || 0, attente: d.attente || [] };
+    })
+    .catch(function () {})
+    .then(function () { clearTimeout(minuteur); });
+}
+
+// Solde du Pi moins les achats faits ici depuis sa lecture et pas encore vus par le Pi
+function soldeAffichable(nom) {
+  const cle = normalize(nom);
+  const p = soldesPi[cle];
+  if (!p) return null;
+  const vus = p.attente.slice();
+  let s = p.solde;
+  achatsBorne = achatsBorne.filter(function (a) { return Date.now() - a.t < 30 * 60 * 1000; });
+  achatsBorne.forEach(function (a) {
+    if (a.nom !== cle) return;
+    const i = vus.findIndex(function (v) { return v.date === a.date && v.heure === a.heure && Math.abs(v.total - a.total) < 0.005; });
+    if (i !== -1) { vus.splice(i, 1); return; }      // déjà compté par le Pi
+    if (a.t > p.lu - 20000) s -= a.total;
+  });
+  return s;
 }
 
 function validatePin() {
@@ -1969,6 +2017,9 @@ function confirmOrder() {
     articles: items.join(', '),
     total: totalSheet.toFixed(2).replace('.', ',')
   };
+  // 23/11/2026 : solde affiché diminué du montant réellement débité (remise comprise)
+  achatsBorne.push({ nom: normalize(currentMember.name), t: Date.now(), date: ventePayload.date,
+                     heure: ventePayload.heure, total: totalSheet });
   document.getElementById('success-warn').hidden = true;   // reset avertissement
   // Écriture VÉRIFIÉE : si ça n'aboutit pas, on garde la vente localement + on alerte
   postSheet(ventePayload).then(res => {
