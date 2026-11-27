@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="borne-version" content="20261126-201355">
+<meta name="borne-version" content="20261127-120616">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Hygie — Borne Consommation</title>
   <!-- Mode webapp plein écran (écran d'accueil iPad / iPhone) -->
@@ -2118,6 +2118,7 @@ async function loadMembers() {
         }));
         try { localStorage.setItem('hygie_products_cache', JSON.stringify(PRODUCTS)); } catch(e) {}
       }
+      await chargerProduitsPi();   // 27/11/2026 : la liste du Pi passe devant celle du Sheet
       // Code admin éventuellement renvoyé par le script (propriété de script)
       if (data.adminCode) {
         ADMIN_CODE = String(data.adminCode);
@@ -2129,17 +2130,42 @@ async function loadMembers() {
     }
   } catch(e) {}
 
-  // Hors-ligne : on tente le cache, sinon la liste intégrée
-  try {
-    const cacheProd = localStorage.getItem('hygie_products_cache');
-    if (cacheProd) { PRODUCTS = JSON.parse(cacheProd); }
-  } catch(e) {}
+  // Hors-ligne : on tente le Pi, puis le cache, sinon la liste intégrée
+  if (!(await chargerProduitsPi())) {
+    try {
+      const cacheProd = localStorage.getItem('hygie_products_cache');
+      if (cacheProd) { PRODUCTS = JSON.parse(cacheProd); }
+    } catch(e) {}
+  }
   try {
     const cache = localStorage.getItem('hygie_members_cache');
     if (cache) { members = JSON.parse(cache); refreshAfterLoad(); return; }
   } catch(e) {}
   members = [...MEMBERS];
   refreshAfterLoad();
+}
+
+// 27/11/2026 : produits et prix servis par le Pi (prioritaires). En panne : on garde le Sheet / le cache.
+const PRODUITS_URL = 'https://boutique.crossfit-hygie.fr/borne/produits';
+async function chargerProduitsPi() {
+  try {
+    const ctl = new AbortController();
+    const minuteur = setTimeout(() => ctl.abort(), 5000);
+    const r = await fetch(PRODUITS_URL, { cache: 'no-store', signal: ctl.signal });
+    clearTimeout(minuteur);
+    const d = await r.json();
+    if (!d || !d.ok || !Array.isArray(d.produits) || d.produits.length === 0) return false;
+    PRODUCTS = d.produits.map((p, i) => ({
+      id: i + 1,
+      name: p.name,
+      price: Number(p.price) || 0,
+      emoji: p.emoji || '',
+      image: p.image || '',
+      logo: p.logo || ''
+    }));
+    try { localStorage.setItem('hygie_products_cache', JSON.stringify(PRODUCTS)); } catch(e) {}
+    return true;
+  } catch(e) { return false; }
 }
 
 // Rafraîchir les écrans qui dépendent de la liste membres
