@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="borne-version" content="20261127-171011">
+<meta name="borne-version" content="20261127-171358">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Hygie — Borne Consommation</title>
   <!-- Mode webapp plein écran (écran d'accueil iPad / iPhone) -->
@@ -2615,11 +2615,11 @@ setInterval(flushPending, 5 * 60 * 1000);
     fetch(location.pathname + '?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.text(); }).then(function(t){
       var m = t.match(/name="borne-version" content="([^"]+)"/);
       if (m && m[1] !== ici) aRecharger = true;
-      if (aRecharger && libre()) location.reload();
+      if (aRecharger && libre()) location.replace(location.pathname + '?v=' + Date.now());   /* 27/11 : sans cache (avant : reload pouvait reprendre l'ancienne page) */
     }).catch(function(){});
   }
   setInterval(verifier, 3 * 60 * 1000);
-  setInterval(function(){ if (aRecharger && libre()) location.reload(); }, 20000);
+  setInterval(function(){ if (aRecharger && libre()) location.replace(location.pathname + '?v=' + Date.now());   /* 27/11 : sans cache (avant : reload pouvait reprendre l'ancienne page) */ }, 20000);
 })();
 </script>
 </body>
